@@ -83,9 +83,11 @@ onBeforeUnmount(() => {
     <div class="container">
         <section class="carousel" @mouseover="stopCarousel" @mouseout="startCarousel">
             <div class="carousel-inner">
-                <div v-for="(image, index) in carouselImages" :key="index" v-show="currentIndex === index" class="carousel-item">
-                    <img :src="image" alt="轮播图">
-                </div>
+                <Transition name="fade" mode="out-in">
+                    <div :key="currentIndex" class="carousel-item">
+                        <img :src="carouselImages[currentIndex]" alt="轮播图">
+                    </div>
+                </Transition>
             </div>
             <button @click="prevItem" class="carousel-control prev">&#10094;</button>
             <button @click="nextItem()" class="carousel-control next">&#10095;</button>
@@ -220,6 +222,8 @@ onBeforeUnmount(() => {
         position: relative;
         width: 100%;
         padding-bottom: 40px;
+        /* 应用新的加载动画 */
+        animation: flyInFromRight 0.8s ease-out forwards;
     }
 
     .carousel-inner {
@@ -227,20 +231,42 @@ onBeforeUnmount(() => {
         overflow: hidden;
         border-radius: 8px;
         position: relative;
-        min-height: 300px; 
+        min-height: 450px;
+    }
+    /* 动画 */
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* 新增：轮播图整体飞入动画 */
+    @keyframes flyInFromRight {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .carousel-item {
-        min-width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         transition: opacity 0.7s ease-in-out;
     }
 
     .carousel-item img {
         width: 100%;
-        height: auto;
+        height: 100%;
         display: block;
         object-fit: contain;
-        max-height: 500px;
         margin: 0 auto;
     }
 
@@ -316,7 +342,7 @@ onBeforeUnmount(() => {
     }
 
     .product-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px) scale(1.05);
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
@@ -337,10 +363,24 @@ onBeforeUnmount(() => {
         background-color: #fff;
         padding: 40px 0;
         text-align: center;
+        /* 添加飞入动画 */
+        opacity: 0;
+        animation: fadeInUp 0.5s 0.6s forwards;
     }
 
     .contact-section h2 {
         margin-bottom: 20px;
+    }
+    /* 页脚 */
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+        /* 添加飞入动画 */
+        opacity: 0;
+        animation: fadeInUp 0.5s 0.8s forwards;
     }
 
     .contact-link {
@@ -378,6 +418,17 @@ onBeforeUnmount(() => {
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    /* 轮播图淡入淡出效果 */
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.6s ease-in-out;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        opacity: 0;
     }
 
 </style>
