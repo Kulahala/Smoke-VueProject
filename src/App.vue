@@ -72,6 +72,27 @@ watchEffect(() => {
 
 <style>
   @import './assets/base.css';
+
+  /* 全局加载动画 */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    opacity: 0; /* 动画开始前，元素是透明的 */
+  }
+
+  .ready .animate-fade-in-up {
+    /* 当父元素有 .ready 类时，启动动画 */
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
 </style>
 
 <style scoped>
@@ -83,6 +104,8 @@ watchEffect(() => {
 
     #main-content {
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .nav-wrapper {

@@ -1,12 +1,24 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const isReady = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isReady.value = true;
+  }, 10);
+});
+</script>
+
 <template>
-  <div class="about-view page-content">
-    <div class="container">
-      <section class="about-section card">
+  <div class="about-view page-content" :class="{ ready: isReady }">
+    <div class="container about-container">
+      <section class="about-section card animate-fade-in-up">
         <h1>关于我们</h1>
         <p>欢迎来到 BestLinksz.com！我们致力于提供最优质的产品和服务。</p>
         <p>我们的团队充满激情，专注于创新和客户满意度。我们相信，通过我们的不懈努力，可以为客户创造无与伦比的价值。</p>
       </section>
-      <section class="contact-section card">
+      <section class="contact-section card animate-fade-in-up" style="animation-delay: 0.2s">
         <h2>联系方式</h2>
         <p>如果您有任何问题或合作意向，请随时通过以下方式联系我们：</p>
         <div class="contact-info">
@@ -21,8 +33,17 @@
 </template>
 
 <style scoped>
-.about-section, .contact-section {
-  margin-bottom: 40px;
+.about-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
 }
 
 h1, h2 {

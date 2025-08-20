@@ -1,31 +1,38 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { store } from '../store';
 
 const route = useRoute();
+const isReady = ref(false);
 
 // Ensure all data derived from the route or store is computed
 const productId = computed(() => parseInt(route.params.id));
 const product = computed(() => store.getProduct(productId.value));
+
+onMounted(() => {
+  setTimeout(() => {
+    isReady.value = true;
+  }, 10);
+});
 </script>
 
 <template>
-    <div class="page-content">
+    <div class="page-content" :class="{ ready: isReady }">
         <div class="container">
             <div v-if="product" class="product-detail">
-                <div class="product-image">
+                <div class="product-image animate-fade-in-up">
                     <img :src="product.image" :alt="product.name">
                 </div>
                 <div class="product-info card">
-                    <h1>{{ product.name }}</h1>
-                    <p>{{ product.description }}</p>
-                    <p><strong>分类:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
-                    <router-link to="/about" class="add-to-cart-btn">联系我们</router-link>
+                    <h1 class="animate-fade-in-up" style="animation-delay: 0.1s">{{ product.name }}</h1>
+                    <p class="animate-fade-in-up" style="animation-delay: 0.2s">{{ product.description }}</p>
+                    <p class="animate-fade-in-up" style="animation-delay: 0.3s"><strong>分类:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
+                    <router-link to="/about" class="add-to-cart-btn animate-fade-in-up" style="animation-delay: 0.4s">联系我们</router-link>
                 </div>
             </div>
             <div v-else>
-                <h2 class="card" style="text-align: center; padding: 2rem;">商品未找到</h2>
+                <h2 class="card animate-fade-in-up" style="text-align: center; padding: 2rem;">商品未找到</h2>
             </div>
         </div>
     </div>
