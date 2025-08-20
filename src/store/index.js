@@ -1,6 +1,14 @@
 import { reactive } from 'vue';
 
 export const store = reactive({
+  // Initialize theme from localStorage or default to 'system'
+  theme: localStorage.getItem('theme') || 'system',
+
+  setTheme(newTheme) {
+    this.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+  },
+
   products: [
     { id: 1, name: '商品 1', image: '/电子烟/微信图片_20250805234550_1211.jpg', category: '1', description: '这里是商品 1 的详细描述。' },
     { id: 2, name: '商品 2', image: '/电子烟/微信图片_20250805234550_1212.jpg', category: '1', description: '这里是商品 2 的详细描述。' },

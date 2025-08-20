@@ -1,46 +1,116 @@
 <script setup>
 import { store } from './store';
+import { watchEffect, computed } from 'vue';
+
+// Computed property to determine if the current theme is dark
+const isDark = computed(() => {
+  if (store.theme === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  return store.theme === 'dark';
+});
+
+// Function to toggle theme
+const toggleTheme = () => {
+  const newTheme = isDark.value ? 'light' : 'dark';
+  store.setTheme(newTheme);
+};
+
+// Watch for theme changes and apply the class to the <html> element
+watchEffect(() => {
+  document.documentElement.classList.toggle('dark', isDark.value);
+});
 </script>
 
 <template>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <router-link to="/">BestLinksz.com</router-link>
-            </div>
-            <nav>
-                <ul>
-                    <li><router-link to="/">Home</router-link></li>
-                    <li class="dropdown">
-                        <a href="#">Products</a>
-                        <ul class="dropdown-menu">
-                            <li v-for="category in store.categories" :key="category.id" class="nested-dropdown">
-                                <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
-                                <ul class="nested-dropdown-menu">
-                                    <li v-for="product in store.getProductsByCategory(category.id)" :key="product.id">
-                                        <router-link :to="`/product/${product.id}`">{{ product.name }}</router-link>
+    <div id="app-container">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <router-link to="/">BestLinksz.com</router-link>
+                </div>
+                <div class="nav-wrapper">
+                    <nav>
+                        <ul>
+                            <li><router-link to="/">Home</router-link></li>
+                            <li class="dropdown">
+                                <a href="#">Products</a>
+                                <ul class="dropdown-menu">
+                                    <li v-for="category in store.categories" :key="category.id" class="nested-dropdown">
+                                        <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
+                                        <ul class="nested-dropdown-menu">
+                                            <li v-for="product in store.getProductsByCategory(category.id)" :key="product.id">
+                                                <router-link :to="`/product/${product.id}`">{{ product.name }}</router-link>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
+                            <li><router-link to="/about">About</router-link></li>
                         </ul>
-                    </li>
-                    <li><router-link to="/about">About</router-link></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                    </nav>
+                    <button @click="toggleTheme" class="theme-toggle-btn" aria-label="Toggle theme">
+                        <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
 
-    <!-- 路由匹配到的组件将在这里渲染 -->
-    <router-view :key="$route.path"/>
+        <!-- 路由匹配到的组件将在这里渲染 -->
+        <main id="main-content">
+            <router-view :key="$route.path"/>
+        </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 BestLinksz.com. All Rights Reserved.</p>
-        </div>
-    </footer>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 BestLinksz.com. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
 </template>
 
+<style>
+  @import './assets/base.css';
+</style>
+
 <style scoped>
+    #app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    #main-content {
+      flex: 1;
+    }
+
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .theme-toggle-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 20px;
+        color: var(--color-text);
+        padding: 5px;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .theme-toggle-btn:hover {
+        background-color: var(--color-border);
+    }
+
+    .theme-toggle-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
     /* Basic styles from the original App.vue */
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -57,16 +127,17 @@ import { store } from './store';
 
     a {
         text-decoration: none;
-        color: #333;
+        color: var(--color-text);
     }
 
     header {
-        background-color: #fff;
+        background-color: var(--color-background-soft);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         padding: 15px 0;
         position: sticky;
         top: 0;
         z-index: 1000;
+        transition: background-color 0.5s;
     }
 
     header .container {
@@ -78,6 +149,11 @@ import { store } from './store';
     .logo a {
         font-size: 24px;
         font-weight: bold;
+        color: var(--color-text);
+    }
+
+    .logo a.router-link-exact-active {
+        color: var(--color-text);
     }
 
     nav > ul {
@@ -120,14 +196,14 @@ import { store } from './store';
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: #fff;
+        background-color: var(--color-background-soft);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         list-style: none;
         padding: 10px 0;
         margin: 0;
-        min-width: 150px;
+        min-width: 80px;
         transform-origin: top;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.2s ease, background-color 0.5s;
     }
 
     .dropdown:hover .dropdown-menu {
@@ -153,14 +229,14 @@ import { store } from './store';
         position: absolute;
         top: -10px; /* Align with the top of the parent li's padding */
         left: 100%;
-        background-color: #fff;
+        background-color: var(--color-background-soft);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         list-style: none;
         padding: 5px 0; /* Reduced panel padding */
         margin: 0;
-        min-width: 130px; /* Made panel smaller */
+        min-width: 70px; /* Made panel smaller */
         transform-origin: top;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.2s ease, background-color 0.5s;
     }
 
     .nested-dropdown-menu li a {
@@ -169,7 +245,7 @@ import { store } from './store';
     }
 
     .nested-dropdown-menu li:hover {
-        background-color: #f8f9fa; /* Added subtle hover background */
+        background-color: var(--color-background-mute); /* Added subtle hover background */
     }
 
     .nested-dropdown:hover .nested-dropdown-menu {

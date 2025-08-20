@@ -245,7 +245,7 @@ a {
     text-align: center;
 }
 .contact-section {
-    background-color: #fff;
+    background-color: var(--color-background-soft);
     padding: 40px 0;
     text-align: center;
     opacity: 0;

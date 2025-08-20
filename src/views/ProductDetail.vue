@@ -11,64 +11,61 @@ const product = computed(() => store.getProduct(productId.value));
 </script>
 
 <template>
-    <div class="container">
-        <div v-if="product" class="product-detail">
-            <div class="product-image">
-                <img :src="product.image" :alt="product.name">
+    <div class="page-content">
+        <div class="container">
+            <div v-if="product" class="product-detail">
+                <div class="product-image">
+                    <img :src="product.image" :alt="product.name">
+                </div>
+                <div class="product-info card">
+                    <h1>{{ product.name }}</h1>
+                    <p>{{ product.description }}</p>
+                    <p><strong>分类:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
+                    <router-link to="/about" class="add-to-cart-btn">联系我们</router-link>
+                </div>
             </div>
-            <div class="product-info">
-                <h1>{{ product.name }}</h1>
-                <p>{{ product.description }}</p>
-                <p><strong>分类:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
-                <router-link to="/about" class="add-to-cart-btn">联系我们</router-link>
+            <div v-else>
+                <h2 class="card" style="text-align: center; padding: 2rem;">商品未找到</h2>
             </div>
-        </div>
-        <div v-else>
-            <h2>商品未找到</h2>
         </div>
     </div>
 </template>
 
 <style scoped>
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-}
 .product-detail {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 40px;
     align-items: start;
 }
 .product-image img {
     width: 100%;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .product-info h1 {
     margin-top: 0;
     font-size: 2.5em;
+    color: var(--color-heading);
 }
 .product-info p {
     font-size: 1.1em;
     line-height: 1.6;
-    color: #555;
+    color: var(--color-text);
 }
 .add-to-cart-btn {
-    display: inline-block; /* Add display property for proper sizing */
-    text-decoration: none; /* Remove underline */
-    background-color: #007bff;
-    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--color-heading);
+    color: var(--color-background);
     border: none;
     padding: 15px 30px;
     font-size: 1.2em;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: opacity 0.3s ease;
     margin-top: 20px;
 }
 .add-to-cart-btn:hover {
-    background-color: #0056b3;
+    opacity: 0.9;
 }
 </style>

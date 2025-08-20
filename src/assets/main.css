@@ -4,3 +4,14 @@ body {
     /* 防止因动画或其他元素导致的水平溢出 */
     overflow-x: hidden;
 }
+
+#app {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  background-image: radial-gradient(circle, #dcdcdc 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+html.dark #app {
+  background-image: radial-gradient(circle, #444 1px, transparent 1px);
+}
