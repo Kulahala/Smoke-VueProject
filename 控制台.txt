@@ -1,0 +1,15 @@
+[plugin:vite:vue] Unexpected '/'. Escaping special characters with \ may help.
+E:/develop/test/vue-project/src/App.vue
+    at E:/develop/test/vue-project/src/App.vue:106:1
+    at Root._error (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:6720:18)
+    at Root.error (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:5177:21)
+    at Parser.error (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7185:23)
+    at Parser.unexpected (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7199:19)
+    at Parser.combinator (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7113:14)
+    at Parser.parse (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7487:16)
+    at Parser.loop (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7443:14)
+    at new Parser (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:6713:12)
+    at Processor._root (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7651:20)
+    at Processor._runSync (E:\develop\test\vue-project\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:7689:23)
+Click outside, press Esc key, or fix the code to dismiss.
+You can also disable this overlay by setting server.hmr.overlay to false in vite.config.js.

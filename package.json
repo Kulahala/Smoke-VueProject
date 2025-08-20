@@ -10,12 +10,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "bundle": "npm run build && node bundle.js",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
