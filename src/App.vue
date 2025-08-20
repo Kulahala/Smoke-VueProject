@@ -27,7 +27,7 @@ watchEffect(() => {
         <header>
             <div class="container">
                 <div class="logo">
-                    <router-link to="/">BestLinksz.com</router-link>
+                    <router-link to="/">BestLinksz.com<sup>®</sup></router-link>
                 </div>
                 <div class="nav-wrapper">
                     <nav>
@@ -172,8 +172,8 @@ watchEffect(() => {
         margin-left: 20px;
     }
 
-    nav ul li a {
-        font-size: 16px;
+        nav > ul > li > a {
+        font-size: 18px;
         padding: 10px;
         transition: color 0.3s ease;
     }
@@ -206,7 +206,7 @@ watchEffect(() => {
         list-style: none;
         padding: 10px 0;
         margin: 0;
-        min-width: 80px;
+        min-width: 85px;
         transform-origin: top;
         transition: opacity 0.2s ease, background-color 0.5s;
     }
@@ -221,6 +221,7 @@ watchEffect(() => {
         display: block;
         padding: 10px 20px;
         white-space: nowrap;
+        font-size: 16px;
     }
 
     /* --- New styles for nested dropdown --- */
