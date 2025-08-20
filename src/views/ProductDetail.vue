@@ -27,12 +27,12 @@ onMounted(() => {
                 <div class="product-info card">
                     <h1 class="animate-fade-in-up" style="animation-delay: 0.1s">{{ product.name }}</h1>
                     <p class="animate-fade-in-up" style="animation-delay: 0.2s">{{ product.description }}</p>
-                    <p class="animate-fade-in-up" style="animation-delay: 0.3s"><strong>分类:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
-                    <router-link to="/about" class="add-to-cart-btn animate-fade-in-up" style="animation-delay: 0.4s">联系我们</router-link>
+                    <p class="animate-fade-in-up" style="animation-delay: 0.3s"><strong>Category:</strong> {{ store.categories.find(c => c.id === product.category)?.name }}</p>
+                    <router-link to="/about" class="add-to-cart-btn animate-fade-in-up" style="animation-delay: 0.4s">Contact Us</router-link>
                 </div>
             </div>
             <div v-else>
-                <h2 class="card animate-fade-in-up" style="text-align: center; padding: 2rem;">商品未找到</h2>
+                <h2 class="card animate-fade-in-up" style="text-align: center; padding: 2rem;">Product Not Found</h2>
             </div>
         </div>
     </div>

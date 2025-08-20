@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
             <div class="carousel-inner">
                 <Transition name="fade" mode="out-in">
                     <div :key="currentIndex" class="carousel-item">
-                        <img :src="carouselImages[currentIndex]" alt="轮播图">
+                        <img :src="carouselImages[currentIndex]" alt="Carousel Image">
                     </div>
                 </Transition>
             </div>
@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
 
     <main class="container">
         <section class="products">
-            <h2 class="animate-fade-in-up">我们的产品</h2>
+            <h2 class="animate-fade-in-up">Our Products</h2>
             <div class="product-grid">
                 <div v-for="(product, index) in products" :key="index" class="product-card" :style="{ animationDelay: (index * 0.1) + 's' }">
                     <router-link :to="`/product/${product.id}`">
@@ -91,9 +91,9 @@ onBeforeUnmount(() => {
 
     <section class="contact-section">
         <div class="container">
-            <h2>联系我们</h2>
-            <a href="mailto:1378554398@qq.com" class="contact-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <h2 class="animate-fade-in-up" style="animation-delay: 0.2s">Contact Us</h2>
+            <a href="mailto:1378554398@qq.com" class="contact-link animate-fade-in-up" style="animation-delay: 0.3s">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 <span>1378554398@qq.com</span>
             </a>
         </div>
@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
 }
 a {
     text-decoration: none;
-    color: #333;
+    color: var(--color-text);
 }
 .carousel {
     position: relative;
@@ -195,6 +195,7 @@ a {
 .products h2 {
     text-align: center;
     margin-bottom: 40px;
+    color: var(--color-heading);
 }
 .product-grid {
     display: grid;
@@ -203,7 +204,7 @@ a {
 }
 
 .product-card {
-    background-color: #fff;
+    background-color: var(--color-background-soft);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
@@ -233,6 +234,7 @@ a {
     padding: 20px;
     margin: 0;
     text-align: center;
+    color: var(--color-text);
 }
 .contact-section {
     background-color: var(--color-background-soft);
@@ -248,19 +250,21 @@ a {
 }
 .contact-section h2 {
     margin-bottom: 20px;
+    color: var(--color-heading);
 }
 .contact-link {
     display: inline-flex;
     align-items: center;
     font-size: 18px;
-    color: #007bff;
+    color: var(--color-heading);
     transition: color 0.3s ease;
 }
 .contact-link:hover {
-    color: #0056b3;
+    opacity: 0.8;
 }
 .contact-link svg {
     margin-right: 10px;
+    stroke: currentColor;
 }
 .fade-enter-active,
 .fade-leave-active {
