@@ -131,13 +131,18 @@ watchEffect(() => {
     }
 
     header {
-        background-color: var(--color-background-soft);
+        background-color: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         padding: 15px 0;
         position: sticky;
         top: 0;
         z-index: 1000;
         transition: background-color 0.5s;
+    }
+
+    html.dark header {
+        background-color: rgba(34, 34, 34, 0.75);
     }
 
     header .container {
