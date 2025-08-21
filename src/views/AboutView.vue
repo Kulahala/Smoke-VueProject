@@ -43,7 +43,16 @@ onMounted(() => {
 .about-container {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 60px;
+}
+
+.card {
+  box-shadow: 0 4px 8px var(--color-shadow);
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px var(--color-shadow-hover);
 }
 
 h1, h2 {
