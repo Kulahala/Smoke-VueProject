@@ -62,6 +62,10 @@ html.dark {
   font-weight: normal;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);

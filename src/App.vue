@@ -1,6 +1,13 @@
 <script setup>
+import { ref, watchEffect, computed } from 'vue';
 import { store } from './store';
-import { watchEffect, computed } from 'vue';
+
+// State for mobile menu
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 // Computed property to determine if the current theme is dark
 const isDark = computed(() => {
@@ -24,13 +31,49 @@ watchEffect(() => {
 
 <template>
     <div id="app-container">
+        <div class="overlay" v-if="isMenuOpen" @click="isMenuOpen = false"></div>
+
+        <button @click="toggleMenu" class="hamburger-btn" aria-label="Toggle menu" :class="{ 'is-active': isMenuOpen }">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-wrapper" :class="{ 'is-open': isMenuOpen }">
+            <nav>
+                <ul>
+                    <li @click="isMenuOpen = false"><router-link to="/">Home</router-link></li>
+                    <li class="dropdown">
+                        <a href="#">Products</a>
+                        <ul class="dropdown-menu">
+                            <li v-for="category in store.categories" :key="category.id" class="nested-dropdown">
+                                <router-link @click="isMenuOpen = false" :to="`/category/${category.id}`">{{ category.name }}</router-link>
+                                <ul class="nested-dropdown-menu">
+                                    <li v-for="product in store.getProductsByCategory(category.id)" :key="product.id">
+                                        <router-link @click="isMenuOpen = false" :to="`/product/${product.id}`">{{ product.name }}</router-link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li @click="isMenuOpen = false"><router-link to="/about">About</router-link></li>
+                    <li @click="isMenuOpen = false"><router-link to="/blog">Blog</router-link></li>
+                </ul>
+            </nav>
+            <button @click="toggleTheme" class="theme-toggle-btn" aria-label="Toggle theme">
+                <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
+
         <header>
             <div class="container">
                 <div class="logo">
                     <router-link to="/">BestLinksz.com<sup>®</sup></router-link>
                 </div>
-                <div class="nav-wrapper">
-                    <nav>
+                <!-- Desktop navigation is now here -->
+                <div class="nav-wrapper-desktop">
+                     <nav>
                         <ul>
                             <li><router-link to="/">Home</router-link></li>
                             <li class="dropdown">
@@ -103,13 +146,24 @@ watchEffect(() => {
       min-height: 100vh;
     }
 
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(4px);
+        z-index: 1001; /* Below menu, above content */
+        transition: opacity 0.3s ease-in-out;
+    }
+
     #main-content {
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    .nav-wrapper {
+    .nav-wrapper-desktop {
         display: flex;
         align-items: center;
     }
@@ -133,14 +187,6 @@ watchEffect(() => {
     .theme-toggle-btn svg {
         width: 20px;
         height: 20px;
-    }
-
-    /* Basic styles from the original App.vue */
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        margin: 0;
-        background-color: #f4f4f4;
-        color: #333;
     }
 
     .container {
@@ -185,105 +231,232 @@ watchEffect(() => {
         color: var(--color-text);
     }
 
-    nav > ul {
+    .nav-wrapper-desktop nav > ul {
         list-style: none;
         margin: 0;
         padding: 0;
         display: flex;
     }
 
-    nav > ul > li {
+    .nav-wrapper-desktop nav > ul > li {
         margin-left: 20px;
     }
 
-        nav > ul > li > a {
+    .nav-wrapper-desktop nav > ul > li > a {
         font-size: 18px;
         padding: 10px;
         transition: color 0.3s ease;
     }
 
-    nav ul li a:hover, .router-link-exact-active {
+    .nav-wrapper-desktop nav ul li a:hover, .nav-wrapper-desktop .router-link-exact-active {
         color: #007bff;
     }
 
-    .dropdown {
-        position: relative;
+    .hamburger-btn {
+        display: none; /* Hidden on desktop */
     }
 
-    @keyframes growDown {
-        from {
-            transform: scaleY(0);
+    /* --- Desktop Styles (screens wider than 768px) --- */
+    @media (min-width: 768px) {
+        .overlay { display: none; } /* Hide overlay on desktop */
+        .nav-wrapper { display: none; } /* Hide mobile nav wrapper on desktop */
+
+        .dropdown {
+            position: relative;
         }
-        to {
-            transform: scaleY(1);
+
+        @keyframes growDown {
+            from {
+                transform: scaleY(0);
+            }
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--color-background-soft);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            min-width: 85px;
+            transform-origin: top;
+            transition: opacity 0.2s ease, background-color 0.5s;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            animation: growDown 0.2s ease-out;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            white-space: nowrap;
+            font-size: 16px;
+        }
+
+        .nested-dropdown {
+            position: relative;
+        }
+
+        .nested-dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: -10px;
+            left: 100%;
+            background-color: var(--color-background-soft);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            list-style: none;
+            padding: 5px 0;
+            margin: 0;
+            min-width: 70px;
+            transform-origin: top;
+            transition: opacity 0.2s ease, background-color 0.5s;
+        }
+
+        .nested-dropdown-menu li a {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .nested-dropdown-menu li:hover {
+            background-color: var(--color-background-mute);
+        }
+
+        .nested-dropdown:hover .nested-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            animation: growDown 0.2s ease-out;
         }
     }
 
-    .dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: var(--color-background-soft);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        list-style: none;
-        padding: 10px 0;
-        margin: 0;
-        min-width: 85px;
-        transform-origin: top;
-        transition: opacity 0.2s ease, background-color 0.5s;
-    }
+    /* --- Mobile Styles (screens narrower than 768px) --- */
+    @media (max-width: 767px) {
+        .nav-wrapper-desktop { display: none; }
 
-    .dropdown:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        animation: growDown 0.2s ease-out;
-    }
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1003; /* Above overlay and menu */
+            position: fixed;
+            top: 1.2rem;
+            right: 20px;
+        }
 
-    .dropdown-menu li a {
-        display: block;
-        padding: 10px 20px;
-        white-space: nowrap;
-        font-size: 16px;
-    }
+        .hamburger-btn span {
+            width: 2rem;
+            height: 0.25rem;
+            background: var(--color-text);
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+        
+        .hamburger-btn.is-active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
 
-    /* --- New styles for nested dropdown --- */
-    .nested-dropdown {
-        position: relative;
-    }
+        .hamburger-btn.is-active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
 
-    .nested-dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        top: -10px; /* Align with the top of the parent li's padding */
-        left: 100%;
-        background-color: var(--color-background-soft);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        list-style: none;
-        padding: 5px 0; /* Reduced panel padding */
-        margin: 0;
-        min-width: 70px; /* Made panel smaller */
-        transform-origin: top;
-        transition: opacity 0.2s ease, background-color 0.5s;
-    }
+        .hamburger-btn.is-active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
 
-    .nested-dropdown-menu li a {
-        padding: 8px 15px; /* Reduced link padding */
-        font-size: 14px; /* Smaller font */
-    }
+        .nav-wrapper {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: auto;
+            width: 65%;
+            height: 100vh;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-top: 5rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1002;
+            box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
+        }
 
-    .nested-dropdown-menu li:hover {
-        background-color: var(--color-background-mute); /* Added subtle hover background */
-    }
+        .nav-wrapper.is-open {
+            transform: translateX(0);
+        }
 
-    .nested-dropdown:hover .nested-dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        animation: growDown 0.2s ease-out;
+        .nav-wrapper .theme-toggle-btn {
+            margin-top: 2rem;
+            align-self: center;
+        }
+
+        .nav-wrapper nav {
+            width: 100%;
+        }
+        
+        .nav-wrapper nav > ul {
+            flex-direction: column;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-wrapper nav > ul > li {
+            margin: 0;
+            width: 100%;
+        }
+        
+        .nav-wrapper nav > ul > li > a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: var(--color-text);
+        }
+
+        .nav-wrapper .dropdown > a {
+            cursor: pointer;
+        }
+
+        .nav-wrapper .dropdown-menu, .nav-wrapper .nested-dropdown-menu {
+            position: static;
+            box-shadow: none;
+            background-color: transparent;
+            padding-left: 2rem;
+            min-width: 100%;
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            transition: none;
+        }
+        
+        .nav-wrapper .dropdown-menu li a, .nav-wrapper .nested-dropdown-menu li a {
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            white-space: normal;
+            display: flex;
+            align-items: center;
+        }
     }
-    /* --- End of new styles --- */
 
     footer {
         background-color: #333;
@@ -308,3 +481,5 @@ watchEffect(() => {
         opacity: 0;
     }
 </style>
+
+
