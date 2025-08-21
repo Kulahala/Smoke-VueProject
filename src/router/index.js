@@ -24,6 +24,11 @@ const routes = [
     name: 'About',
     component: () => import('../views/AboutView.vue')
   },
+  {
+    path: '/blog',
+    name: 'Blog',
+    component: () => import('../views/BlogView.vue')
+  },
   // Optional: Add a 404 not found route
   {
     path: '/:pathMatch(.*)*',
