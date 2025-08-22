@@ -164,7 +164,7 @@ watchEffect(() => {
     }
 
     .nav-wrapper-desktop {
-        display: flex;
+        display: none;
         align-items: center;
     }
 
@@ -253,11 +253,123 @@ watchEffect(() => {
     }
 
     .hamburger-btn {
-        display: none; /* Hidden on desktop */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 2rem;
+        height: 2rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1003; /* Above overlay and menu */
+        position: fixed;
+        top: 1.2rem;
+        right: 20px;
+    }
+
+    .hamburger-btn span {
+        width: 2rem;
+        height: 0.25rem;
+        background: var(--color-text);
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        position: relative;
+        transform-origin: 1px;
+    }
+    
+    .hamburger-btn.is-active span:nth-child(1) {
+        transform: rotate(45deg);
+    }
+
+    .hamburger-btn.is-active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .hamburger-btn.is-active span:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+
+    .nav-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: auto;
+        width: 65%;
+        height: 100vh;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 5rem;
+        transform: translateX(100%);
+        transition: transform 0.2s ease-in-out;
+        z-index: 1002;
+        box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-wrapper.is-open {
+        transform: translateX(0);
+    }
+
+    .nav-wrapper .theme-toggle-btn {
+        margin-top: 2rem;
+        align-self: center;
+    }
+
+    .nav-wrapper nav {
+        width: 100%;
+    }
+    
+    .nav-wrapper nav > ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+    }
+
+    .nav-wrapper nav > ul > li {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .nav-wrapper nav > ul > li > a {
+        display: flex;
+        align-items: center;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        color: var(--color-text);
+    }
+
+    .nav-wrapper .dropdown > a {
+        cursor: pointer;
+    }
+
+    .nav-wrapper .dropdown-menu, .nav-wrapper .nested-dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 2rem;
+        min-width: 100%;
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        transition: none;
+    }
+    
+    .nav-wrapper .dropdown-menu li a, .nav-wrapper .nested-dropdown-menu li a {
+        padding: 0.75rem 0;
+        font-size: 1rem;
+        white-space: normal;
+        display: flex;
+        align-items: center;
     }
 
     /* --- Desktop Styles (screens wider than 768px) --- */
     @media (min-width: 768px) {
+        .nav-wrapper-desktop { display: flex; }
+        .hamburger-btn { display: none; }
         .overlay { display: none; } /* Hide overlay on desktop */
         .nav-wrapper { display: none; } /* Hide mobile nav wrapper on desktop */
 
@@ -339,125 +451,6 @@ watchEffect(() => {
         }
     }
 
-    /* --- Mobile Styles (screens narrower than 768px) --- */
-    @media (max-width: 767px) {
-        .nav-wrapper-desktop { display: none; }
-
-        .hamburger-btn {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 2rem;
-            height: 2rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1003; /* Above overlay and menu */
-            position: fixed;
-            top: 1.2rem;
-            right: 20px;
-        }
-
-        .hamburger-btn span {
-            width: 2rem;
-            height: 0.25rem;
-            background: var(--color-text);
-            border-radius: 10px;
-            transition: all 0.3s linear;
-            position: relative;
-            transform-origin: 1px;
-        }
-        
-        .hamburger-btn.is-active span:nth-child(1) {
-            transform: rotate(45deg);
-        }
-
-        .hamburger-btn.is-active span:nth-child(2) {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-
-        .hamburger-btn.is-active span:nth-child(3) {
-            transform: rotate(-45deg);
-        }
-
-        .nav-wrapper {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: auto;
-            width: 65%;
-            height: 100vh;
-            background-color: var(--color-background);
-            color: var(--color-text);
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding-top: 5rem;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1002;
-            box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
-        }
-
-        .nav-wrapper.is-open {
-            transform: translateX(0);
-        }
-
-        .nav-wrapper .theme-toggle-btn {
-            margin-top: 2rem;
-            align-self: center;
-        }
-
-        .nav-wrapper nav {
-            width: 100%;
-        }
-        
-        .nav-wrapper nav > ul {
-            flex-direction: column;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-wrapper nav > ul > li {
-            margin: 0;
-            width: 100%;
-        }
-        
-        .nav-wrapper nav > ul > li > a {
-            display: flex;
-            align-items: center;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            color: var(--color-text);
-        }
-
-        .nav-wrapper .dropdown > a {
-            cursor: pointer;
-        }
-
-        .nav-wrapper .dropdown-menu, .nav-wrapper .nested-dropdown-menu {
-            position: static;
-            box-shadow: none;
-            background-color: transparent;
-            padding-left: 2rem;
-            min-width: 100%;
-            display: block;
-            visibility: visible;
-            opacity: 1;
-            transition: none;
-        }
-        
-        .nav-wrapper .dropdown-menu li a, .nav-wrapper .nested-dropdown-menu li a {
-            padding: 0.75rem 0;
-            font-size: 1rem;
-            white-space: normal;
-            display: flex;
-            align-items: center;
-        }
-    }
-
     footer {
         background-color: #333;
         color: #fff;
@@ -481,5 +474,3 @@ watchEffect(() => {
         opacity: 0;
     }
 </style>
-
-

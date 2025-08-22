@@ -39,11 +39,15 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.page-content {
+    margin-top: 40px;
+}
 .product-detail {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 0.6fr 1.4fr;
     gap: 40px;
     align-items: start;
+    padding-left: 40px;
 }
 .product-image img {
     width: 100%;

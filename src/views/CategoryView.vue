@@ -41,7 +41,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Styles are copied from App.vue for consistency */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -53,41 +52,46 @@ onMounted(() => {
 .products h2 {
     text-align: center;
     margin-bottom: 40px;
+    color: var(--color-heading);
 }
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
+
 .product-card {
-    background-color: #fff;
+    background-color: var(--color-background-soft);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px var(--color-shadow);
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s ease;
+    opacity: 0; /* Start as transparent for the animation */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .ready .product-card {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fadeInUp 0.5s ease-out forwards;
 }
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px var(--color-shadow-hover);
+}
+
 .product-card a {
     text-decoration: none;
-    color: #333;
+    color: var(--color-text);
 }
+
 .product-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
 }
 .product-card h3 {
     padding: 20px;
     margin: 0;
     text-align: center;
-}
-
-.category-view.ready .product-card:hover {
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    color: var(--color-text);
 }
 </style>

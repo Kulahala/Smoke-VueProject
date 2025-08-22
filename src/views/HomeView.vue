@@ -138,6 +138,8 @@ a {
     width: 100%;
     height: 100%;
     transition: opacity 0.7s ease-in-out;
+    border-radius: 8px;
+    overflow: hidden;
 }
 .carousel-item img {
     width: 100%;
@@ -181,13 +183,13 @@ a {
 .indicator {
     width: 12px;
     height: 12px;
-    background-color: #cccccc;
+    background-color: var(--color-border);
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 .indicator.active {
-    background-color: #888888;
+    background-color: var(--color-heading);
 }
 .products {
     padding: 40px 0;
