@@ -56,7 +56,7 @@ onMounted(() => {
 }
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
@@ -67,6 +67,8 @@ onMounted(() => {
     overflow: hidden;
     opacity: 0; /* Start as transparent for the animation */
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-width: 400px; /* Constrain the card width */
+    margin: 0 auto; /* Center the card in the grid cell */
 }
 
 .ready .product-card {

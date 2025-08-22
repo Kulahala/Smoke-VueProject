@@ -211,7 +211,9 @@ a {
     box-shadow: 0 4px 8px var(--color-shadow);
     overflow: hidden;
     opacity: 0; /* Start as transparent for the animation */
-    
+    max-width: 290px;
+    margin: 0 auto;
+
     /* The hover effects will now use this transition, which has NO DELAY */
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }

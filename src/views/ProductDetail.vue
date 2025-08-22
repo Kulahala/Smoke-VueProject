@@ -52,6 +52,7 @@ onMounted(() => {
 .product-image img {
     width: 100%;
     border-radius: 8px;
+    box-shadow: 0 4px 8px var(--color-shadow);
 }
 .product-info h1 {
     margin-top: 0;
