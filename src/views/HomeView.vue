@@ -9,7 +9,7 @@ const isReady = ref(false);
 const carouselImages = ref([
     '/电子烟/雾化器主页1.jpg',
     '/电子烟/雾化器主页2.jpg',
-    '/电子烟/微信图片_20250805234550_1210.jpg'
+    '/电子烟/packaging.jpg'
 ]);
 
 const products = computed(() => store.products);
