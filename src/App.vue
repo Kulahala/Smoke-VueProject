@@ -337,8 +337,8 @@ watchEffect(() => {
     .nav-wrapper nav > ul > li > a {
         display: flex;
         align-items: center;
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
+        padding: clamp(0.6rem, 1.5vh, 1rem) 2rem;
+        font-size: clamp(1rem, 0.9rem + 1vw, 1.2rem);
         color: var(--color-text);
     }
 
@@ -359,8 +359,8 @@ watchEffect(() => {
     }
     
     .nav-wrapper .dropdown-menu li a, .nav-wrapper .nested-dropdown-menu li a {
-        padding: 0.75rem 0;
-        font-size: 1rem;
+        padding: clamp(0.4rem, 1vh, 0.75rem) 0;
+        font-size: clamp(0.85rem, 0.8rem + 0.75vw, 1rem);
         white-space: normal;
         display: flex;
         align-items: center;
