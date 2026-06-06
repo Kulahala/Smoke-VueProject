@@ -47,7 +47,7 @@ onMounted(() => {
         <p>{{ store.text(category, 'description') }}</p>
         <div class="category-actions">
           <a :href="mailtoLink" class="primary-action">{{ store.t('category.emailPricing') }}</a>
-          <router-link to="/" class="secondary-action">{{ store.t('common.backCatalogue') }}</router-link>
+          <router-link to="/products" class="secondary-action">{{ store.t('common.backCatalogue') }}</router-link>
         </div>
       </div>
     </section>
