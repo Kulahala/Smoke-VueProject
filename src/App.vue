@@ -39,6 +39,19 @@ const closeMenu = () => {
   isUtilityOpen.value = false;
 };
 
+const showBackToTop = ref(false);
+
+const handleScroll = () => {
+  showBackToTop.value = window.scrollY > 300;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+};
+
 const handleBrandClick = (event) => {
   closeMenu();
   if (route.path === '/') {
@@ -84,11 +97,13 @@ onMounted(() => {
   updateSystemTheme();
   mediaQuery.addEventListener?.('change', updateSystemTheme);
   document.addEventListener('click', handleDocumentClick);
+  window.addEventListener('scroll', handleScroll);
 });
 
 onBeforeUnmount(() => {
   mediaQuery?.removeEventListener?.('change', updateSystemTheme);
   document.removeEventListener('click', handleDocumentClick);
+  window.removeEventListener('scroll', handleScroll);
 });
 
 const setMeta = (selector, attribute, value) => {
@@ -397,6 +412,18 @@ watchEffect(() => {
         <span>{{ store.t('footer.legal') }}</span>
       </div>
     </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button
+      type="button"
+      :class="['back-to-top', { visible: showBackToTop }]"
+      :aria-label="store.language === 'zh' ? '返回顶部' : 'Back to top'"
+      @click="scrollToTop"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -993,6 +1020,60 @@ html.dark .inquiry-link:hover {
 
   .site-header {
     background: var(--color-background);
+  }
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface-elevated) 82%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--color-heading);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 850;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  box-shadow: 0 8px 24px var(--color-shadow);
+  transition:
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s,
+    background 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 30px var(--color-shadow-hover),
+    0 0 16px color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
   }
 }
 </style>
