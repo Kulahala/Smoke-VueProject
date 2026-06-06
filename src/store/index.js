@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 
-export const inquiryEmail = '1378554398@qq.com';
+export const inquiryEmail = 'benson.lee@bestlinksz.com';
 
 // 新手只需要改这里和下面 products/categoryGroups：
 // 1. 图片放到 public/电子烟 文件夹。
@@ -27,7 +27,7 @@ export const heroSlides = [
 export const store = reactive({
   language: localStorage.getItem('language') || 'en',
   theme: localStorage.getItem('theme') || 'system',
-  colorScheme: localStorage.getItem('colorScheme') || 'gold',
+  colorScheme: localStorage.getItem('colorScheme') || 'default',
 
   setLanguage(newLanguage) {
     this.language = newLanguage === 'zh' ? 'zh' : 'en';

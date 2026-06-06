@@ -39,6 +39,14 @@ const closeMenu = () => {
   isUtilityOpen.value = false;
 };
 
+const handleBrandClick = (event) => {
+  closeMenu();
+  if (route.path === '/') {
+    event.preventDefault();
+    window.location.reload();
+  }
+};
+
 const updateSystemTheme = () => {
   systemPrefersDark.value = Boolean(mediaQuery?.matches);
 };
@@ -51,18 +59,22 @@ const handleDocumentClick = (event) => {
 };
 
 const schemes = [
-  { value: 'default', label: 'Default', color: '#00f5d4' },
-  { value: 'blue', label: 'Cyber Blue', color: '#00d2ff' },
-  { value: 'gold', label: 'Luxury Gold', color: '#dfb260' },
+  { value: 'white-mint', label: 'Light Mint', labelZh: '白绿', theme: 'light', scheme: 'default', themeColor: '#ffffff', accentColor: '#00e5c9' },
+  { value: 'white-blue', label: 'Light Blue', labelZh: '白蓝', theme: 'light', scheme: 'blue', themeColor: '#ffffff', accentColor: '#0066ff' },
+  { value: 'white-gold', label: 'Light Gold', labelZh: '白金', theme: 'light', scheme: 'gold', themeColor: '#ffffff', accentColor: '#c29543' },
+  { value: 'dark-mint', label: 'Dark Mint', labelZh: '黑绿', theme: 'dark', scheme: 'default', themeColor: '#04090b', accentColor: '#00f5d4' },
+  { value: 'cyber-blue', label: 'Cyber Blue', labelZh: '黑蓝', theme: 'dark', scheme: 'blue', themeColor: '#020617', accentColor: '#00d2ff' },
+  { value: 'luxury-gold', label: 'Luxury Gold', labelZh: '黑金', theme: 'dark', scheme: 'gold', themeColor: '#09090b', accentColor: '#dfb260' }
 ];
 
-const setColorScheme = (schemeValue) => {
-  store.setColorScheme(schemeValue);
+const setColorScheme = (schemeItem) => {
+  store.setTheme(schemeItem.theme);
+  store.setColorScheme(schemeItem.scheme);
 };
 
 const activeSchemeLabel = computed(() => {
-  const scheme = schemes.find((item) => item.value === store.colorScheme) || schemes[0];
-  return store.language === 'zh' ? (scheme.value === 'default' ? '默认' : scheme.value === 'blue' ? '黑蓝' : '黑金') : scheme.label;
+  const active = schemes.find((item) => store.theme === item.theme && store.colorScheme === item.scheme) || schemes[3];
+  return store.language === 'zh' ? active.labelZh : active.label;
 });
 
 const activeLanguageLabel = computed(() => (store.language === 'zh' ? store.t('lang.zh') : store.t('lang.en')));
@@ -184,6 +196,12 @@ watchEffect(() => {
   document.documentElement.classList.remove('scheme-default', 'scheme-blue', 'scheme-gold');
   document.documentElement.classList.add(`scheme-${store.colorScheme}`);
 
+  // 动态切换最顶部标签页 Favicon 图标以适配明暗主题
+  const favEl = document.head.querySelector('link[rel="icon"]');
+  if (favEl) {
+    favEl.setAttribute('href', isDark.value ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png');
+  }
+
   const seo = pageSeo.value;
   const absoluteImage = seo.image.startsWith('http') ? seo.image : `${siteUrl}${seo.image}`;
   document.title = seo.title;
@@ -250,8 +268,10 @@ watchEffect(() => {
   <div id="app-container">
     <header class="site-header">
       <div class="container header-inner">
-        <router-link class="brand" to="/" @click="closeMenu">
-          <span class="brand-mark">B</span>
+        <router-link class="brand" to="/" @click="handleBrandClick">
+          <div class="brand-mark-wrapper">
+            <img class="brand-logo" :src="isDark ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png'" alt="BestLinksz Logo" />
+          </div>
           <span>
             <strong>BestLinksz</strong>
             <small>{{ store.t('brand.subtitle') }}</small>
@@ -316,11 +336,12 @@ watchEffect(() => {
                       v-for="scheme in schemes"
                       :key="scheme.value"
                       type="button"
-                      :class="['palette-dot', { active: store.colorScheme === scheme.value }]"
-                      :style="{ '--dot-color': scheme.color }"
-                      :title="scheme.label"
-                      @click="setColorScheme(scheme.value)"
+                      :class="['palette-dot', { active: store.theme === scheme.theme && store.colorScheme === scheme.scheme }]"
+                      :style="{ '--theme-color': scheme.themeColor, '--accent-color': scheme.accentColor }"
+                      :title="store.language === 'zh' ? scheme.labelZh : scheme.label"
+                      @click="setColorScheme(scheme)"
                     >
+                      <span class="dot-inner"></span>
                     </button>
                   </div>
                 </div>
@@ -440,20 +461,24 @@ watchEffect(() => {
   text-decoration: none;
 }
 
-.brand-mark {
+.brand-mark-wrapper {
   width: 38px;
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--color-accent) 44%, var(--color-border-strong));
+  border: 1px solid color-mix(in srgb, var(--color-accent) 26%, var(--color-border));
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 48%),
-    var(--color-heading);
-  color: var(--color-accent);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 10px 24px var(--color-shadow);
-  font-family: var(--font-display);
-  font-weight: 900;
+  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface-elevated));
+  box-shadow: 0 4px 14px var(--color-shadow);
+  padding: 5px;
+  overflow: hidden;
+}
+
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--color-accent) 35%, transparent));
 }
 
 .brand strong,
@@ -664,7 +689,8 @@ watchEffect(() => {
 
 .palette-switch {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 14px;
   padding: 4px 6px;
 }
 
@@ -672,22 +698,33 @@ watchEffect(() => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid var(--color-border-strong);
-  background-color: var(--dot-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: var(--accent-color);
   padding: 0;
   cursor: pointer;
   position: relative;
+  display: grid;
+  place-items: center;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .palette-dot:hover {
-  transform: scale(1.15);
+  transform: scale(1.12);
 }
 
 .palette-dot.active {
-  outline: 2px solid var(--dot-color);
+  outline: 2px solid var(--accent-color);
   outline-offset: 3px;
+}
+
+.dot-inner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--theme-color);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  display: block;
 }
 
 .language-switch {

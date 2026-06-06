@@ -44,7 +44,7 @@ image: '/电子烟/你的图片名.jpg'
 打开 `src/store/index.js`，改这一行：
 
 ```js
-export const inquiryEmail = '1378554398@qq.com';
+export const inquiryEmail = 'benson.lee@bestlinksz.com';
 ```
 
 改成你的接单邮箱即可。所有按钮、页脚和详情页询盘邮件都会自动跟着改。
