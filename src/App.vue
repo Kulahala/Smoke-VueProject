@@ -272,7 +272,6 @@ watchEffect(() => {
                     @click="closeMenu"
                   >
                     <span>{{ store.text(category, 'name') }}</span>
-                    <small>{{ store.text(category, 'description') }}</small>
                   </router-link>
                 </section>
               </div>
@@ -403,12 +402,14 @@ watchEffect(() => {
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-background) 86%, transparent);
-  backdrop-filter: blur(18px);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background) 94%, transparent), color-mix(in srgb, var(--color-background) 84%, transparent)),
+    color-mix(in srgb, var(--color-background) 92%, transparent);
+  backdrop-filter: blur(22px) saturate(1.1);
 }
 
 .header-inner {
-  min-height: 72px;
+  min-height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -428,10 +429,14 @@ watchEffect(() => {
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 44%, var(--color-border-strong));
   border-radius: 8px;
-  background: var(--color-heading);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 48%),
+    var(--color-heading);
   color: var(--color-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 10px 24px var(--color-shadow);
+  font-family: var(--font-display);
   font-weight: 900;
 }
 
@@ -442,6 +447,7 @@ watchEffect(() => {
   font-size: 1.08rem;
   font-weight: 900;
   line-height: 1.1;
+  letter-spacing: 0;
 }
 
 .brand small {
@@ -467,14 +473,14 @@ watchEffect(() => {
 
 .site-nav a,
 .nav-group-trigger {
-  min-height: 40px;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   border: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   color: var(--color-text);
-  padding: 0 11px;
+  padding: 0 12px;
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -484,7 +490,9 @@ watchEffect(() => {
 .site-nav a.router-link-exact-active,
 .nav-group:hover .nav-group-trigger {
   color: var(--color-link);
-  background: var(--color-accent-soft);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 58%, transparent), transparent),
+    var(--color-accent-soft);
 }
 
 .nav-group {
@@ -493,15 +501,17 @@ watchEffect(() => {
 
 .nav-menu {
   position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  width: min(720px, 86vw);
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 6px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: var(--color-surface);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 82%, transparent), transparent),
+    var(--color-surface);
   box-shadow: 0 22px 54px var(--color-shadow-hover);
   padding: 8px;
   opacity: 0;
@@ -523,15 +533,22 @@ watchEffect(() => {
 .nav-menu-group {
   display: grid;
   align-content: start;
-  gap: 4px;
+  gap: 2px;
+}
+
+.nav-menu-group + .nav-menu-group {
+  border-top: 1px solid var(--color-border);
+  padding-top: 6px;
+  margin-top: 2px;
 }
 
 .nav-menu-group p {
-  padding: 8px 10px 4px;
+  padding: 4px 8px 2px;
   color: var(--color-heading);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 900;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nav-menu a {
@@ -539,7 +556,7 @@ watchEffect(() => {
   align-items: start;
   flex-direction: column;
   gap: 2px;
-  padding: 12px;
+  padding: 6px 8px;
 }
 
 .nav-menu small {
@@ -559,8 +576,10 @@ watchEffect(() => {
   align-items: center;
   gap: 8px;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-surface);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 72%, transparent), transparent),
+    var(--color-surface);
   color: var(--color-heading);
   padding: 0 12px 0 10px;
   box-shadow: 0 10px 24px var(--color-shadow);
@@ -572,7 +591,7 @@ watchEffect(() => {
   height: 26px;
   display: grid;
   place-items: center;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--color-heading);
   color: var(--color-background);
   font-size: 0.78rem;
@@ -598,8 +617,10 @@ watchEffect(() => {
   display: grid;
   gap: 14px;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 90%, transparent), transparent),
+    color-mix(in srgb, var(--color-surface) 94%, transparent);
   box-shadow: 0 24px 70px var(--color-shadow-hover);
   backdrop-filter: blur(18px);
   padding: 14px;
@@ -620,7 +641,7 @@ watchEffect(() => {
 .option-grid {
   display: inline-grid;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--color-background-soft);
   padding: 3px;
 }
@@ -637,7 +658,7 @@ watchEffect(() => {
   min-width: 58px;
   min-height: 32px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 6px;
   background: transparent;
   color: var(--color-text-muted);
   font-size: 0.78rem;
@@ -656,8 +677,10 @@ watchEffect(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background: var(--color-heading);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 48%),
+    var(--color-heading);
   color: var(--color-background);
   padding: 0 14px;
   font-weight: 900;
@@ -679,7 +702,9 @@ html.dark .inquiry-link {
 
 .site-footer {
   border-top: 1px solid var(--color-border);
-  background: var(--color-background-soft);
+  background:
+    linear-gradient(180deg, var(--color-background-soft), color-mix(in srgb, var(--color-background-mute) 54%, var(--color-background-soft))),
+    var(--color-background-soft);
   color: var(--color-text-muted);
   padding: 52px 0 24px;
 }
