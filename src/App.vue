@@ -196,10 +196,10 @@ watchEffect(() => {
   document.documentElement.classList.remove('scheme-default', 'scheme-blue', 'scheme-gold');
   document.documentElement.classList.add(`scheme-${store.colorScheme}`);
 
-  // 动态切换最顶部标签页 Favicon 图标以适配明暗主题
+  // 动态切换最顶部标签页 Favicon 图标以适配系统/浏览器本身的明暗主题（不受网站内部配色切换影响）
   const favEl = document.head.querySelector('link[rel="icon"]');
   if (favEl) {
-    favEl.setAttribute('href', isDark.value ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png');
+    favEl.setAttribute('href', systemPrefersDark.value ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png');
   }
 
   const seo = pageSeo.value;
