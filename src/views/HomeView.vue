@@ -10,7 +10,7 @@ const featuredProducts = computed(() => store.representativeProducts);
 const categoryGroups = computed(() =>
   store.categoryGroups.map((group) => ({
     ...group,
-    heroImage: group.children[0]?.heroImage,
+    heroImage: group.heroImage || group.children[0]?.heroImage,
     target: `/products#${group.id}`,
   })),
 );
@@ -255,14 +255,17 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.96) contrast(1.03);
+  filter: saturate(0.9) contrast(1.08);
 }
 
 .hero-overlay {
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(8, 14, 22, 0.92) 0%, rgba(8, 14, 22, 0.75) 46%, rgba(8, 14, 22, 0.34) 100%),
-    linear-gradient(180deg, rgba(8, 14, 22, 0.24), rgba(8, 14, 22, 0.64));
+    radial-gradient(circle at 80% 45%, color-mix(in srgb, var(--color-accent) 7%, transparent) 0%, transparent 56%),
+    linear-gradient(90deg, rgba(4, 9, 11, 0.96) 0%, rgba(6, 12, 14, 0.82) 48%, rgba(6, 12, 14, 0.3) 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 76px),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 76px),
+    linear-gradient(180deg, rgba(4, 9, 11, 0.1), rgba(4, 9, 11, 0.72));
 }
 
 .hero-content {
@@ -307,10 +310,26 @@ onBeforeUnmount(() => {
   animation-delay: 0.16s;
 }
 
+.ready .category-card:nth-child(4),
+.ready .product-card:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.ready .category-card:nth-child(5),
+.ready .product-card:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.ready .category-card:nth-child(6),
+.ready .product-card:nth-child(6) {
+  animation-delay: 0.40s;
+}
+
 .eyebrow {
   margin-bottom: 12px;
   color: var(--color-accent);
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -322,6 +341,8 @@ onBeforeUnmount(() => {
   font-size: clamp(2.6rem, 7vw, 5.9rem);
   line-height: 0.96;
   font-weight: 900;
+  letter-spacing: -0.025em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
 }
 
 .hero-text {
@@ -345,7 +366,7 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0 20px;
   font-weight: 800;
   text-decoration: none;
@@ -356,8 +377,11 @@ onBeforeUnmount(() => {
 }
 
 .primary-action {
-  background: var(--color-accent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #fff 26%, transparent), transparent 42%),
+    var(--color-accent);
   color: #071018;
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--color-accent) 18%, transparent);
 }
 
 .secondary-action {
@@ -384,6 +408,7 @@ onBeforeUnmount(() => {
 
 .hero-metrics div {
   border-top: 1px solid rgba(255, 255, 255, 0.24);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent);
   padding-top: 14px;
 }
 
@@ -422,7 +447,8 @@ onBeforeUnmount(() => {
 }
 
 .intro-section {
-  background: var(--color-background);
+  background:
+    linear-gradient(180deg, var(--color-background), color-mix(in srgb, var(--color-background-soft) 44%, var(--color-background)));
 }
 
 .intro-grid {
@@ -464,11 +490,21 @@ onBeforeUnmount(() => {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 24px;
   color: #fff;
   text-decoration: none;
   isolation: isolate;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 20px 40px var(--color-shadow-hover),
+    0 0 16px color-mix(in srgb, var(--color-accent) 18%, transparent);
 }
 
 .category-card img {
@@ -478,7 +514,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.35s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .category-card::after {
@@ -486,21 +522,25 @@ onBeforeUnmount(() => {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(8, 14, 22, 0.12), rgba(8, 14, 22, 0.88));
+  background:
+    linear-gradient(180deg, rgba(8, 14, 22, 0.08), rgba(8, 14, 22, 0.88)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 18px);
 }
 
 .category-card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 .category-card span {
   width: fit-content;
   border: 1px solid rgba(255, 255, 255, 0.36);
-  border-radius: 999px;
+  border-radius: 6px;
+  background: rgba(6, 12, 14, 0.34);
   padding: 4px 10px;
   color: rgba(255, 255, 255, 0.78);
   font-size: 0.8rem;
   font-weight: 800;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .category-card h3 {
@@ -508,15 +548,30 @@ onBeforeUnmount(() => {
   color: #fff;
   font-size: 1.75rem;
   line-height: 1.1;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .category-card p {
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.74);
+  opacity: 0.85;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s;
+}
+
+.category-card:hover h3,
+.category-card:hover span {
+  transform: translateY(-3px);
+}
+
+.category-card:hover p {
+  opacity: 1;
+  transform: translateY(-3px);
 }
 
 .catalogue-section {
-  background: var(--color-background-soft);
+  background:
+    linear-gradient(180deg, var(--color-background-soft), var(--color-background)),
+    var(--color-background-soft);
 }
 
 .section-heading {
@@ -531,6 +586,7 @@ onBeforeUnmount(() => {
   color: var(--color-link);
   font-weight: 800;
   text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
 
 .product-grid {
@@ -542,19 +598,23 @@ onBeforeUnmount(() => {
 .product-card {
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: var(--color-surface);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 82%, transparent), transparent),
+    var(--color-surface);
   overflow: hidden;
   box-shadow: 0 18px 40px var(--color-shadow);
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-border-strong);
-  box-shadow: 0 24px 58px var(--color-shadow-hover);
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 24px 58px var(--color-shadow-hover),
+    0 0 20px color-mix(in srgb, var(--color-accent) 24%, transparent);
 }
 
 .product-link {
@@ -569,22 +629,29 @@ onBeforeUnmount(() => {
   display: grid;
   place-items: center;
   aspect-ratio: 1.05 / 1;
-  background:
-    linear-gradient(135deg, rgba(8, 14, 22, 0.06), rgba(36, 110, 135, 0.1)),
-    var(--color-background);
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 16px;
 }
 
 .product-media img {
-  width: 84%;
-  height: 84%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-media img {
+  transform: scale(1.055) translateY(-2px);
 }
 
 .product-media span {
   position: absolute;
   left: 14px;
   top: 14px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--color-accent-soft);
   color: var(--color-accent-ink);
   padding: 5px 10px;
@@ -600,6 +667,7 @@ onBeforeUnmount(() => {
 
 .product-body > p {
   color: var(--color-link);
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -628,7 +696,7 @@ onBeforeUnmount(() => {
 
 .product-meta span {
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 6px;
   padding: 5px 9px;
   color: var(--color-text-muted);
   font-size: 0.82rem;
@@ -646,6 +714,7 @@ onBeforeUnmount(() => {
 
 .process-step {
   border-top: 2px solid var(--color-heading);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 52%, transparent), transparent);
   padding: 24px 0 0;
 }
 
@@ -668,7 +737,9 @@ onBeforeUnmount(() => {
 
 .contact-band {
   padding: 70px 0;
-  background: var(--color-heading);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 76px),
+    var(--color-heading);
   color: var(--color-background);
 }
 

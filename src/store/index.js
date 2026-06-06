@@ -8,17 +8,17 @@ export const inquiryEmail = '1378554398@qq.com';
 // 3. 菜单层级改 categoryGroups，商品归类改 product.category。
 export const heroSlides = [
   {
-    image: '/电子烟/placeholders/pod-slim.svg',
+    image: '/电子烟/微信图片_20250805234550_1239.jpg',
     title: 'Wholesale vape catalogue',
     titleZh: '批发电子烟产品目录',
   },
   {
-    image: '/电子烟/placeholders/disposable-max.svg',
+    image: '/电子烟/disposable_vape_max.png',
     title: 'Device and pod systems',
     titleZh: '设备与烟弹系统',
   },
   {
-    image: '/电子烟/placeholders/packaging-suite.svg',
+    image: '/电子烟/packaging.jpg',
     title: 'Packaging and OEM support',
     titleZh: '包装与 OEM 支持',
   },
@@ -27,6 +27,7 @@ export const heroSlides = [
 export const store = reactive({
   language: localStorage.getItem('language') || 'en',
   theme: localStorage.getItem('theme') || 'system',
+  colorScheme: localStorage.getItem('colorScheme') || 'gold',
 
   setLanguage(newLanguage) {
     this.language = newLanguage === 'zh' ? 'zh' : 'en';
@@ -38,6 +39,11 @@ export const store = reactive({
     localStorage.setItem('theme', newTheme);
   },
 
+  setColorScheme(newScheme) {
+    this.colorScheme = newScheme;
+    localStorage.setItem('colorScheme', newScheme);
+  },
+
   categoryGroups: [
     {
       id: 'devices',
@@ -45,6 +51,7 @@ export const store = reactive({
       nameZh: '设备系列',
       description: 'Core vape hardware families for wholesale catalogues and brand programs.',
       descriptionZh: '面向批发目录和品牌项目的核心电子烟硬件系列。',
+      heroImage: '/电子烟/微信图片_20250805234550_1239.jpg',
       children: [
         {
           id: 'pod-systems',
@@ -54,7 +61,7 @@ export const store = reactive({
           shortNameZh: '换弹',
           description: 'Compact refillable and replaceable pod devices for distributors and private-label programs.',
           descriptionZh: '适合经销商和贴牌项目的紧凑型可注油/可换弹设备。',
-          heroImage: '/电子烟/placeholders/pod-slim.svg',
+          heroImage: '/电子烟/微信图片_20250805234550_1239.jpg',
         },
         {
           id: 'starter-kits',
@@ -65,7 +72,7 @@ export const store = reactive({
           description:
             'Bundled device and packaging solutions built for brand launches, channel samples, and wholesale catalogues.',
           descriptionZh: '适合品牌首发、渠道样品和批发目录的设备与包装套装。',
-          heroImage: '/电子烟/placeholders/starter-kit-box.svg',
+          heroImage: '/电子烟/starter_kit_box.png',
         },
       ],
     },
@@ -75,6 +82,7 @@ export const store = reactive({
       nameZh: '现成系列',
       description: 'Fast catalogue items for distributors that need clear SKUs and quick quotation.',
       descriptionZh: '适合需要清晰 SKU 和快速报价的经销商目录产品。',
+      heroImage: '/电子烟/disposable_vape_max.png',
       children: [
         {
           id: 'disposable-vapes',
@@ -85,7 +93,7 @@ export const store = reactive({
           description:
             'Ready-to-ship disposable lines with modern finishes, multiple capacity tiers, and market-ready packaging.',
           descriptionZh: '具备现代外观、多容量档位和市场化包装的一次性产品线。',
-          heroImage: '/电子烟/placeholders/disposable-max.svg',
+          heroImage: '/电子烟/disposable_vape_max.png',
         },
         {
           id: 'sample-packs',
@@ -95,7 +103,7 @@ export const store = reactive({
           shortNameZh: '样品',
           description: 'Mixed samples for buyer evaluation, trade-show preparation, and distributor sales teams.',
           descriptionZh: '用于买家评估、展会准备和经销商销售团队的混合样品包。',
-          heroImage: '/电子烟/placeholders/sample-pack.svg',
+          heroImage: '/电子烟/微信图片_20250805234550_1212.jpg',
         },
       ],
     },
@@ -105,6 +113,7 @@ export const store = reactive({
       nameZh: '配件与耗材',
       description: 'Replacement parts and add-on items for repeat orders, service packs, and channel replenishment.',
       descriptionZh: '用于复购订单、售后套包和渠道补货的替换件与附加产品。',
+      heroImage: '/电子烟/微信图片_20250805234550_1222.jpg',
       children: [
         {
           id: 'replacement-pods',
@@ -114,7 +123,7 @@ export const store = reactive({
           shortNameZh: '烟弹',
           description: 'Replacement cartridges and pod packs for repeat-purchase programs and distributor replenishment.',
           descriptionZh: '面向复购项目和经销商补货的替换烟弹与烟弹套包。',
-          heroImage: '/电子烟/placeholders/replacement-pods.svg',
+          heroImage: '/电子烟/微信图片_20250805234550_1213.jpg',
         },
         {
           id: 'coils-accessories',
@@ -124,7 +133,7 @@ export const store = reactive({
           shortNameZh: '雾化芯',
           description: 'Mesh coils, cables, lanyards, and small accessories that support catalogue follow-up orders.',
           descriptionZh: 'Mesh 雾化芯、线材、挂绳和小配件，适合目录后续补充订单。',
-          heroImage: '/电子烟/placeholders/coil-pack.svg',
+          heroImage: '/电子烟/微信图片_20250805234550_1220.jpg',
         },
       ],
     },
@@ -134,6 +143,7 @@ export const store = reactive({
       nameZh: '品牌支持',
       description: 'Packaging and OEM services that turn selected models into market-ready business orders.',
       descriptionZh: '把选定型号转化为可上市商业订单的包装与 OEM 服务。',
+      heroImage: '/电子烟/starter_kit_box.png',
       children: [
         {
           id: 'packaging-oem',
@@ -143,7 +153,7 @@ export const store = reactive({
           shortNameZh: 'OEM',
           description: 'Retail boxes, sleeves, manuals, logo placement, and sample-ready presentation support.',
           descriptionZh: '支持零售盒、套筒、说明书、Logo 位置和样品展示包装。',
-          heroImage: '/电子烟/placeholders/packaging-suite.svg',
+          heroImage: '/电子烟/packaging.jpg',
         },
         {
           id: 'retail-displays',
@@ -153,7 +163,7 @@ export const store = reactive({
           shortNameZh: '陈列',
           description: 'Counter displays, sample boards, and sales tools for distributors and retail channel teams.',
           descriptionZh: '面向经销商和零售渠道团队的柜台陈列、样品板和销售工具。',
-          heroImage: '/电子烟/placeholders/display-stand.svg',
+          heroImage: '/电子烟/counter_display_stand.png',
         },
       ],
     },
@@ -177,7 +187,7 @@ export const store = reactive({
     {
       id: 1,
       name: 'Aurora Slim Pod',
-      image: '/电子烟/placeholders/pod-slim.svg',
+      image: '/电子烟/微信图片_20250805234550_1239.jpg',
       category: 'pod-systems',
       description:
         'A slim aluminum pod device for channel-ready nicotine salt programs. The clean shell, stable draw activation, and lightweight format make it easy to position for everyday retail.',
@@ -206,7 +216,7 @@ export const store = reactive({
     {
       id: 2,
       name: 'Nova Ceramic Pod',
-      image: '/电子烟/placeholders/pod-ceramic.svg',
+      image: '/电子烟/微信图片_20250805234550_1240.jpg',
       category: 'pod-systems',
       description:
         'A refillable ceramic-core pod solution focused on smoother flavor delivery and repeat-purchase cartridge programs for wholesale buyers.',
@@ -235,7 +245,7 @@ export const store = reactive({
     {
       id: 3,
       name: 'Pulse Max Disposable',
-      image: '/电子烟/placeholders/disposable-max.svg',
+      image: '/电子烟/disposable_vape_max.png',
       category: 'disposable-vapes',
       description:
         'A high-capacity disposable vape line for distributors who need strong shelf presence, consistent vapor output, and fast SKU rollout.',
@@ -264,7 +274,7 @@ export const store = reactive({
     {
       id: 4,
       name: 'Edge Mini Disposable',
-      image: '/电子烟/placeholders/disposable-mini.svg',
+      image: '/电子烟/微信图片_20250805234550_1230.jpg',
       category: 'disposable-vapes',
       description:
         'A compact disposable product for sample packs, convenience channels, and markets that prefer a smaller device footprint.',
@@ -293,7 +303,7 @@ export const store = reactive({
     {
       id: 5,
       name: 'Launch Kit Box Set',
-      image: '/电子烟/placeholders/starter-kit-box.svg',
+      image: '/电子烟/starter_kit_box.png',
       category: 'starter-kits',
       description:
         'A complete starter kit package for brands preparing trade-show samples, distributor onboarding, or first retail placement.',
@@ -322,7 +332,7 @@ export const store = reactive({
     {
       id: 6,
       name: 'Display Sample Pack',
-      image: '/电子烟/placeholders/sample-pack.svg',
+      image: '/电子烟/微信图片_20250805234550_1212.jpg',
       category: 'sample-packs',
       description:
         'A curated sample pack for buyers comparing finishes, flavors, and device families before confirming a wholesale order.',
@@ -351,7 +361,7 @@ export const store = reactive({
     {
       id: 7,
       name: 'Metro Open Pod Kit',
-      image: '/电子烟/placeholders/open-pod-kit.svg',
+      image: '/电子烟/微信图片_20250805234550_1236.jpg',
       category: 'starter-kits',
       description:
         'A starter kit configuration for first-order brand launches, built around a compact device, clear inserts, and retail-ready documentation.',
@@ -380,7 +390,7 @@ export const store = reactive({
     {
       id: 8,
       name: 'Cloud Bar Pro',
-      image: '/电子烟/placeholders/disposable-bar.svg',
+      image: '/电子烟/微信图片_20250805234550_1229.jpg',
       category: 'disposable-vapes',
       description:
         'A disposable vape format for buyers who need stronger shelf visibility, consistent hand feel, and multiple flavor rollout potential.',
@@ -409,7 +419,7 @@ export const store = reactive({
     {
       id: 9,
       name: 'OEM Packaging Suite',
-      image: '/电子烟/placeholders/packaging-suite.svg',
+      image: '/电子烟/packaging.jpg',
       category: 'packaging-oem',
       description:
         'Packaging coordination for selected catalogue items, including box structure, sleeve design, barcode area, and sales sample presentation.',
@@ -438,7 +448,7 @@ export const store = reactive({
     {
       id: 10,
       name: 'Channel Sample Board',
-      image: '/电子烟/placeholders/sample-board.svg',
+      image: '/电子烟/微信图片_20250805234550_1210.jpg',
       category: 'sample-packs',
       description:
         'A compact sample board for distributor teams to compare finishes, model sizes, and target shelf positioning before confirming orders.',
@@ -467,7 +477,7 @@ export const store = reactive({
     {
       id: 11,
       name: 'ClearFlow Replacement Pod Pack',
-      image: '/电子烟/placeholders/replacement-pods.svg',
+      image: '/电子烟/微信图片_20250805234550_1213.jpg',
       category: 'replacement-pods',
       description:
         'A replacement pod pack for repeat-purchase programs, after-sales bundles, and distributor replenishment orders.',
@@ -496,7 +506,7 @@ export const store = reactive({
     {
       id: 12,
       name: 'Mesh Coil Service Pack',
-      image: '/电子烟/placeholders/coil-pack.svg',
+      image: '/电子烟/微信图片_20250805234550_1220.jpg',
       category: 'coils-accessories',
       description:
         'A small accessory and coil service pack for distributors who need add-on replenishment items with clear SKU control.',
@@ -525,7 +535,7 @@ export const store = reactive({
     {
       id: 13,
       name: 'Counter Display Stand',
-      image: '/电子烟/placeholders/display-stand.svg',
+      image: '/电子烟/counter_display_stand.png',
       category: 'retail-displays',
       description:
         'A retail display support item for counter presentation, sample organization, and distributor sales visits.',

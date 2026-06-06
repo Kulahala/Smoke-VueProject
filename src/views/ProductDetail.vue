@@ -164,6 +164,19 @@ onMounted(() => {
   animation-delay: 0.08s;
 }
 
+.related-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.ready .related-card {
+  animation: fadeInUp 0.56s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ready .related-card:nth-child(1) { animation-delay: 0.12s; }
+.ready .related-card:nth-child(2) { animation-delay: 0.19s; }
+.ready .related-card:nth-child(3) { animation-delay: 0.26s; }
+
 .product-gallery {
   position: sticky;
   top: 104px;
@@ -176,17 +189,17 @@ onMounted(() => {
   aspect-ratio: 1 / 1.08;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(16, 24, 32, 0.05), rgba(120, 240, 209, 0.12)),
-    var(--color-surface);
+  background: #ffffff;
   box-shadow: 0 24px 62px var(--color-shadow);
   overflow: hidden;
+  padding: 24px;
 }
 
 .image-frame img {
-  width: min(86%, 520px);
-  height: 86%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.06));
   transition: transform 0.32s ease;
 }
 
@@ -417,26 +430,33 @@ onMounted(() => {
   text-decoration: none;
   overflow: hidden;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .related-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 48px var(--color-shadow-hover);
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 20px 48px var(--color-shadow-hover),
+    0 0 16px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
 .related-card img {
   width: 100%;
   aspect-ratio: 1.25 / 1;
   border-radius: 6px;
-  background: var(--color-background);
+  background: #ffffff;
+  padding: 8px;
+  border: 1px solid var(--color-border);
   object-fit: contain;
-  transition: transform 0.28s ease;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.04));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .related-card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.055) translateY(-1px);
 }
 
 .related-card span {

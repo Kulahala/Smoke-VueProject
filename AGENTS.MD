@@ -59,6 +59,12 @@ image: '/电子烟/placeholders/pod-slim.svg'
 image: 'public/电子烟/placeholders/pod-slim.svg'
 ```
 
+## 图片展示与比例规范
+
+- **分类组背景大图**：大分类的 `heroImage` 必须是纯净、不包含任何多余文字、规格信息或复杂排版的超宽/大特写单图。禁止使用含有大段说明文字的实拍照（例如含有 Advantages 规格对比图的图片）作为卡片背景图，防止在 object-fit Cover 或暗色遮罩时文字被裁剪、遮挡或杂乱无章。
+- **商品卡片展示框**：商品实拍或渲染图的长宽比、大小往往不一致，且通常为白底。在深色主题下，商品图片容器（如 `.product-media`、`.image-frame`）统一采用**纯白色（#ffffff）背景**，配合适量内留白（如 `padding: 12px - 24px`），且图片强制使用 `object-fit: contain` 展示。
+- **视觉目标**：此做法可使白底图片的边缘与白框容器无缝融为一体，不显任何生硬外边框；不同尺寸的图片在同一个框内保持居中完整展示，不剪裁任何边缘，视觉上像物理照片展示盒一样整齐、高档。
+
 ## 改动边界
 
 - 先读真实文件，再下结论；不要凭记忆改关键逻辑。
@@ -100,6 +106,7 @@ image: 'public/电子烟/placeholders/pod-slim.svg'
 - 远端使用 HTTPS：`https://github.com/Kulahala/vue-project.git`。
 - 推送前确认用户是否要求 push；不要默认推送。
 - `outputs/` 这类工具输出目录不要随手提交，除非用户明确要求。
+- 每次进行 git commit 前，必须检查一次是否需要同步更新 `AGENTS.md`（例如，是否有新引入的工具、全局规范变更、核心逻辑修改等需在此记录）。
 
 ## Review 流程
 

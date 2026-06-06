@@ -1,42 +1,53 @@
 :root {
-  --color-background: #f4f7f8;
-  --color-background-soft: #eaf0f1;
-  --color-background-mute: #dfe8ea;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Cascadia Mono', 'SFMono-Regular', Consolas, monospace;
+  --color-background: #f4f7f6;
+  --color-background-soft: #eaf1ee;
+  --color-background-mute: #dce5e2;
   --color-surface: #ffffff;
-  --color-surface-elevated: #f9fbfb;
-  --color-heading: #101820;
-  --color-text: #22313c;
-  --color-text-muted: #657783;
-  --color-border: rgba(16, 24, 32, 0.11);
-  --color-border-strong: rgba(16, 24, 32, 0.22);
-  --color-accent: #78f0d1;
-  --color-accent-soft: rgba(120, 240, 209, 0.18);
-  --color-accent-ink: #073329;
-  --color-link: #176f72;
-  --color-warning: #d7b46a;
-  --color-shadow: rgba(10, 20, 28, 0.09);
-  --color-shadow-hover: rgba(10, 20, 28, 0.17);
+  --color-surface-elevated: #f8faf9;
+  --color-heading: #090e10;
+  --color-text: #1d272a;
+  --color-text-muted: #57686f;
+  --color-border: rgba(9, 14, 16, 0.08);
+  --color-border-strong: rgba(9, 14, 16, 0.18);
+  --color-accent: #00e5c9;
+  --color-accent-rgb: 0, 229, 201;
+  --color-accent-soft: rgba(0, 229, 201, 0.14);
+  --color-accent-ink: #003028;
+  --color-link: #008779;
+  --color-secondary: #c29543;
+  --color-secondary-soft: rgba(194, 149, 67, 0.12);
+  --color-warning: #c29543;
+  --color-shadow: rgba(4, 9, 12, 0.05);
+  --color-shadow-hover: rgba(4, 9, 12, 0.12);
+  --shadow-glow: 0 0 20px rgba(0, 229, 201, 0.15);
   --section-gap: 120px;
 }
 
 html.dark {
-  --color-background: #0a1015;
-  --color-background-soft: #101820;
-  --color-background-mute: #17232b;
-  --color-surface: #111b22;
-  --color-surface-elevated: #15232c;
-  --color-heading: #f2fbfc;
-  --color-text: #d6e3e5;
-  --color-text-muted: #93a7ad;
-  --color-border: rgba(231, 249, 250, 0.12);
-  --color-border-strong: rgba(231, 249, 250, 0.24);
-  --color-accent: #7df2d3;
-  --color-accent-soft: rgba(125, 242, 211, 0.16);
-  --color-accent-ink: #072d26;
-  --color-link: #87e4d2;
-  --color-warning: #e1bd72;
-  --color-shadow: rgba(0, 0, 0, 0.34);
-  --color-shadow-hover: rgba(0, 0, 0, 0.48);
+  --color-background: #04090b;
+  --color-background-soft: #081013;
+  --color-background-mute: #0f1c21;
+  --color-surface: #0a1215;
+  --color-surface-elevated: #0f1a1e;
+  --color-heading: #f0f7f5;
+  --color-text: #cfe0dc;
+  --color-text-muted: #829a95;
+  --color-border: rgba(207, 224, 220, 0.08);
+  --color-border-strong: rgba(207, 224, 220, 0.18);
+  --color-accent: #00f5d4;
+  --color-accent-rgb: 0, 245, 212;
+  --color-accent-soft: rgba(0, 245, 212, 0.12);
+  --color-accent-ink: #00332c;
+  --color-link: #00f5d4;
+  --color-secondary: #dfb260;
+  --color-secondary-soft: rgba(223, 178, 96, 0.12);
+  --color-warning: #dfb260;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-shadow-hover: rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px rgba(0, 245, 212, 0.2);
 }
 
 *,
@@ -60,18 +71,7 @@ body {
     background-color 0.5s;
   line-height: 1.6;
   font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+    var(--font-body);
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -79,7 +79,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
   font-weight: bold;
+  letter-spacing: 0;
 }
 
 button,
@@ -91,4 +93,51 @@ select {
 
 img {
   max-width: 100%;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* ==========================================================================
+   配色方案 (Color Schemes)
+   ========================================================================== */
+
+/* 1. 黑蓝/科技蓝 (Cyber Blue) */
+html.scheme-blue {
+  --color-accent: #0066ff;
+  --color-accent-soft: rgba(0, 102, 255, 0.12);
+  --color-link: #0055d4;
+}
+
+html.dark.scheme-blue {
+  --color-background: #020617;
+  --color-background-soft: #070d19;
+  --color-background-mute: #0e1726;
+  --color-surface: #0f172a;
+  --color-surface-elevated: #1e293b;
+  --color-accent: #00d2ff;
+  --color-accent-soft: rgba(0, 210, 255, 0.12);
+  --color-link: #00d2ff;
+  --shadow-glow: 0 0 24px rgba(0, 210, 255, 0.2);
+}
+
+/* 2. 黑金/奢华金 (Luxury Gold) */
+html.scheme-gold {
+  --color-accent: #c29543;
+  --color-accent-soft: rgba(194, 149, 67, 0.12);
+  --color-link: #9a732a;
+}
+
+html.dark.scheme-gold {
+  --color-background: #09090b;
+  --color-background-soft: #121214;
+  --color-background-mute: #1c1c1f;
+  --color-surface: #18181b;
+  --color-surface-elevated: #27272a;
+  --color-accent: #dfb260;
+  --color-accent-soft: rgba(223, 178, 96, 0.12);
+  --color-link: #dfb260;
+  --shadow-glow: 0 0 24px rgba(223, 178, 96, 0.2);
 }

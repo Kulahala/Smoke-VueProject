@@ -55,7 +55,7 @@ onMounted(() => {
         </div>
         <div class="resource-visual">
           <img
-            src="/电子烟/placeholders/sample-board.svg"
+            src="/电子烟/微信图片_20250805234550_1210.jpg"
             alt="Vape catalogue resource preview"
             loading="eager"
             decoding="async"
@@ -183,23 +183,31 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--color-heading);
   color: var(--color-background);
   margin-top: 28px;
   padding: 0 18px;
   font-weight: 900;
   text-decoration: none;
-  transition: transform 0.18s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.primary-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--color-accent) 18%, transparent);
 }
 
 html.dark .primary-action {
   background: var(--color-accent);
   color: var(--color-accent-ink);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
-.primary-action:hover {
-  transform: translateY(-2px);
+html.dark .primary-action:hover {
+  background: color-mix(in srgb, var(--color-accent) 88%, #fff);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
 }
 
 .resource-visual {

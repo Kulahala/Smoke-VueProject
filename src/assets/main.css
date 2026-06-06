@@ -2,6 +2,18 @@
   min-height: 100vh;
   background-color: var(--color-background);
   background-image:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-background-soft) 52%, transparent), transparent 360px),
-    linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-accent-soft) 40%, transparent), transparent);
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-accent) 5%, transparent) 0%, transparent 38%),
+    radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--color-secondary) 3.5%, transparent) 0%, transparent 35%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background-soft) 62%, transparent), transparent 420px),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-heading) 4%, transparent) 0 1px,
+      transparent 1px 72px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-heading) 3%, transparent) 0 1px,
+      transparent 1px 72px
+    );
+  background-attachment: fixed;
 }

@@ -50,9 +50,19 @@ const handleDocumentClick = (event) => {
   }
 };
 
-const activeThemeLabel = computed(() => {
-  const option = themeOptions.find((item) => item.value === store.theme) || themeOptions[0];
-  return store.t(option.labelKey);
+const schemes = [
+  { value: 'default', label: 'Default', color: '#00f5d4' },
+  { value: 'blue', label: 'Cyber Blue', color: '#00d2ff' },
+  { value: 'gold', label: 'Luxury Gold', color: '#dfb260' },
+];
+
+const setColorScheme = (schemeValue) => {
+  store.setColorScheme(schemeValue);
+};
+
+const activeSchemeLabel = computed(() => {
+  const scheme = schemes.find((item) => item.value === store.colorScheme) || schemes[0];
+  return store.language === 'zh' ? (scheme.value === 'default' ? '默认' : scheme.value === 'blue' ? '黑蓝' : '黑金') : scheme.label;
 });
 
 const activeLanguageLabel = computed(() => (store.language === 'zh' ? store.t('lang.zh') : store.t('lang.en')));
@@ -130,7 +140,7 @@ const pageSeo = computed(() => {
       title: `${store.t('catalog.title')} | BestLinksz`,
       description: store.t('catalog.intro'),
       url: routeUrl,
-      image: '/电子烟/placeholders/disposable-max.svg',
+      image: '/电子烟/disposable_vape_max.png',
     };
   }
 
@@ -142,7 +152,7 @@ const pageSeo = computed(() => {
           ? 'BestLinksz 面向海外商业买家提供电子烟批发目录、OEM 包装、样品和邮箱询盘支持。'
           : 'BestLinksz provides a B2B vape catalogue, OEM packaging, sample coordination, and email inquiry support for overseas business buyers.',
       url: routeUrl,
-      image: '/电子烟/placeholders/packaging-suite.svg',
+      image: '/电子烟/packaging.jpg',
     };
   }
 
@@ -154,7 +164,7 @@ const pageSeo = computed(() => {
           ? '电子烟批发询盘、样品、OEM 包装和目录维护说明。'
           : 'Buyer notes for wholesale vape inquiries, samples, OEM packaging, and catalogue maintenance.',
       url: routeUrl,
-      image: '/电子烟/placeholders/sample-board.svg',
+      image: '/电子烟/微信图片_20250805234550_1210.jpg',
     };
   }
 
@@ -162,13 +172,17 @@ const pageSeo = computed(() => {
     title: store.t('seo.homeTitle'),
     description: store.t('seo.homeDescription'),
     url: routeUrl,
-    image: '/电子烟/placeholders/pod-slim.svg',
+    image: '/电子烟/微信图片_20250805234550_1239.jpg',
   };
 });
 
 watchEffect(() => {
   document.documentElement.classList.toggle('dark', isDark.value);
   document.documentElement.lang = store.language === 'zh' ? 'zh-CN' : 'en';
+
+  // 动态切换配色类
+  document.documentElement.classList.remove('scheme-default', 'scheme-blue', 'scheme-gold');
+  document.documentElement.classList.add(`scheme-${store.colorScheme}`);
 
   const seo = pageSeo.value;
   const absoluteImage = seo.image.startsWith('http') ? seo.image : `${siteUrl}${seo.image}`;
@@ -291,21 +305,22 @@ watchEffect(() => {
                 @click.stop="isUtilityOpen = !isUtilityOpen"
               >
                 <span>Aa</span>
-                <small>{{ activeLanguageLabel }} / {{ activeThemeLabel }}</small>
+                <small>{{ activeLanguageLabel }} / {{ activeSchemeLabel }}</small>
               </button>
 
               <div v-if="isUtilityOpen" class="utility-panel" @click.stop>
                 <div class="utility-section">
-                  <span>{{ store.t('settings.theme') }}</span>
-                  <div class="option-grid theme-switch" aria-label="Theme switch">
+                  <span>{{ store.language === 'zh' ? '选择配色' : 'Color Scheme' }}</span>
+                  <div class="palette-switch" aria-label="Color Palette">
                     <button
-                      v-for="option in themeOptions"
-                      :key="option.value"
+                      v-for="scheme in schemes"
+                      :key="scheme.value"
                       type="button"
-                      :class="{ active: store.theme === option.value }"
-                      @click="setTheme(option.value)"
+                      :class="['palette-dot', { active: store.colorScheme === scheme.value }]"
+                      :style="{ '--dot-color': scheme.color }"
+                      :title="scheme.label"
+                      @click="setColorScheme(scheme.value)"
                     >
-                      {{ store.t(option.labelKey) }}
                     </button>
                   </div>
                 </div>
@@ -401,11 +416,12 @@ watchEffect(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border-strong) 40%, transparent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-background) 94%, transparent), color-mix(in srgb, var(--color-background) 84%, transparent)),
-    color-mix(in srgb, var(--color-background) 92%, transparent);
-  backdrop-filter: blur(22px) saturate(1.1);
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background) 92%, transparent), color-mix(in srgb, var(--color-background) 82%, transparent)),
+    color-mix(in srgb, var(--color-background) 90%, transparent);
+  backdrop-filter: blur(26px) saturate(1.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .header-inner {
@@ -484,6 +500,7 @@ watchEffect(() => {
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-nav a:hover,
@@ -502,7 +519,7 @@ watchEffect(() => {
 .nav-menu {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
   width: 260px;
   display: grid;
   grid-template-columns: 1fr;
@@ -523,8 +540,7 @@ watchEffect(() => {
     visibility 0.16s ease;
 }
 
-.nav-group:hover .nav-menu,
-.nav-group:focus-within .nav-menu {
+.nav-group:hover .nav-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -646,8 +662,32 @@ watchEffect(() => {
   padding: 3px;
 }
 
-.theme-switch {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.palette-switch {
+  display: flex;
+  gap: 16px;
+  padding: 4px 6px;
+}
+
+.palette-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--dot-color);
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.palette-dot:hover {
+  transform: scale(1.15);
+}
+
+.palette-dot.active {
+  outline: 2px solid var(--dot-color);
+  outline-offset: 3px;
 }
 
 .language-switch {
@@ -685,11 +725,24 @@ watchEffect(() => {
   padding: 0 14px;
   font-weight: 900;
   text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.inquiry-link:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--color-accent) 22%, transparent);
 }
 
 html.dark .inquiry-link {
   background: var(--color-accent);
   color: var(--color-accent-ink);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+html.dark .inquiry-link:hover {
+  background: color-mix(in srgb, var(--color-accent) 88%, #fff);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
 }
 
 .hamburger-btn {

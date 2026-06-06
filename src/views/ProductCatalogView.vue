@@ -108,7 +108,9 @@ onMounted(() => {
 
 <style scoped>
 .catalog-view {
-  background: var(--color-background);
+  background:
+    linear-gradient(180deg, var(--color-background), color-mix(in srgb, var(--color-background-soft) 52%, var(--color-background))),
+    var(--color-background);
 }
 
 .container {
@@ -121,8 +123,9 @@ onMounted(() => {
   place-items: center;
   min-height: clamp(460px, 62vh, 680px);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-background-soft) 74%, transparent), transparent),
-    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 38%);
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background-soft) 82%, transparent), transparent 78%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-heading) 5%, transparent) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(180deg, color-mix(in srgb, var(--color-heading) 4%, transparent) 0 1px, transparent 1px 84px);
   text-align: center;
 }
 
@@ -135,13 +138,30 @@ onMounted(() => {
 .ready .catalog-hero-inner,
 .ready .group-heading,
 .ready .category-block {
-  animation: fadeInUp 0.56s ease forwards;
+  animation: fadeInUp 0.56s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+.product-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.ready .product-card {
+  animation: fadeInUp 0.56s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ready .product-card:nth-child(1) { animation-delay: 0.05s; }
+.ready .product-card:nth-child(2) { animation-delay: 0.12s; }
+.ready .product-card:nth-child(3) { animation-delay: 0.19s; }
+.ready .product-card:nth-child(4) { animation-delay: 0.26s; }
+.ready .product-card:nth-child(5) { animation-delay: 0.33s; }
+.ready .product-card:nth-child(6) { animation-delay: 0.40s; }
 
 .eyebrow {
   margin-bottom: 12px;
   color: var(--color-link);
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -175,8 +195,10 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  background: var(--color-heading);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 44%),
+    var(--color-heading);
   color: var(--color-background);
   padding: 0 22px;
   font-weight: 900;
@@ -190,11 +212,14 @@ onMounted(() => {
 
 .category-strip {
   position: sticky;
-  top: 72px;
+  top: 68px;
   z-index: 100;
   border-block: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-background) 88%, transparent);
-  backdrop-filter: blur(18px);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background) 94%, transparent), color-mix(in srgb, var(--color-background) 86%, transparent)),
+    color-mix(in srgb, var(--color-background) 90%, transparent);
+  backdrop-filter: blur(20px) saturate(1.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
 }
 
 .strip-inner {
@@ -206,16 +231,19 @@ onMounted(() => {
 
 .strip-inner a {
   flex: 0 0 auto;
-  border-radius: 999px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: var(--color-text);
   padding: 8px 14px;
   font-weight: 800;
   text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .strip-inner a:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
   background: var(--color-accent-soft);
-  color: var(--color-heading);
+  color: var(--color-link);
 }
 
 .catalog-body {
@@ -228,7 +256,9 @@ onMounted(() => {
 }
 
 .group-section:nth-child(even) {
-  background: var(--color-background-soft);
+  background:
+    linear-gradient(180deg, var(--color-background-soft), color-mix(in srgb, var(--color-background) 34%, var(--color-background-soft))),
+    var(--color-background-soft);
 }
 
 .group-grid {
@@ -241,6 +271,8 @@ onMounted(() => {
 .group-heading {
   position: sticky;
   top: 142px;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 18px;
   opacity: 0;
   transform: translateY(18px);
 }
@@ -263,6 +295,8 @@ onMounted(() => {
 }
 
 .category-block {
+  border-top: 1px solid var(--color-border);
+  padding-top: 18px;
   opacity: 0;
   transform: translateY(18px);
 }
@@ -277,6 +311,7 @@ onMounted(() => {
 
 .category-heading span {
   color: var(--color-link);
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -291,6 +326,7 @@ onMounted(() => {
 }
 
 .category-heading a {
+  border-bottom: 1px solid currentColor;
   color: var(--color-link);
   font-weight: 900;
   text-decoration: none;
@@ -305,19 +341,23 @@ onMounted(() => {
 .product-card {
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: var(--color-surface);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 82%, transparent), transparent),
+    var(--color-surface);
   overflow: hidden;
   box-shadow: 0 16px 38px var(--color-shadow);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-border-strong);
-  box-shadow: 0 24px 58px var(--color-shadow-hover);
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 24px 58px var(--color-shadow-hover),
+    0 0 20px color-mix(in srgb, var(--color-accent) 24%, transparent);
 }
 
 .product-card a {
@@ -332,27 +372,29 @@ onMounted(() => {
   display: grid;
   place-items: center;
   aspect-ratio: 1.16 / 1;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.24), transparent),
-    var(--color-background-soft);
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 16px;
 }
 
 .product-media img {
-  width: min(82%, 340px);
-  height: 82%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  transition: transform 0.28s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-media img {
-  transform: scale(1.055);
+  transform: scale(1.055) translateY(-2px);
 }
 
 .product-media span {
   position: absolute;
   top: 14px;
   left: 14px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--color-accent-soft);
   color: var(--color-accent-ink);
   padding: 5px 10px;
@@ -368,6 +410,7 @@ onMounted(() => {
 
 .product-content > p {
   color: var(--color-link);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -395,7 +438,7 @@ onMounted(() => {
 
 .product-meta span {
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 6px;
   color: var(--color-text-muted);
   padding: 5px 9px;
   font-size: 0.82rem;
