@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import CategoryView from '../views/CategoryView.vue';
+import ProductCatalogView from '../views/ProductCatalogView.vue';
 import ProductDetail from '../views/ProductDetail.vue';
 
 const routes = [
@@ -13,6 +14,11 @@ const routes = [
     path: '/category/:id',
     name: 'Category',
     component: CategoryView
+  },
+  {
+    path: '/products',
+    name: 'Products',
+    component: ProductCatalogView
   },
   {
     path: '/product/:id',
@@ -39,7 +45,18 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        top: 138,
+        behavior: 'smooth'
+      };
+    }
+
+    return { top: 0 };
+  }
 });
 
 export default router;

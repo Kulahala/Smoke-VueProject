@@ -1,12 +1,7 @@
-/* 全局样式 */
-
 #app {
   min-height: 100vh;
   background-color: var(--color-background);
-  background-image: radial-gradient(circle, #dcdcdc 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-html.dark #app {
-  background-image: radial-gradient(circle, #444 1px, transparent 1px);
+  background-image:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-background-soft) 52%, transparent), transparent 360px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-accent-soft) 40%, transparent), transparent);
 }

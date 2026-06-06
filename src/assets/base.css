@@ -1,57 +1,42 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --color-shadow: rgba(0, 0, 0, 0.08);
-  --color-shadow-hover: rgba(0, 0, 0, 0.15);
-
-  --section-gap: 160px;
+  --color-background: #f4f7f8;
+  --color-background-soft: #eaf0f1;
+  --color-background-mute: #dfe8ea;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f9fbfb;
+  --color-heading: #101820;
+  --color-text: #22313c;
+  --color-text-muted: #657783;
+  --color-border: rgba(16, 24, 32, 0.11);
+  --color-border-strong: rgba(16, 24, 32, 0.22);
+  --color-accent: #78f0d1;
+  --color-accent-soft: rgba(120, 240, 209, 0.18);
+  --color-accent-ink: #073329;
+  --color-link: #176f72;
+  --color-warning: #d7b46a;
+  --color-shadow: rgba(10, 20, 28, 0.09);
+  --color-shadow-hover: rgba(10, 20, 28, 0.17);
+  --section-gap: 120px;
 }
 
 html.dark {
-  --color-background: var(--vt-c-black);
-  --color-background-soft: var(--vt-c-black-soft);
-  --color-background-mute: var(--vt-c-black-mute);
-
-  --color-border: var(--vt-c-divider-dark-2);
-  --color-border-hover: var(--vt-c-divider-dark-1);
-
-  --color-heading: var(--vt-c-text-dark-1);
-  --color-text: var(--vt-c-text-dark-2);
-
-  --color-shadow: rgba(255, 255, 255, 0.08);
-  --color-shadow-hover: rgba(255, 255, 255, 0.15);
+  --color-background: #0a1015;
+  --color-background-soft: #101820;
+  --color-background-mute: #17232b;
+  --color-surface: #111b22;
+  --color-surface-elevated: #15232c;
+  --color-heading: #f2fbfc;
+  --color-text: #d6e3e5;
+  --color-text-muted: #93a7ad;
+  --color-border: rgba(231, 249, 250, 0.12);
+  --color-border-strong: rgba(231, 249, 250, 0.24);
+  --color-accent: #7df2d3;
+  --color-accent-soft: rgba(125, 242, 211, 0.16);
+  --color-accent-ink: #072d26;
+  --color-link: #87e4d2;
+  --color-warning: #e1bd72;
+  --color-shadow: rgba(0, 0, 0, 0.34);
+  --color-shadow-hover: rgba(0, 0, 0, 0.48);
 }
 
 *,
@@ -95,4 +80,15 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
 }

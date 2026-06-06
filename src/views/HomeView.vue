@@ -1,286 +1,798 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import { store } from '../store';
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
+import { heroSlides, inquiryEmail, store } from '../store';
 
 const currentIndex = ref(0);
 const intervalId = ref(null);
 const isReady = ref(false);
 
-const carouselImages = ref([
-    '/电子烟/雾化器主页1.jpg',
-    '/电子烟/雾化器主页2.jpg',
-    '/电子烟/packaging.jpg'
-]);
+const featuredProducts = computed(() => store.representativeProducts);
+const categoryGroups = computed(() =>
+  store.categoryGroups.map((group) => ({
+    ...group,
+    heroImage: group.children[0]?.heroImage,
+    target: `/products#${group.id}`,
+  })),
+);
+const slides = computed(() => heroSlides);
+const currentSlide = computed(() => slides.value[currentIndex.value]);
+const mailtoLink = computed(
+  () =>
+    `mailto:${inquiryEmail}?subject=${encodeURIComponent(
+      store.language === 'zh' ? '批发产品询盘' : 'Wholesale product inquiry',
+    )}&body=${encodeURIComponent(
+      store.language === 'zh'
+        ? '你好，我想了解产品目录、价格、起订量和交期信息。'
+        : 'Hello, I would like to receive your catalogue, pricing, MOQ, and lead time information.',
+    )}`,
+);
 
-const products = computed(() => store.products);
+const nextHero = () => {
+  currentIndex.value = (currentIndex.value + 1) % slides.value.length;
+};
 
-const stopCarousel = () => {
+const setHero = (index) => {
+  currentIndex.value = index;
+};
+
+const startHeroRotation = () => {
+  stopHeroRotation();
+  intervalId.value = setInterval(nextHero, 5000);
+};
+
+const stopHeroRotation = () => {
+  if (intervalId.value) {
     clearInterval(intervalId.value);
     intervalId.value = null;
-};
-
-const startCarousel = () => {
-    stopCarousel();
-    intervalId.value = setInterval(() => {
-        nextItem(false);
-    }, 5000);
-};
-
-const showItem = (index) => {
-    currentIndex.value = index;
-    startCarousel();
-};
-
-const nextItem = (manual = true) => {
-    if (manual) stopCarousel();
-    currentIndex.value = (currentIndex.value + 1) % carouselImages.value.length;
-    if (manual) startCarousel();
-};
-
-const prevItem = () => {
-    stopCarousel();
-    currentIndex.value = (currentIndex.value - 1 + carouselImages.value.length) % carouselImages.value.length;
-    startCarousel();
+  }
 };
 
 onMounted(() => {
-    startCarousel();
-    // Use timeout to ensure animations trigger on navigation
-    setTimeout(() => {
-        isReady.value = true;
-    }, 10);
+  startHeroRotation();
+  requestAnimationFrame(() => {
+    isReady.value = true;
+  });
 });
 
 onBeforeUnmount(() => {
-    stopCarousel();
+  stopHeroRotation();
 });
 </script>
 
 <template>
-<div class="home-view" :class="{ ready: isReady }">
-    <div class="container">
-        <section class="carousel" @mouseover="stopCarousel" @mouseout="startCarousel">
-            <div class="carousel-inner">
-                <Transition name="fade" mode="out-in">
-                    <div :key="currentIndex" class="carousel-item">
-                        <img :src="carouselImages[currentIndex]" alt="Carousel Image">
-                    </div>
-                </Transition>
+  <div class="home-view" :class="{ ready: isReady }">
+    <section class="hero-section">
+      <div class="hero-media" aria-hidden="true">
+        <Transition name="hero-fade" mode="out-in">
+          <img
+            :key="currentSlide.image"
+            :src="currentSlide.image"
+            :alt="store.text(currentSlide, 'title')"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </Transition>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">{{ store.t('home.eyebrow') }}</p>
+          <h1>{{ store.t('home.title') }}</h1>
+          <p class="hero-text">
+            {{ store.t('home.heroText') }}
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a :href="mailtoLink" class="primary-action">{{ store.t('home.emailQuote') }}</a>
+            <router-link to="/products" class="secondary-action">{{ store.t('home.viewProducts') }}</router-link>
+          </div>
+          <div class="hero-indicators" aria-label="Hero image selector">
+            <button
+              v-for="(_, index) in slides"
+              :key="index"
+              type="button"
+              :class="{ active: currentIndex === index }"
+              :aria-label="`${store.t('home.showSlide')} ${store.text(slides[index], 'title')}`"
+              @click="setHero(index)"
+            ></button>
+          </div>
+          <dl class="hero-metrics" aria-label="Business highlights">
+            <div>
+              <dt>{{ store.t('home.metric.oem') }}</dt>
+              <dd>{{ store.t('home.metric.oemText') }}</dd>
             </div>
-            <button @click="prevItem" class="carousel-control prev">&#10094;</button>
-            <button @click="nextItem()" class="carousel-control next">&#10095;</button>
-            <div class="carousel-indicators">
-                <span v-for="(_, index) in carouselImages" :key="index" :class="{ active: currentIndex === index }" @click="showItem(index)" class="indicator"></span>
+            <div>
+              <dt>{{ store.t('home.metric.moq') }}</dt>
+              <dd>{{ store.t('home.metric.moqText') }}</dd>
             </div>
-        </section>
-    </div>
-
-    <main class="container">
-        <section class="products">
-            <h2 class="animate-fade-in-up">Our Products</h2>
-            <div class="product-grid">
-                <div v-for="(product, index) in products" :key="index" class="product-card" :style="{ animationDelay: (index * 0.1) + 's' }">
-                    <router-link :to="`/product/${product.id}`">
-                        <img :src="product.image" :alt="product.name">
-                        <h3>{{ product.name }}</h3>
-                    </router-link>
-                </div>
+            <div>
+              <dt>{{ store.t('home.metric.lead') }}</dt>
+              <dd>{{ store.t('home.metric.leadText') }}</dd>
             </div>
-        </section>
-    </main>
-
-    <section class="contact-section">
-        <div class="container">
-            <h2 class="animate-fade-in-up" style="animation-delay: 0.2s">Contact Us</h2>
-            <a href="mailto:1378554398@qq.com" class="contact-link animate-fade-in-up" style="animation-delay: 0.3s">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>1378554398@qq.com</span>
-            </a>
+          </dl>
         </div>
+      </div>
     </section>
-</div>
+
+    <main>
+      <section class="section intro-section">
+        <div class="container intro-grid">
+          <div>
+            <p class="eyebrow">{{ store.t('home.productLines') }}</p>
+            <h2>{{ store.t('home.introTitle') }}</h2>
+          </div>
+          <p>
+            {{ store.t('home.introText') }}
+          </p>
+        </div>
+      </section>
+
+      <section class="section category-section">
+        <div class="container category-grid">
+          <router-link
+            v-for="group in categoryGroups"
+            :key="group.id"
+            class="category-card"
+            :to="group.target"
+          >
+            <img :src="group.heroImage" :alt="store.text(group, 'name')" loading="lazy" decoding="async" />
+            <span>{{ group.children.length }} {{ store.t('catalog.categories') }}</span>
+            <h3>{{ store.text(group, 'name') }}</h3>
+            <p>{{ store.text(group, 'description') }}</p>
+          </router-link>
+        </div>
+      </section>
+
+      <section class="section catalogue-section">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">{{ store.t('home.featured') }}</p>
+              <h2>{{ store.t('home.showcase') }}</h2>
+            </div>
+            <p class="section-note">{{ store.t('home.featuredText') }}</p>
+            <router-link to="/products" class="text-link">{{ store.t('home.browseCategory') }}</router-link>
+          </div>
+
+          <div class="product-grid">
+            <article v-for="entry in featuredProducts" :key="entry.group.id" class="product-card">
+              <router-link :to="`/product/${entry.product.id}`" class="product-link">
+                <div class="product-media">
+                  <img :src="entry.product.image" :alt="entry.product.name" loading="lazy" decoding="async" />
+                  <span>{{ store.text(entry.product, 'badge') }}</span>
+                </div>
+                <div class="product-body">
+                  <p>{{ store.text(entry.group, 'name') }}</p>
+                  <h3>{{ entry.product.name }}</h3>
+                  <ul>
+                    <li v-for="highlight in store.list(entry.product, 'highlights').slice(0, 2)" :key="highlight">
+                      {{ highlight }}
+                    </li>
+                  </ul>
+                  <div class="product-meta">
+                    <span>{{ store.t('common.moq') }}: {{ store.text(entry.product, 'moq') }}</span>
+                    <span>{{ store.text(entry.product, 'leadTime') }}</span>
+                  </div>
+                </div>
+              </router-link>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process-section">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">{{ store.t('home.howOrders') }}</p>
+              <h2>{{ store.t('home.workflowTitle') }}</h2>
+            </div>
+          </div>
+          <div class="process-grid">
+            <div class="process-step">
+              <span>01</span>
+              <h3>{{ store.t('home.step1Title') }}</h3>
+              <p>{{ store.t('home.step1Text') }}</p>
+            </div>
+            <div class="process-step">
+              <span>02</span>
+              <h3>{{ store.t('home.step2Title') }}</h3>
+              <p>{{ store.t('home.step2Text') }}</p>
+            </div>
+            <div class="process-step">
+              <span>03</span>
+              <h3>{{ store.t('home.step3Title') }}</h3>
+              <p>{{ store.t('home.step3Text') }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band">
+        <div class="container contact-band-inner">
+          <div>
+            <p class="eyebrow">{{ store.t('home.wholesaleInquiry') }}</p>
+            <h2>{{ store.t('home.contactTitle') }}</h2>
+          </div>
+          <a :href="mailtoLink" class="primary-action">{{ store.t('home.contactEmail') }} {{ inquiryEmail }}</a>
+        </div>
+      </section>
+    </main>
+  </div>
 </template>
 
 <style scoped>
-/* Styles are copied from App.vue, but scoped to this component */
+.home-view {
+  overflow: hidden;
+}
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
 }
-a {
-    text-decoration: none;
-    color: var(--color-text);
+
+.hero-section {
+  position: relative;
+  min-height: clamp(620px, 82vh, 780px);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  isolation: isolate;
 }
-.carousel {
-    position: relative;
-    width: 100%;
-    padding-bottom: 40px;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+.hero-media,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
 }
-.ready .carousel {
-    opacity: 1;
-    transform: translateX(0);
+
+.hero-media {
+  z-index: -2;
+  background: #10151b;
 }
-.carousel-inner {
-    display: flex;
-    overflow: hidden;
-    border-radius: 8px;
-    position: relative;
-    min-height: 450px;
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.96) contrast(1.03);
 }
-.carousel-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.7s ease-in-out;
-    border-radius: 8px;
-    overflow: hidden;
+
+.hero-overlay {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(8, 14, 22, 0.92) 0%, rgba(8, 14, 22, 0.75) 46%, rgba(8, 14, 22, 0.34) 100%),
+    linear-gradient(180deg, rgba(8, 14, 22, 0.24), rgba(8, 14, 22, 0.64));
 }
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    margin: 0 auto;
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  padding: 92px 0 74px;
 }
-.carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    z-index: 10;
-    transition: transform 0.1s ease, background-color 0.1s ease;
+
+.hero-copy {
+  max-width: 920px;
 }
-.carousel-control:active {
-    transform: translateY(-50%) scale(0.9);
-    background-color: rgba(0,0,0,0.7);
+
+.hero-copy,
+.intro-grid,
+.category-card,
+.product-card,
+.process-step,
+.contact-band-inner {
+  opacity: 0;
+  transform: translateY(18px);
 }
-.carousel-control.prev {
-    left: 10px;
+
+.ready .hero-copy,
+.ready .intro-grid,
+.ready .category-card,
+.ready .product-card,
+.ready .process-step,
+.ready .contact-band-inner {
+  animation: fadeInUp 0.58s ease forwards;
 }
-.carousel-control.next {
-    right: 10px;
+
+.ready .category-card:nth-child(2),
+.ready .product-card:nth-child(2),
+.ready .process-step:nth-child(2) {
+  animation-delay: 0.08s;
 }
-.carousel-indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
+
+.ready .category-card:nth-child(3),
+.ready .product-card:nth-child(3),
+.ready .process-step:nth-child(3) {
+  animation-delay: 0.16s;
 }
-.indicator {
-    width: 12px;
-    height: 12px;
-    background-color: var(--color-border);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
-.indicator.active {
-    background-color: var(--color-heading);
+
+.hero-copy h1 {
+  max-width: 920px;
+  color: #fff;
+  font-size: clamp(2.6rem, 7vw, 5.9rem);
+  line-height: 0.96;
+  font-weight: 900;
 }
-.products {
-    padding: 40px 0;
+
+.hero-text {
+  max-width: 720px;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.75;
 }
-.products h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--color-heading);
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
 }
+
+.primary-action,
+.secondary-action {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.primary-action {
+  background: var(--color-accent);
+  color: #071018;
+}
+
+.secondary-action {
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  color: #fff;
+}
+
+.primary-action:hover,
+.secondary-action:hover {
+  transform: translateY(-2px);
+}
+
+.secondary-action:hover {
+  border-color: #fff;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 760px;
+  margin-top: 44px;
+}
+
+.hero-metrics div {
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  padding-top: 14px;
+}
+
+.hero-metrics dt {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.hero-metrics dd {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.hero-indicators {
+  display: flex;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.hero-indicators button {
+  width: 36px;
+  height: 4px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+}
+
+.hero-indicators button.active {
+  background: var(--color-accent);
+}
+
+.section {
+  padding: 78px 0;
+}
+
+.intro-section {
+  background: var(--color-background);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.75fr);
+  gap: 48px;
+  align-items: end;
+}
+
+.intro-grid h2,
+.section-heading h2,
+.contact-band h2 {
+  color: var(--color-heading);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.intro-grid p:last-child {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.category-section {
+  padding-top: 0;
+  background: var(--color-background);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.category-card {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 24px;
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.category-card img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(8, 14, 22, 0.12), rgba(8, 14, 22, 0.88));
+}
+
+.category-card:hover img {
+  transform: scale(1.04);
+}
+
+.category-card span {
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.category-card h3 {
+  margin-top: 14px;
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.category-card p {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.catalogue-section {
+  background: var(--color-background-soft);
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.text-link {
+  color: var(--color-link);
+  font-weight: 800;
+  text-decoration: none;
+}
+
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .product-card {
-    background-color: var(--color-background-soft);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--color-shadow);
-    overflow: hidden;
-    opacity: 0; /* Start as transparent for the animation */
-    max-width: 290px;
-    margin: 0 auto;
-
-    /* The hover effects will now use this transition, which has NO DELAY */
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.ready .product-card {
-    /* The entrance animation is now handled by 'animation', with a delay */
-    animation: fadeInUp 0.5s ease-out forwards;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  overflow: hidden;
+  box-shadow: 0 18px 40px var(--color-shadow);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .product-card:hover {
-    /* The hover effect is now instantaneous thanks to the separated transition */
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px var(--color-shadow-hover);
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 24px 58px var(--color-shadow-hover);
 }
 
-.product-card img {
+.product-link {
+  display: grid;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1.05 / 1;
+  background:
+    linear-gradient(135deg, rgba(8, 14, 22, 0.06), rgba(36, 110, 135, 0.1)),
+    var(--color-background);
+}
+
+.product-media img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+}
+
+.product-media span {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-ink);
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.product-body {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+
+.product-body > p {
+  color: var(--color-link);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.product-body h3 {
+  color: var(--color-heading);
+  font-size: 1.32rem;
+  line-height: 1.18;
+}
+
+.product-body ul {
+  display: grid;
+  gap: 6px;
+  padding: 0 0 0 18px;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.product-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.product-meta span {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.process-section {
+  background: var(--color-background);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.process-step {
+  border-top: 2px solid var(--color-heading);
+  padding: 24px 0 0;
+}
+
+.process-step span {
+  color: var(--color-link);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.process-step h3 {
+  margin-top: 14px;
+  color: var(--color-heading);
+  font-size: 1.28rem;
+}
+
+.process-step p {
+  margin-top: 10px;
+  color: var(--color-text-muted);
+}
+
+.contact-band {
+  padding: 70px 0;
+  background: var(--color-heading);
+  color: var(--color-background);
+}
+
+.contact-band .eyebrow,
+.contact-band h2 {
+  color: var(--color-background);
+}
+
+.contact-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.contact-band .primary-action {
+  flex: 0 0 auto;
+  background: var(--color-accent);
+  color: #071018;
+}
+
+.hero-fade-enter-active,
+.hero-fade-leave-active {
+  transition: opacity 0.7s ease;
+}
+
+.hero-fade-enter-from,
+.hero-fade-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 980px) {
+  .intro-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-grid,
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-content {
+    align-items: start;
+  }
+
+  .category-card {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 680px) {
+  .container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .hero-section {
+    min-height: min(720px, calc(100svh - 72px));
+  }
+
+  .hero-content {
+    padding: 58px 0 34px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .hero-text {
+    margin-top: 16px;
+    line-height: 1.56;
+  }
+
+  .hero-actions {
+    margin-top: 24px;
+  }
+
+  .hero-indicators {
+    margin-top: 16px;
+  }
+
+  .hero-actions,
+  .contact-band-inner {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-action,
+  .secondary-action {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
-}
-.product-card h3 {
-    padding: 20px;
-    margin: 0;
-    text-align: center;
-    color: var(--color-text);
-}
-.contact-section {
-    background-color: var(--color-background-soft);
-    padding: 40px 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s;
-}
-.ready .contact-section {
-    opacity: 1;
-    transform: translateY(0);
-}
-.contact-section h2 {
-    margin-bottom: 20px;
-    color: var(--color-heading);
-}
-.contact-link {
-    display: inline-flex;
-    align-items: center;
-    font-size: 18px;
-    color: var(--color-heading);
-    transition: color 0.3s ease;
-}
-.contact-link:hover {
-    opacity: 0.8;
-}
-.contact-link svg {
-    margin-right: 10px;
-    stroke: currentColor;
-}
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.6s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
+  }
 
-.home-view.ready .product-card:hover {
-    /* This rule is now merged into the main .product-card:hover rule above */
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .hero-metrics div {
+    padding-top: 10px;
+  }
+
+  .hero-metrics dt {
+    font-size: 0.98rem;
+    line-height: 1.15;
+  }
+
+  .hero-metrics dd {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .category-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
 }
 </style>
-
