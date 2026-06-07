@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: feat-cms
+  branch: main
 
 media_folder: "public/电子烟"
 public_folder: "/电子烟"
