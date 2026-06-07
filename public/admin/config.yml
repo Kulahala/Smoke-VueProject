@@ -17,18 +17,38 @@ collections:
         label: "General Settings (核心信息配置)"
         file: "src/data/settings.json"
         fields:
-          - { label: "Inquiry Email (询盘接单邮箱)", name: "inquiryEmail", widget: "string" }
+          - label: "Inquiry Email (询盘接单邮箱)"
+            name: "inquiryEmail"
+            widget: "string"
           - label: "Hero Slides (首页轮播大图)"
             name: "heroSlides"
             widget: "list"
             fields:
-              - { label: "Slide Image (图片)", name: "image", widget: "image" }
-              - { label: "Title - English (英文标题)", name: "title", widget: "string" }
-              - { label: "Title - Chinese (中文标题)", name: "titleZh", widget: "string" }
-          - label: "Service Points - English (服务亮点-英文版)", name: "servicePoints", widget: "list", field: { label: "Point", name: "point", widget: "string" }
-          - label: "Service Points - Chinese (服务亮点-中文版)", name: "servicePointsZh", widget: "list", field: { label: "Point", name: "point", widget: "string" }
+              - label: "Slide Image (图片)"
+                name: "image"
+                widget: "image"
+              - label: "Title - English (英文标题)"
+                name: "title"
+                widget: "string"
+              - label: "Title - Chinese (中文标题)"
+                name: "titleZh"
+                widget: "string"
+          - label: "Service Points - English (服务亮点-英文版)"
+            name: "servicePoints"
+            widget: "list"
+            field:
+              label: "Point"
+              name: "point"
+              widget: "string"
+          - label: "Service Points - Chinese (服务亮点-中文版)"
+            name: "servicePointsZh"
+            widget: "list"
+            field:
+              label: "Point"
+              name: "point"
+              widget: "string"
 
-  # 2. 分类名称修改（防灾限制：大框架只提供文字改名，防止删改结构造成前台挂掉）
+  # 2. 分类名称修改（大框架只提供文字改名，防止删改结构造成前台挂掉）
   - name: "categories"
     label: "Categories (分类名称编辑)"
     delete: false
@@ -43,24 +63,52 @@ collections:
             name: "categoryGroups"
             widget: "list"
             fields:
-              - { label: "Group ID (分类 ID, 禁止更改)", name: "id", widget: "hidden" }
-              - { label: "Group Name - English (系列名-英文)", name: "name", widget: "string" }
-              - { label: "Group Name - Chinese (系列名-中文)", name: "nameZh", widget: "string" }
-              - { label: "Description - English (描述-英文)", name: "description", widget: "string" }
-              - { label: "Description - Chinese (描述-中文)", name: "descriptionZh", widget: "string" }
-              - { label: "Hero Cover Image (系列顶部大配图)", name: "heroImage", widget: "image" }
+              - label: "Group ID (分类 ID, 禁止更改)"
+                name: "id"
+                widget: "hidden"
+              - label: "Group Name - English (系列名-英文)"
+                name: "name"
+                widget: "string"
+              - label: "Group Name - Chinese (系列名-中文)"
+                name: "nameZh"
+                widget: "string"
+              - label: "Description - English (描述-英文)"
+                name: "description"
+                widget: "string"
+              - label: "Description - Chinese (描述-中文)"
+                name: "descriptionZh"
+                widget: "string"
+              - label: "Hero Cover Image (系列顶部大配图)"
+                name: "heroImage"
+                widget: "image"
               - label: "Sub Categories (二级子分类)"
                 name: "children"
                 widget: "list"
                 fields:
-                  - { label: "Category ID (分类 ID, 禁止更改)", name: "id", widget: "hidden" }
-                  - { label: "Category Name - English (分类名-英文)", name: "name", widget: "string" }
-                  - { label: "Category Name - Chinese (分类名-中文)", name: "nameZh", widget: "string" }
-                  - { label: "Short Tag - English (卡片短标签-英文)", name: "shortName", widget: "string" }
-                  - { label: "Short Tag - Chinese (卡片短标签-中文)", name: "shortNameZh", widget: "string" }
-                  - { label: "Description - English (描述-英文)", name: "description", widget: "string" }
-                  - { label: "Description - Chinese (描述-中文)", name: "descriptionZh", widget: "string" }
-                  - { label: "Hero Cover Image (大配图)", name: "heroImage", widget: "image" }
+                  - label: "Category ID (分类 ID, 禁止更改)"
+                    name: "id"
+                    widget: "hidden"
+                  - label: "Category Name - English (分类名-英文)"
+                    name: "name"
+                    widget: "string"
+                  - label: "Category Name - Chinese (分类名-中文)"
+                    name: "nameZh"
+                    widget: "string"
+                  - label: "Short Tag - English (卡片短标签-英文)"
+                    name: "shortName"
+                    widget: "string"
+                  - label: "Short Tag - Chinese (卡片短标签-中文)"
+                    name: "shortNameZh"
+                    widget: "string"
+                  - label: "Description - English (描述-英文)"
+                    name: "description"
+                    widget: "string"
+                  - label: "Description - Chinese (描述-中文)"
+                    name: "descriptionZh"
+                    widget: "string"
+                  - label: "Hero Cover Image (大配图)"
+                    name: "heroImage"
+                    widget: "image"
 
   # 3. 产品库管理（支持完整的新增、下架、图文内容修改）
   - name: "products"
@@ -73,46 +121,93 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: "Product ID (数字ID, 新增时请递增不可重复)", name: "id", widget: "number", value_type: "int" }
-      - { label: "Product Name (产品名称)", name: "name", widget: "string" }
-      - { label: "Product Image (实拍图片)", name: "image", widget: "image" }
+      - label: "Product ID (数字ID, 新增时请递增不可重复)"
+        name: "id"
+        widget: "number"
+        value_type: "int"
+      - label: "Product Name (产品名称)"
+        name: "name"
+        widget: "string"
+      - label: "Product Image (实拍图片)"
+        name: "image"
+        widget: "image"
       - label: "Category (所属二级分类)"
         name: "category"
         widget: "select"
         options:
-          - { label: "换弹设备 (Pod Systems)", value: "pod-systems" }
-          - { label: "套装产品 (Starter Kits)", value: "starter-kits" }
-          - { label: "一次性电子烟 (Disposable Vapes)", value: "disposable-vapes" }
-          - { label: "样品套包 (Sample Packs)", value: "sample-packs" }
-          - { label: "替换烟弹 (Replacement Pods)", value: "replacement-pods" }
-          - { label: "雾化芯与配件 (Coils & Accessories)", value: "coils-accessories" }
-          - { label: "包装与 OEM (Packaging & OEM)", value: "packaging-oem" }
-          - { label: "陈列物料 (Retail Displays)", value: "retail-displays" }
-      - { label: "Description - English (产品描述-英文)", name: "description", widget: "text" }
-      - { label: "Description - Chinese (产品描述-中文)", name: "descriptionZh", widget: "text", required: false }
+          - label: "换弹设备 (Pod Systems)"
+            value: "pod-systems"
+          - label: "套装产品 (Starter Kits)"
+            value: "starter-kits"
+          - label: "一次性电子烟 (Disposable Vapes)"
+            value: "disposable-vapes"
+          - label: "样品套包 (Sample Packs)"
+            value: "sample-packs"
+          - label: "替换烟弹 (Replacement Pods)"
+            value: "replacement-pods"
+          - label: "雾化芯与配件 (Coils & Accessories)"
+            value: "coils-accessories"
+          - label: "包装与 OEM (Packaging & OEM)"
+            value: "packaging-oem"
+          - label: "陈列物料 (Retail Displays)"
+            value: "retail-displays"
+      - label: "Description - English (产品描述-英文)"
+        name: "description"
+        widget: "text"
+      - label: "Description - Chinese (产品描述-中文)"
+        name: "descriptionZh"
+        widget: "text"
+        required: false
       - label: "Key Highlights - English (卖点-英文, 每行一条)"
         name: "highlights"
         widget: "list"
-        field: { name: "item", widget: "string" }
+        field:
+          name: "item"
+          widget: "string"
       - label: "Key Highlights - Chinese (卖点-中文, 每行一条)"
         name: "highlightsZh"
         widget: "list"
-        field: { name: "item", widget: "string" }
+        field:
+          name: "item"
+          widget: "string"
       - label: "Specifications - English (技术参数-英文)"
         name: "specs"
         widget: "list"
         fields:
-          - { label: "Label (名称, 如 Puffs)", name: "label", widget: "string" }
-          - { label: "Value (参数值, 如 6000)", name: "value", widget: "string" }
+          - label: "Label (名称, 如 Puffs)"
+            name: "label"
+            widget: "string"
+          - label: "Value (参数值, 如 6000)"
+            name: "value"
+            widget: "string"
       - label: "Specifications - Chinese (技术参数-中文)"
         name: "specsZh"
         widget: "list"
         fields:
-          - { label: "Label (名称, 如 口数)", name: "label", widget: "string" }
-          - { label: "Value (参数值, 如 6000)", name: "value", widget: "string" }
-      - { label: "MOQ - English (起订量-英文)", name: "moq", widget: "string" }
-      - { label: "MOQ - Chinese (起订量-中文)", name: "moqZh", widget: "string", required: false }
-      - { label: "Lead Time - English (生产交期-英文)", name: "leadTime", widget: "string" }
-      - { label: "Lead Time - Chinese (生产交期-中文)", name: "leadTimeZh", widget: "string", required: false }
-      - { label: "Card Badge - English (卡片小角标-英文)", name: "badge", widget: "string" }
-      - { label: "Card Badge - Chinese (卡片小角标-中文)", name: "badgeZh", widget: "string", required: false }
+          - label: "Label (名称, 如 口数)"
+            name: "label"
+            widget: "string"
+          - label: "Value (参数值, 如 6000)"
+            name: "value"
+            widget: "string"
+      - label: "MOQ - English (起订量-英文)"
+        name: "moq"
+        widget: "string"
+      - label: "MOQ - Chinese (起订量-中文)"
+        name: "moqZh"
+        widget: "string"
+        required: false
+      - label: "Lead Time - English (生产交期-英文)"
+        name: "leadTime"
+        widget: "string"
+      - label: "Lead Time - Chinese (生产交期-中文)"
+        name: "leadTimeZh"
+        widget: "string"
+        required: false
+      - label: "Card Badge - English (卡片小角标-英文)"
+        name: "badge"
+        widget: "string"
+      - label: "Card Badge - Chinese (卡片小角标-中文)"
+        name: "badgeZh"
+        widget: "string"
+        required: false
