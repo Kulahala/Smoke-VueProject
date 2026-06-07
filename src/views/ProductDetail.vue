@@ -134,6 +134,7 @@ onMounted(() => {
         </div>
 
         <div class="inquiry-card">
+          <div class="vape-glow-2"></div>
           <div>
             <span>{{ store.t('common.wholesaleInquiry') }}</span>
             <h2>{{ store.t('product.requestTitle') }}</h2>
@@ -489,14 +490,58 @@ onMounted(() => {
 .inquiry-card::before {
   content: '';
   position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.18) 0%, transparent 70%);
+  inset: 0;
+  background-image: radial-gradient(var(--color-background) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  opacity: 0.08;
   pointer-events: none;
-  filter: blur(10px);
+  z-index: 0;
+}
+
+.inquiry-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.28) 0%, rgba(var(--color-accent-rgb), 0.05) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  animation: vapeSteam 10s ease-in-out infinite;
+}
+
+/* Vape 左下角小霓虹发光球 */
+.vape-glow-2 {
+  position: absolute;
+  bottom: -60%;
+  left: -10%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.22) 0%, rgba(var(--color-accent-rgb), 0.04) 50%, transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  animation: vapeSteamAlt 8s ease-in-out infinite;
+}
+
+html.dark .inquiry-card::after {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.5) 0%, rgba(var(--color-accent-rgb), 0.12) 45%, transparent 70%);
+  filter: blur(24px);
+}
+
+html.dark .vape-glow-2 {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.4) 0%, rgba(var(--color-accent-rgb), 0.1) 45%, transparent 70%);
+  filter: blur(20px);
+}
+
+.inquiry-card > div:not(.vape-glow-2),
+.inquiry-card a {
+  position: relative;
+  z-index: 2;
 }
 
 .inquiry-card h2,
