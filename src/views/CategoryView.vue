@@ -376,7 +376,7 @@ onMounted(() => {
   border-radius: 999px;
   background: rgba(var(--color-accent-rgb), 0.15);
   border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-  color: var(--color-link);
+  color: var(--color-accent-ink);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.05);

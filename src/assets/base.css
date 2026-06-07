@@ -109,6 +109,7 @@ html.scheme-blue {
   --color-accent: #0066ff;
   --color-accent-rgb: 0, 102, 255;
   --color-accent-soft: rgba(0, 102, 255, 0.12);
+  --color-accent-ink: #001f4d;
   --color-link: #0055d4;
 }
 
@@ -121,6 +122,7 @@ html.dark.scheme-blue {
   --color-accent: #00d2ff;
   --color-accent-rgb: 0, 210, 255;
   --color-accent-soft: rgba(0, 210, 255, 0.12);
+  --color-accent-ink: #002b66;
   --color-link: #00d2ff;
   --shadow-glow: 0 0 24px rgba(0, 210, 255, 0.2);
 }
@@ -130,6 +132,7 @@ html.scheme-gold {
   --color-accent: #c29543;
   --color-accent-rgb: 194, 149, 67;
   --color-accent-soft: rgba(194, 149, 67, 0.12);
+  --color-accent-ink: #3d2c11;
   --color-link: #9a732a;
 }
 
@@ -142,6 +145,7 @@ html.dark.scheme-gold {
   --color-accent: #dfb260;
   --color-accent-rgb: 223, 178, 96;
   --color-accent-soft: rgba(223, 178, 96, 0.12);
+  --color-accent-ink: #4d3816;
   --color-link: #dfb260;
   --shadow-glow: 0 0 24px rgba(223, 178, 96, 0.2);
 }
