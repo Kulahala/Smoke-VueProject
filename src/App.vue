@@ -658,11 +658,11 @@ watchEffect(() => {
   display: grid;
   grid-template-columns: 1fr;
   gap: 6px;
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
   border-radius: 8px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 82%, transparent), transparent),
-    var(--color-surface);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
   box-shadow: 0 22px 54px var(--color-shadow-hover);
   padding: 8px;
   opacity: 0;
@@ -672,6 +672,7 @@ watchEffect(() => {
     opacity 0.16s ease,
     transform 0.16s ease,
     visibility 0.16s ease;
+  z-index: 100;
 }
 
 .nav-group:hover .nav-menu {
@@ -767,12 +768,12 @@ watchEffect(() => {
   width: min(320px, calc(100vw - 32px));
   display: grid;
   gap: 14px;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
   border-radius: 12px;
   background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   box-shadow: 0 24px 70px var(--color-shadow-hover);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
   padding: 14px;
   z-index: 100;
 }
@@ -1010,9 +1011,11 @@ html.dark .inquiry-link:hover {
     align-items: stretch;
     gap: 16px;
     overflow: auto;
-    border: 1px solid var(--color-border);
+    border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
     border-radius: 8px;
-    background: var(--color-surface);
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    backdrop-filter: blur(18px) saturate(1.2);
     box-shadow: 0 22px 60px var(--color-shadow-hover);
     padding: 16px;
     opacity: 0;
@@ -1057,6 +1060,10 @@ html.dark .inquiry-link:hover {
     grid-template-columns: 1fr;
     margin-top: 6px;
     box-shadow: none;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     opacity: 1;
     transform: none;
   }
@@ -1076,6 +1083,10 @@ html.dark .inquiry-link:hover {
     width: 100%;
     margin-top: 10px;
     box-shadow: none;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .inquiry-link {
