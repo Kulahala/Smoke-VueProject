@@ -278,11 +278,485 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 135, 121, 0.35);
       }
+
+      /* 表单字段聚焦高亮样式 */
+      .cms-field-highlight {
+        outline: 2px dashed #ff4d4f !important;
+        outline-offset: 4px;
+        box-shadow: 0 0 12px rgba(255, 77, 79, 0.25) !important;
+        position: relative;
+        transition: outline 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      /* 指南高亮闪烁效果 */
+      .guide-text-highlight {
+        animation: pulse-glow 1.5s infinite alternate;
+        border: 1px solid #ff4d4f !important;
+        border-radius: 6px;
+        padding: 4px;
+      }
+
+      .guide-alert.guide-text-highlight {
+        border-left-width: 5px !important;
+      }
+
+      @keyframes pulse-glow {
+        0% {
+          background-color: rgba(255, 77, 79, 0.04);
+          box-shadow: 0 0 4px rgba(255, 77, 79, 0.1);
+        }
+        100% {
+          background-color: rgba(255, 77, 79, 0.12);
+          box-shadow: 0 0 12px rgba(255, 77, 79, 0.25);
+        }
+      }
+
+      /* ====================================================
+         🎨 Decap CMS 全局高质感主题美化 (Premium UI Overrides)
+         ==================================================== */
+      
+      /* 全局背景与边距调和 */
+      body {
+        background-color: #f3f7f6 !important;
+      }
+
+      /* 隐藏原本简陋的预览/切换提示 */
+      [class*="ControlContainer"] > [class*="ControlActive"] > div:first-child:empty {
+        display: none !important;
+      }
+
+      /* 顶部导航条（毛玻璃与精致下边框） */
+      header[class*="AppHeader"] {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(0, 135, 121, 0.08) !important;
+        box-shadow: 0 4px 30px rgba(13, 43, 36, 0.015) !important;
+      }
+
+      /* 头部链接与文字 */
+      header[class*="AppHeader"] a,
+      header[class*="AppHeader"] button {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        font-weight: 600 !important;
+        color: #0d2b24 !important;
+        transition: all 0.2s ease !important;
+      }
+
+      /* 主编辑器面板边距调和 */
+      [class*="EditorContainer"] {
+        background-color: transparent !important;
+        padding-top: 24px !important;
+      }
+
+      /* 表单项容器卡片化（高雅白卡，微阴影，悬浮呼吸感） */
+      [class*="ControlContainer"] {
+        background: #ffffff !important;
+        border: 1px solid rgba(9, 14, 16, 0.05) !important;
+        border-radius: 14px !important;
+        padding: 22px 24px !important;
+        margin-bottom: 24px !important;
+        box-shadow: 0 8px 24px rgba(13, 43, 36, 0.012) !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+      }
+      [class*="ControlContainer"]:hover {
+        border-color: rgba(0, 135, 121, 0.25) !important;
+        box-shadow: 0 12px 36px rgba(0, 135, 121, 0.05) !important;
+      }
+
+      /* 字段标题（品牌绿，硬朗字重，加入竖线点缀） */
+      [class*="ControlContainer"] label {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 11.5px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+        color: #008779 !important;
+        margin-bottom: 10px !important;
+        display: inline-block !important;
+        border-left: 3px solid #008779 !important;
+        padding-left: 8px !important;
+        line-height: 1.2 !important;
+      }
+
+      /* 输入框、文本域、下拉选择框 */
+      [class*="ControlContainer"] input,
+      [class*="ControlContainer"] textarea,
+      [class*="ControlContainer"] select,
+      [class*="ControlActive"] {
+        border: 1px solid rgba(0, 135, 121, 0.15) !important;
+        border-radius: 8px !important;
+        padding: 11px 14px !important;
+        font-size: 13.5px !important;
+        color: #0d2b24 !important;
+        background-color: #fafcfc !important;
+        transition: all 0.2s ease !important;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+        width: 100% !important;
+      }
+      [class*="ControlContainer"] input:focus,
+      [class*="ControlContainer"] textarea:focus,
+      [class*="ControlContainer"] select:focus {
+        border-color: #008779 !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(0, 135, 121, 0.12) !important;
+        outline: none !important;
+      }
+
+      /* 列表/多层级拖拽容器整体美化 */
+      [class*="ListControl"] {
+        border: 1px dashed rgba(0, 135, 121, 0.18) !important;
+        border-radius: 12px !important;
+        padding: 20px !important;
+        background-color: #fcfdfe !important;
+      }
+
+      /* 列表子项头部条（高雅青色渐变，去粗灰） */
+      [class*="NestedObjectLabel"] {
+        background: linear-gradient(135deg, #f0f7f5 0%, #e6f2ee 100%) !important;
+        border-radius: 10px 10px 0 0 !important;
+        padding: 12px 16px !important;
+        border-bottom: 1px solid rgba(0, 135, 121, 0.08) !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      [class*="NestedObjectLabel"] h3 {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #0d2b24 !important;
+      }
+
+      /* 拖拽项的外包裹框 */
+      [class*="ObjectWidgetWrapper"] {
+        border: 1px solid rgba(0, 135, 121, 0.08) !important;
+        border-radius: 10px !important;
+        margin-bottom: 16px !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 12px rgba(13, 43, 36, 0.01) !important;
+      }
+
+      /* 列表的 Add 按钮美化 */
+      [class*="ListControl"] button[class*="Button"] {
+        background: #ffffff !important;
+        border: 1.5px solid #008779 !important;
+        color: #008779 !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        padding: 10px 22px !important;
+        font-size: 12.5px !important;
+        transition: all 0.2s !important;
+        cursor: pointer !important;
+      }
+      [class*="ListControl"] button[class*="Button"]:hover {
+        background: #008779 !important;
+        color: #ffffff !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(0, 135, 121, 0.15) !important;
+      }
+
+      /* 顶部发布（Publish）按钮 */
+      button[class*="PublishButton"] {
+        background: linear-gradient(135deg, #0d2b24 0%, #008779 100%) !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        padding: 10px 22px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 12px rgba(0, 135, 121, 0.18) !important;
+        border: none !important;
+        transition: all 0.2s !important;
+        cursor: pointer !important;
+      }
+      button[class*="PublishButton"]:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 18px rgba(0, 135, 121, 0.28) !important;
+      }
+
+      /* 左侧主导航侧边栏（主集合页） */
+      [class*="SidebarContainer"] {
+        background-color: #ffffff !important;
+        border-right: 1px solid rgba(0, 135, 121, 0.08) !important;
+        padding-top: 20px !important;
+      }
+      [class*="SidebarLink"] {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 13.5px !important;
+        border-radius: 8px !important;
+        margin: 6px 12px !important;
+        color: #5c6c68 !important;
+        transition: all 0.2s !important;
+      }
+      [class*="SidebarLink"]-active,
+      [class*="SidebarLink"]:hover {
+        background-color: #f0f7f5 !important;
+        color: #008779 !important;
+      }
+
+      /* ====================================================
+         🎨 Decap CMS 整体框架左右偏移腾出侧边栏空间
+         ==================================================== */
+      #nc-root {
+        margin-left: 390px !important;
+        margin-right: 390px !important;
+        width: calc(100% - 780px) !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+      }
+
+      body.blueprint-collapsed #nc-root {
+        margin-left: 0 !important;
+        width: calc(100% - 390px) !important;
+      }
+      body.guide-collapsed #nc-root {
+        margin-right: 0 !important;
+        width: calc(100% - 390px) !important;
+      }
+      body.blueprint-collapsed.guide-collapsed #nc-root {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+      }
+
+      /* ====================================================
+         🗺️ 左侧可视化对照蓝图侧边栏样式
+         ==================================================== */
+      #guide-blueprint-sidebar {
+        position: fixed;
+        top: 80px;
+        left: 30px;
+        width: 360px;
+        bottom: 40px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(9, 14, 16, 0.08);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        z-index: 9999;
+        display: none; /* 默认隐藏，登录且进入编辑页显示 */
+        flex-direction: column;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        overflow: hidden;
+      }
+
+      #guide-blueprint-sidebar.collapsed {
+        transform: translateX(-420px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .blueprint-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #f5f9f8 0%, #eaf5f2 100%);
+      }
+
+      .blueprint-header h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #0d2b24;
+      }
+
+      .blueprint-close-btn {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #8c9e99;
+        transition: color 0.2s;
+        padding: 0 4px;
+        line-height: 1;
+      }
+
+      .blueprint-close-btn:hover {
+        color: #0d2b24;
+      }
+
+      .blueprint-content {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .blueprint-intro {
+        font-size: 12.5px;
+        color: #5c6c68;
+        line-height: 1.5;
+        background: #f0f7f5;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border-left: 3px solid #008779;
+      }
+
+      /* 浏览器模拟窗口 */
+      .mock-browser {
+        border: 1px solid rgba(0, 135, 121, 0.12);
+        border-radius: 12px;
+        background: #ffffff;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(13, 43, 36, 0.04);
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .mock-browser-header {
+        background: #f0f4f3;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border-bottom: 1px solid rgba(0, 135, 121, 0.08);
+      }
+      .mock-browser-header .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .mock-browser-header .dot.red { background: #ff5f56; }
+      .mock-browser-header .dot.yellow { background: #ffbd2e; }
+      .mock-browser-header .dot.green { background: #27c93f; }
+      .mock-browser-header .mock-url {
+        font-size: 10px;
+        color: #8c9e99;
+        background: #ffffff;
+        padding: 2px 20px;
+        border-radius: 4px;
+        margin-left: 10px;
+        flex: 1;
+        text-align: center;
+        font-family: monospace;
+      }
+      .mock-browser-body {
+        padding: 12px;
+        background: #f4f7f6;
+        min-height: 340px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      /* 真实图片容器与大小控制 */
+      .real-screenshot-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        position: relative !important;
+      }
+      .real-screenshot {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+      }
+
+      /* 模拟网页区块通用样式 */
+      .mock-section {
+        background: #ffffff;
+        border: 1px solid rgba(0, 135, 121, 0.08);
+        border-radius: 6px;
+        padding: 10px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: #5c6c68;
+        transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 页面蓝图区域激活高亮 */
+      .mock-section.blueprint-active {
+        border-color: #ff4d4f !important;
+        background-color: rgba(255, 77, 79, 0.06) !important;
+        color: #ff4d4f !important;
+        box-shadow: 0 0 14px rgba(255, 77, 79, 0.3) !important;
+        transform: scale(1.03);
+        z-index: 10;
+      }
+      .mock-section.blueprint-active::after {
+        content: '📝 修改这里';
+        position: absolute;
+        bottom: 2px;
+        right: 4px;
+        font-size: 8px;
+        background: #ff4d4f;
+        color: #ffffff;
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+
+      /* 唤起按钮 */
+      #blueprint-open-btn {
+        position: fixed;
+        left: 30px;
+        bottom: 40px;
+        padding: 12px 20px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #0d2b24 0%, #008779 100%);
+        color: #ffffff;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 135, 121, 0.25);
+        cursor: pointer;
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+      }
+
+      #blueprint-open-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 135, 121, 0.35);
+      }
+
+      /* 自适应屏幕适配 */
+      @media (max-width: 1400px) {
+        #guide-sidebar, #guide-blueprint-sidebar {
+          width: 300px !important;
+        }
+        #nc-root {
+          margin-left: 320px !important;
+          margin-right: 320px !important;
+          width: calc(100% - 640px) !important;
+        }
+        body.blueprint-collapsed #nc-root {
+          width: calc(100% - 320px) !important;
+        }
+        body.guide-collapsed #nc-root {
+          width: calc(100% - 320px) !important;
+        }
+      }
+      @media (max-width: 1200px) {
+        #nc-root {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          width: 100% !important;
+        }
+        #guide-sidebar, #guide-blueprint-sidebar {
+          box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+        }
+      }
+
     </style>
   </head>
   <body>
     <!-- Include the Decap CMS script -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+
 
     <!-- 操作手册浮窗 -->
     <div id="guide-sidebar">
@@ -298,11 +772,11 @@
           <div class="guide-content">
             <div class="guide-section">
               <h4>📌 核心注意事项</h4>
-              <div class="guide-alert">
+              <div class="guide-alert" id="alert-id">
                 <strong>🚨 新增商品 ID 限制</strong><br>
                 每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 23，新商品 ID 必须填写 <b>24</b>，否则会导致数据覆盖或保存失败。
               </div>
-              <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;">
+              <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;" id="alert-cat-id">
                 <strong>⚠️ 分类 ID 禁止修改</strong><br>
                 编辑分类时，<b>Group ID</b> 和 <b>Category ID</b> 已经被锁定/隐藏，千万不要尝试更改或随意替换其定义，否则前台网页将无法正确过滤显示商品。
               </div>
@@ -329,15 +803,15 @@
             <div class="guide-section">
               <h4>🎨 内容与图片规范</h4>
               <ul>
-                <li><strong>商品图片</strong>：必须上传<b>纯白色背景</b>的渲染图或实拍图。前台系统会对白底图片自动渲染为高端的“照片展示盒”物理效果。</li>
-                <li><strong>系列背景图 (Hero Image)</strong>：必须是<b>无文字、无规格图表</b>的纯净、高清大特写图，防止在 object-fit cover 或暗色遮罩时文字被裁剪、显示杂乱。</li>
+                <li class="spec-image-tip"><strong>商品图片</strong>：必须上传<b>纯白色背景</b>的渲染图或实拍图。前台系统会对白底图片自动渲染为高端的“照片展示盒”物理效果。</li>
+                <li class="spec-hero-tip"><strong>系列背景图 (Hero Image)</strong>：必须是<b>无文字、无规格图表</b>的纯净、高清大特写图，防止在 object-fit cover 或暗色遮罩时文字被裁剪、显示杂乱。</li>
               </ul>
             </div>
 
             <div class="guide-section">
               <h4>🚀 如何发布上线</h4>
               <ul>
-                <li>所有的修改和新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
+                <li>所有的修改 and 新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
                 <li>点击发布后，Netlify 会在后台自动完成打包部署，<b>通常 1-2 分钟内</b>前台网站即可更新。</li>
               </ul>
             </div>
@@ -360,6 +834,99 @@
     <!-- 唤起操作手册按钮 -->
     <button id="guide-open-btn" style="display: none;">
       <span>📖 打开操作指南</span>
+    </button>
+
+    <!-- 可视化对照侧边栏 (Left Visual Blueprint Sidebar) -->
+    <div id="guide-blueprint-sidebar">
+      <div class="blueprint-header">
+        <h3>🗺️ 可视化修改对照</h3>
+        <button id="blueprint-close-btn" class="blueprint-close-btn">&times;</button>
+      </div>
+      <div class="blueprint-content">
+        <div class="blueprint-intro">
+          💡 <b>实时修改指南</b>：在中间编辑表单输入时，左侧会同步高亮显示该项更改将影响的网页前台对应区块。
+        </div>
+        
+        <div class="mock-browser">
+          <div class="mock-browser-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="mock-url">bestlinksz.com</span>
+          </div>
+          <div class="mock-browser-body">
+            <!-- 首页模拟蓝图 -->
+            <div id="mock-home" class="mock-page" style="display: none; flex-direction: column; gap: 8px;">
+              <!-- 真实截图容器 (默认隐藏，图片加载成功后显示) -->
+              <div class="real-screenshot-container" style="display: none; position: relative; width: 100%;">
+                <img src="/admin/img/guide-home.png" alt="Home Page Preview" class="real-screenshot" style="width: 100%; border-radius: 4px; display: block;" onerror="this.parentElement.style.display='none'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='flex';" onload="this.parentElement.style.display='block'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='none';">
+                <div class="dynamic-highlight-box" style="position: absolute; border: 2.5px solid #ff4d4f; box-shadow: 0 0 14px rgba(255, 77, 79, 0.45); display: none; border-radius: 4px; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); animation: pulse-glow 1.5s infinite alternate;"></div>
+              </div>
+              <!-- 默认的 CSS 蓝图容器 -->
+              <div class="blueprint-container" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <div class="mock-section mock-header" style="height: 25px; font-size: 10px; background-color: #fafcfc;">顶部导航栏 (Header)</div>
+                <div class="mock-section mock-hero" data-highlight="hero" style="height: 90px; border-style: dashed; font-size: 12px;">首页顶部大图轮播<br>(Hero Slides)</div>
+                <div class="mock-section mock-services" data-highlight="services" style="height: 50px; font-size: 11px;">服务亮点介绍区<br>(Service Points)</div>
+                <div class="mock-section mock-products-grid" style="height: 80px; opacity: 0.5; border-style: dashed; background-color: #fafcfc; font-size: 10px;">产品展示区块<br>(Products Area)</div>
+                <div class="mock-section mock-footer" data-highlight="footer" style="height: 55px; font-size: 11px;">底栏询盘接单邮箱<br>(Footer Inquiry Email)</div>
+              </div>
+            </div>
+
+            <!-- 分类目录页模拟蓝图 -->
+            <div id="mock-catalog" class="mock-page" style="display: none; flex-direction: column; gap: 8px;">
+              <!-- 真实截图容器 -->
+              <div class="real-screenshot-container" style="display: none; position: relative; width: 100%;">
+                <img src="/admin/img/guide-catalog.png" alt="Catalog Page Preview" class="real-screenshot" style="width: 100%; border-radius: 4px; display: block;" onerror="this.parentElement.style.display='none'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='flex';" onload="this.parentElement.style.display='block'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='none';">
+                <div class="dynamic-highlight-box" style="position: absolute; border: 2.5px solid #ff4d4f; box-shadow: 0 0 14px rgba(255, 77, 79, 0.45); display: none; border-radius: 4px; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); animation: pulse-glow 1.5s infinite alternate;"></div>
+              </div>
+              <!-- 默认的 CSS 蓝图容器 -->
+              <div class="blueprint-container" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <div class="mock-section mock-header" style="height: 25px; font-size: 10px; background-color: #fafcfc;">顶部导航栏 (Header)</div>
+                <div class="mock-section mock-cat-hero" data-highlight="cat-hero" style="height: 55px; border-style: dashed; font-size: 11px;">分类系列顶部大背景<br>(Hero Cover Image)</div>
+                <div style="display: flex; gap: 8px; height: 170px;">
+                  <div class="mock-section mock-cat-list" data-highlight="cat-list" style="width: 32%; font-size: 10px; border-style: dashed;">大分类/二级分类<br>筛选侧栏</div>
+                  <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                    <div class="mock-section" style="flex: 1; opacity: 0.5; font-size: 9px; background-color: #fafcfc;">商品卡片一</div>
+                    <div class="mock-section" style="flex: 1; opacity: 0.5; font-size: 9px; background-color: #fafcfc;">商品卡片二</div>
+                    <div class="mock-section" style="flex: 1; opacity: 0.5; font-size: 9px; background-color: #fafcfc;">商品卡片三</div>
+                  </div>
+                </div>
+                <div class="mock-section mock-footer" style="height: 25px; font-size: 9px; opacity: 0.5; background-color: #fafcfc;">底栏 (Footer)</div>
+              </div>
+            </div>
+
+            <!-- 单品详情页模拟蓝图 -->
+            <div id="mock-product" class="mock-page" style="display: none; flex-direction: column; gap: 8px;">
+              <!-- 真实截图容器 -->
+              <div class="real-screenshot-container" style="display: none; position: relative; width: 100%;">
+                <img src="/admin/img/guide-detail.png" alt="Product Detail Preview" class="real-screenshot" style="width: 100%; border-radius: 4px; display: block;" onerror="this.parentElement.style.display='none'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='flex';" onload="this.parentElement.style.display='block'; this.closest('.mock-page').querySelector('.blueprint-container').style.display='none';">
+                <div class="dynamic-highlight-box" style="position: absolute; border: 2.5px solid #ff4d4f; box-shadow: 0 0 14px rgba(255, 77, 79, 0.45); display: none; border-radius: 4px; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); animation: pulse-glow 1.5s infinite alternate;"></div>
+              </div>
+              <!-- 默认的 CSS 蓝图容器 -->
+              <div class="blueprint-container" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <div class="mock-section mock-header" style="height: 25px; font-size: 10px; background-color: #fafcfc;">顶部导航栏 (Header)</div>
+                <div style="display: flex; gap: 8px; height: 180px;">
+                  <div class="mock-section mock-prod-img" data-highlight="prod-img" style="width: 45%; font-size: 11px; border-style: dashed; position: relative;">
+                    白底商品展示主图<br>(Product Image)
+                    <div class="mock-section mock-prod-badge" data-highlight="prod-badge" style="position: absolute; top: 6px; left: 6px; width: 45px; height: 16px; font-size: 8px; padding: 0; background: #e0e0e0; border: 1px solid #999; display: flex; align-items: center; justify-content: center; border-radius: 3px;">角标 Badge</div>
+                  </div>
+                  <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                    <div class="mock-section mock-prod-info" data-highlight="prod-info" style="flex: 1; font-size: 11px;">产品英文/中文标题<br>与核心描述</div>
+                    <div class="mock-section mock-prod-specs" data-highlight="prod-specs" style="flex: 1.5; font-size: 10px;">技术规格参数表<br>(起订量 MOQ / 交期)</div>
+                  </div>
+                </div>
+                <div class="mock-section mock-prod-meta" data-highlight="prod-meta" style="height: 30px; font-size: 10px; border-style: dashed;">唯一识别编码 ID (递增数字)</div>
+                <div class="mock-section mock-footer" style="height: 25px; font-size: 9px; opacity: 0.5; background-color: #fafcfc;">底栏 (Footer)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 唤起可视化蓝图按钮 -->
+    <button id="blueprint-open-btn" style="display: none;">
+      <span>🗺️ 打开修改对照</span>
     </button>
 
     <script>
@@ -437,50 +1004,121 @@
         const detailTitle = document.getElementById('detail-title');
         const detailContent = document.getElementById('detail-content');
 
+        // 左侧可视化对照栏变量
+        const blueprintSidebar = document.getElementById('guide-blueprint-sidebar');
+        const blueprintOpenBtn = document.getElementById('blueprint-open-btn');
+        const blueprintCloseBtn = document.getElementById('blueprint-close-btn');
+
         // 默认隐藏
         sidebar.style.display = 'none';
         openBtn.style.display = 'none';
+        blueprintSidebar.style.display = 'none';
+        blueprintOpenBtn.style.display = 'none';
 
-        // 检查登录状态的函数
+        // 检查登录状态并初始化显示
         const checkLoginStatus = () => {
           const hasSidebar = document.querySelector('[class*="sidebar"]') || document.querySelector('[class*="Sidebar"]');
           const hasCollections = document.body.innerText.includes('Collections') || document.body.innerText.includes('分类名称编辑');
+          const isEditorPage = window.location.hash.includes('/collections') || window.location.hash.includes('/workflow');
 
-          if (hasSidebar || hasCollections) {
-            const isCollapsed = localStorage.getItem('admin-guide-collapsed') === 'true';
+          if (hasSidebar || hasCollections || isEditorPage) {
+            // 右侧指南折叠状态
+            const isGuideCollapsed = localStorage.getItem('admin-guide-collapsed') === 'true';
             sidebar.style.display = 'flex';
-            if (isCollapsed) {
+            if (isGuideCollapsed) {
               sidebar.classList.add('collapsed');
               openBtn.style.display = 'flex';
+              document.body.classList.add('guide-collapsed');
             } else {
               sidebar.classList.remove('collapsed');
               openBtn.style.display = 'none';
+              document.body.classList.remove('guide-collapsed');
+            }
+
+            // 左侧蓝图折叠状态
+            if (isEditorPage) {
+              const isBlueprintCollapsed = localStorage.getItem('admin-blueprint-collapsed') === 'true';
+              blueprintSidebar.style.display = 'flex';
+              if (isBlueprintCollapsed) {
+                blueprintSidebar.classList.add('collapsed');
+                blueprintOpenBtn.style.display = 'flex';
+                document.body.classList.add('blueprint-collapsed');
+              } else {
+                blueprintSidebar.classList.remove('collapsed');
+                blueprintOpenBtn.style.display = 'none';
+                document.body.classList.remove('blueprint-collapsed');
+              }
+
+              // 切换显示对应的网页模型
+              const mockHome = document.getElementById('mock-home');
+              const mockCatalog = document.getElementById('mock-catalog');
+              const mockProduct = document.getElementById('mock-product');
+
+              mockHome.style.display = 'none';
+              mockCatalog.style.display = 'none';
+              mockProduct.style.display = 'none';
+
+              if (window.location.hash.includes('/settings')) {
+                mockHome.style.display = 'flex';
+              } else if (window.location.hash.includes('/categories')) {
+                mockCatalog.style.display = 'flex';
+              } else if (window.location.hash.includes('/products')) {
+                mockProduct.style.display = 'flex';
+              }
+            } else {
+              blueprintSidebar.style.display = 'none';
+              blueprintOpenBtn.style.display = 'none';
+              document.body.classList.add('blueprint-collapsed');
             }
           } else {
-            // 未登录状态，彻底隐藏
+            // 未登录，彻底隐藏
             sidebar.style.display = 'none';
             openBtn.style.display = 'none';
+            blueprintSidebar.style.display = 'none';
+            blueprintOpenBtn.style.display = 'none';
+            document.body.classList.add('guide-collapsed');
+            document.body.classList.add('blueprint-collapsed');
           }
         };
 
         // 轮询检查登录状态（因为 React 渲染是异步的）
         setInterval(checkLoginStatus, 500);
 
-        // 关闭事件
+        // ==========================================
+        // 🛠️ 侧边栏按钮交互逻辑
+        // ==========================================
+        
+        // 操作指南
         closeBtn.addEventListener('click', () => {
           sidebar.classList.add('collapsed');
           openBtn.style.display = 'flex';
+          document.body.classList.add('guide-collapsed');
           localStorage.setItem('admin-guide-collapsed', 'true');
         });
 
-        // 打开事件
         openBtn.addEventListener('click', () => {
           sidebar.classList.remove('collapsed');
           openBtn.style.display = 'none';
+          document.body.classList.remove('guide-collapsed');
           localStorage.setItem('admin-guide-collapsed', 'false');
         });
 
-        // 菜单项点击事件（进入二级菜单）
+        // 可视化修改对照
+        blueprintCloseBtn.addEventListener('click', () => {
+          blueprintSidebar.classList.add('collapsed');
+          blueprintOpenBtn.style.display = 'flex';
+          document.body.classList.add('blueprint-collapsed');
+          localStorage.setItem('admin-blueprint-collapsed', 'true');
+        });
+
+        blueprintOpenBtn.addEventListener('click', () => {
+          blueprintSidebar.classList.remove('collapsed');
+          blueprintOpenBtn.style.display = 'none';
+          document.body.classList.remove('blueprint-collapsed');
+          localStorage.setItem('admin-blueprint-collapsed', 'false');
+        });
+
+        // 菜单项点击进入二级指南
         document.querySelectorAll('.menu-item').forEach(item => {
           item.addEventListener('click', () => {
             const target = item.getAttribute('data-target');
@@ -492,9 +1130,199 @@
           });
         });
 
-        // 返回主菜单事件
+        // 返回主指南
         backBtn.addEventListener('click', () => {
           viewsContainer.classList.remove('show-detail');
+        });
+
+        // ==========================================
+        // 💡 填表聚焦高亮与右侧操作指南滚动联动逻辑
+        // ==========================================
+        let currentHighlightedEl = null;
+
+        // 真实截图红框百分比坐标映射表（针对用户提供的 guide-home.png / guide-catalog.png / guide-detail.png 截图进行校准）
+        const highlightCoordinates = {
+          home: {
+            hero: { top: '8%', left: '17%', width: '70%', height: '62%' },
+            services: { top: '71%', left: '17%', width: '42%', height: '12%' },
+            footer: { top: '1.5%', left: '75%', width: '7%', height: '5%' } // 指向 Header 的 Email Inquiry 按钮以示更新
+          },
+          catalog: {
+            'cat-hero': { top: '8%', left: '0%', width: '100%', height: '62%' },
+            'cat-list': { top: '69%', left: '17%', width: '30%', height: '6%' } // 指向分类切换过滤栏
+          },
+          product: {
+            'prod-img': { top: '24%', left: '17%', width: '28%', height: '51%' }, // 指向商品 white bottom base展示大图
+            'prod-info': { top: '28%', left: '48%', width: '35%', height: '26%' }, // 指向商品标题与核心描述
+            'prod-specs': { top: '58%', left: '48%', width: '32%', height: '38%' }, // 指向起订量、交期和参数表区块
+            'prod-meta': { top: '2%', left: '8%', width: '16%', height: '6%' }, // 指向浏览器地址栏的数字 ID
+            'prod-badge': { top: '25.5%', left: '18%', width: '8%', height: '4.5%' } // 指向商品主图左上角角标
+          }
+        };
+
+        const handleFocusOrHover = (e) => {
+          // 只在登录成功且操作指南显示时进行联动
+          if (sidebar.style.display === 'none') return;
+
+          // 寻找最近的输入框、选择器或大包装容器
+          const inputEl = e.target.closest('input, textarea, select, button, [class*="ControlContainer"], .custom-file-upload');
+          if (!inputEl) return;
+
+          // 向上查找包含 label 的字段包裹容器 (Decap CMS 表单项的包裹层)
+          let fieldContainer = inputEl.closest('[class*="ControlContainer"]') || inputEl.parentElement;
+          while (fieldContainer && fieldContainer !== document.body) {
+            if (fieldContainer.querySelector('label')) {
+              break;
+            }
+            fieldContainer = fieldContainer.parentElement;
+          }
+
+          if (!fieldContainer || fieldContainer === document.body) return;
+
+          // 避免在同一个组件上重复高亮
+          if (currentHighlightedEl === fieldContainer) return;
+
+          // 清除上一次的高亮
+          if (currentHighlightedEl) {
+            currentHighlightedEl.classList.remove('cms-field-highlight');
+          }
+
+          // 对当前聚焦 of 输入字段框红高亮
+          fieldContainer.classList.add('cms-field-highlight');
+          currentHighlightedEl = fieldContainer;
+
+          // 提取字段标签文字以精确匹配指南项
+          const labelEl = fieldContainer.querySelector('label');
+          const labelText = labelEl ? labelEl.innerText.toUpperCase() : '';
+
+          clearGuideHighlights();
+          clearBlueprintHighlights();
+
+          // 智能匹配对应的指南小提示，自动滚动高亮
+          let targetGuideId = '';
+          let blueprintTarget = '';
+          let pageType = '';
+
+          // 严谨匹配，避免 SLIDES (轮播) 的 SL-ID-ES 误中
+          const isIdField = labelText.split(/[^A-Z0-9]/).includes('ID') || labelText.includes('数字ID');
+
+          if (isIdField) {
+            if (labelText.includes('PRODUCT') || labelText.includes('商品')) {
+              targetGuideId = 'alert-id';
+              blueprintTarget = 'prod-meta';
+              pageType = 'product';
+            } else {
+              targetGuideId = 'alert-cat-id';
+              blueprintTarget = 'cat-list';
+              pageType = 'catalog';
+            }
+          } else if (labelText.includes('IMAGE') || labelText.includes('图片') || labelText.includes('COVER')) {
+            if (labelText.includes('HERO') || labelText.includes('COVER') || labelText.includes('背景') || labelText.includes('分类')) {
+              targetGuideId = 'spec-hero-tip';
+              if (window.location.hash.includes('/settings')) {
+                blueprintTarget = 'hero';
+                pageType = 'home';
+              } else {
+                blueprintTarget = 'cat-hero';
+                pageType = 'catalog';
+              }
+            } else {
+              targetGuideId = 'spec-image-tip';
+              blueprintTarget = 'prod-img';
+              pageType = 'product';
+            }
+          } else if (labelText.includes('EMAIL') || labelText.includes('邮箱')) {
+            blueprintTarget = 'footer';
+            pageType = 'home';
+          } else if (labelText.includes('SLIDE') || labelText.includes('轮播')) {
+            blueprintTarget = 'hero';
+            pageType = 'home';
+          } else if (labelText.includes('POINT') || labelText.includes('亮点')) {
+            blueprintTarget = 'services';
+            pageType = 'home';
+          } else if (labelText.includes('GROUP') || labelText.includes('CATEGORY') || labelText.includes('分类')) {
+            targetGuideId = 'alert-cat-id';
+            blueprintTarget = 'cat-list';
+            pageType = 'catalog';
+          } else if (labelText.includes('HIGHLIGHT') || labelText.includes('卖点') || labelText.includes('DESC') || labelText.includes('描述') || labelText.includes('NAME') || labelText.includes('名称')) {
+            blueprintTarget = 'prod-info';
+            pageType = 'product';
+          } else if (labelText.includes('SPEC') || labelText.includes('参数') || labelText.includes('MOQ') || labelText.includes('LEAD') || labelText.includes('交期')) {
+            blueprintTarget = 'prod-specs';
+            pageType = 'product';
+          } else if (labelText.includes('BADGE') || labelText.includes('角标')) {
+            blueprintTarget = 'prod-badge';
+            pageType = 'product';
+          }
+
+          if (targetGuideId) {
+            highlightGuideItem(targetGuideId);
+          }
+
+          // 高亮左侧蓝图或真实截图
+          if (blueprintTarget && pageType) {
+            const activePage = document.getElementById('mock-' + pageType);
+            if (activePage) {
+              // 1. 高亮 CSS 蓝图区域
+              const bpEl = activePage.querySelector('[data-highlight="' + blueprintTarget + '"]');
+              if (bpEl) {
+                bpEl.classList.add('blueprint-active');
+              }
+
+              // 2. 高亮真实截图对应红框
+              const screenshotContainer = activePage.querySelector('.real-screenshot-container');
+              const highlightBox = activePage.querySelector('.dynamic-highlight-box');
+              const coords = highlightCoordinates[pageType][blueprintTarget];
+              
+              if (screenshotContainer && highlightBox && coords) {
+                highlightBox.style.top = coords.top;
+                highlightBox.style.left = coords.left;
+                highlightBox.style.width = coords.width;
+                highlightBox.style.height = coords.height;
+                highlightBox.style.display = 'block';
+              }
+            }
+          }
+        };
+
+        const clearGuideHighlights = () => {
+          document.querySelectorAll('.guide-text-highlight').forEach(el => {
+            el.classList.remove('guide-text-highlight');
+          });
+        };
+
+        const clearBlueprintHighlights = () => {
+          // 清除 CSS 蓝图的高亮
+          document.querySelectorAll('.blueprint-active').forEach(el => {
+            el.classList.remove('blueprint-active');
+          });
+          // 隐藏真实截图的高亮红框
+          document.querySelectorAll('.dynamic-highlight-box').forEach(el => {
+            el.style.display = 'none';
+          });
+        };
+
+        const highlightGuideItem = (id) => {
+          // 查找主页面 ID 或二级滑动页面中带对应 class 的小说明项
+          const item = document.getElementById(id) || document.querySelector('.' + id);
+          if (item) {
+            item.classList.add('guide-text-highlight');
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        };
+
+        // 通过 Body 全局事件委托来规避 React 动态异步渲染加载节点延迟的问题
+        document.body.addEventListener('mouseover', handleFocusOrHover);
+        document.body.addEventListener('focusin', handleFocusOrHover);
+
+        // 鼠标移出输入区时，自动清理红框与指南高亮
+        document.body.addEventListener('mouseout', (e) => {
+          if (currentHighlightedEl && !currentHighlightedEl.contains(e.relatedTarget)) {
+            currentHighlightedEl.classList.remove('cms-field-highlight');
+            currentHighlightedEl = null;
+            clearGuideHighlights();
+            clearBlueprintHighlights();
+          }
         });
       });
     </script>
