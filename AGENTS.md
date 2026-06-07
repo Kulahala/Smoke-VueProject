@@ -131,3 +131,4 @@ image: 'public/电子烟/placeholders/pod-slim.svg'
   - 在产品目录页中实现了 Scrollspy 滚动高亮分类条功能，并优化了点击平滑滚动及初次 hash 载入跳转逻辑（[ProductCatalogView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/ProductCatalogView.vue)）。
   - 全局拦截 `mailto:` 写信链接，点击时自动复制询盘邮箱至剪贴板，并配合毛玻璃卡片 Toast 提示，解决无本地写信客户端白屏的体验问题。
   - 公司能力页（[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)）大配图修改为 `object-fit: contain`、强制纯白背景和内边距，统一视觉标准防止图片被裁剪。
+  - 优化产品目录页移动端体验，实现分类导航滑条在滚动切换时自动滚动居中（[ProductCatalogView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/ProductCatalogView.vue)）。

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { inquiryEmail, store } from '../store';
 
@@ -81,6 +81,24 @@ const scrollToGroup = (event, id) => {
     }, 800);
   }
 };
+
+watch(activeGroupId, (newId) => {
+  if (!newId) return;
+  setTimeout(() => {
+    const activeEl = document.querySelector('.strip-inner a.active');
+    const container = document.querySelector('.strip-inner');
+    if (activeEl && container) {
+      const containerWidth = container.clientWidth;
+      const activeWidth = activeEl.clientWidth;
+      const activeLeft = activeEl.offsetLeft;
+      const targetScrollLeft = activeLeft - (containerWidth / 2) + (activeWidth / 2);
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  }, 60);
+});
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true });
