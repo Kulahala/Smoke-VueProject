@@ -12,6 +12,7 @@
     - 清理了产品 3 (Pulse Max Disposable) 不关联的红蓝色 AI 错误图，恢复为干净单图以保证枪灰色主图的视觉一致性。
     - 新增了开发调试视图 [DebugImages.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/DebugImages.vue) 及其路由 `/debug-images` 以便对比预览所有微信实拍原始素材。
     - 优化详情页缩略图超出时的滑动交互，设置按钮为 `flex-shrink: 0` 并为其底栏设计了极细、半透明、带 Hover 激活的定制滚动滑条。
+    - **升级可视化后台多图配置**：在 [config.yml](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/config.yml) 中为产品库增加了 `images` (Product Gallery) 多图相册编辑控件，支持直接在后台增删、排序多个产品实拍图，并防止后台在覆写保存产品数据时丢失多图相册。
   - 新增全局**在线询盘留言小浮窗**（[InquiryWidget.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/components/InquiryWidget.vue)）：页面右下角追加了常驻的“在线询盘 / Inquiry”悬浮按钮，点击拉起磨砂玻璃半透明小表单，支持表单校验、多语言自适应及发送状态转换。若后台未配置 Web3Forms 密钥，系统会自动无缝智能降级为“复制接单邮箱并唤起发信客户端”，避开表单提交失败的尴尬。
   - 在 [public/admin/config.yml](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/config.yml) 全局设置中增加了 `web3formsKey` 选项，支持非技术商家直接在后台管理邮箱留言接收密钥。
   - 优化本地开发配置（[vite.config.js](file:///c:/Users/Administrator/Desktop/Code/vue-project/vite.config.js)），在 `server` 属性中开启了 `open: true`。现在运行 `npm run dev` 启动开发服务器后，会自动在默认浏览器中打开本地测试链接。

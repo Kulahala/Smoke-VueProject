@@ -135,9 +135,16 @@ collections:
       - label: "Product Name (产品名称)"
         name: "name"
         widget: "string"
-      - label: "Product Image (实拍图片)"
+      - label: "Product Image (主图/封面图)"
         name: "image"
         widget: "image"
+      - label: "Product Gallery (产品相册多图, 主图需选为第一个)"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          label: "Image"
+          widget: "image"
       - label: "Category (所属二级分类)"
         name: "category"
         widget: "select"
