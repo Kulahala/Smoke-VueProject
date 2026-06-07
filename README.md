@@ -224,3 +224,37 @@ https://www.bestlinksz.com/
 - 首屏图优先加载，下面图片懒加载。
 - 动效使用轻量 CSS，不安装重型 UI 库，避免拖慢客户打开速度。
 - 当前占位图是 SVG，体积很小；真实商品图上线前建议先压缩。
+
+## 零代码后台管理部署与激活步骤 (Netlify Identity)
+
+项目在 `feat-cms` 分支中集成了 Decap CMS（可视化管理后台），在本地开发环境下，你可以通过以下链接进入后台预览其界面结构：
+```txt
+http://localhost:5173/admin/
+```
+
+要在 Netlify 线上正式激活该后台，供不懂代码的客户登录、修改文字和上传图片，请按照以下步骤操作：
+
+### 第一步：将代码推送并部署到 Netlify
+1. 将当前测试分支推送至 GitHub：
+   ```sh
+   git push origin feat-cms
+   ```
+2. 登录 Netlify 后台，将该站点的构建分支（Production branch）切换或指定为 `feat-cms`（或者合并该分支到主分支触发部署）。
+3. 等待 Netlify 部署生成完毕。
+
+### 第二步：在 Netlify 开启身份验证 (Identity)
+1. 在 Netlify 该站点的控制面板中，点击顶部菜单的 **Site configuration**（站点设置）。
+2. 在左侧导航栏找到 **Identity**（身份验证），点击 **Services**，然后点击 **Enable Identity**（启用身份验证）按钮。
+3. 启用后，建议在下方进行如下安全配置：
+   - **Registration preferences**（注册偏好）：建议设置为 **Invite only**（仅限邀请），这样可以防止外部陌生人注册后台账号。
+
+### 第三步：启用 Git 网关 (Git Gateway)
+1. 依然在 **Identity** 设置页面中，向下滚动找到 **Services** -> **Git Gateway**。
+2. 点击 **Enable Git Gateway**（启用 Git 网关）按钮。
+3. 系统会弹窗要求 GitHub 授权，点击 **Authorize** 允许 Netlify 访问你的 GitHub 仓库（这一步非常关键，它允许客户在网页后台保存时，由 Netlify 代理向 GitHub 提交代码以实现静态更新）。
+
+### 第四步：邀请客户并登录使用
+1. 在 Netlify 控制面板中，进入顶部大菜单的 **Identity** 标签页。
+2. 点击 **Invite users**（邀请用户）按钮，输入你客户的邮箱发送邀请。
+3. 你的客户会在邮箱里收到一封邀请信，点击邮件里的链接激活并设置其登录密码。
+4. 密码设置完毕后，客户直接访问 `你的网站域名/admin/`（例如 `https://www.bestlinksz.com/admin/`），就可以用刚才的邮箱和密码登录可视化后台，进行打字、传图和增删商品了！每次点击保存，网站都会在几分钟内自动构建并实时更新。
