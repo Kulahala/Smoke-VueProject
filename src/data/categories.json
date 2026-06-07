@@ -1,0 +1,124 @@
+{
+  "categoryGroups": [
+    {
+      "id": "devices",
+      "name": "Devices",
+      "nameZh": "设备系列",
+      "description": "Core vape hardware families for wholesale catalogues and brand programs.",
+      "descriptionZh": "面向批发目录和品牌项目的核心电子烟硬件系列。",
+      "heroImage": "/电子烟/微信图片_20250805234550_1239.jpg",
+      "children": [
+        {
+          "id": "pod-systems",
+          "name": "Pod Systems",
+          "nameZh": "换弹设备",
+          "shortName": "Pods",
+          "shortNameZh": "换弹",
+          "description": "Compact refillable and replaceable pod devices for distributors and private-label programs.",
+          "descriptionZh": "适合经销商和贴牌项目的紧凑型可注油/可换弹设备。",
+          "heroImage": "/电子烟/微信图片_20250805234550_1239.jpg"
+        },
+        {
+          "id": "starter-kits",
+          "name": "Starter Kits",
+          "nameZh": "套装产品",
+          "shortName": "Kits",
+          "shortNameZh": "套装",
+          "description": "Bundled device and packaging solutions built for brand launches, channel samples, and wholesale catalogues.",
+          "descriptionZh": "适合品牌首发、渠道样品和批发目录的设备与包装套装。",
+          "heroImage": "/电子烟/starter_kit_box.png"
+        }
+      ]
+    },
+    {
+      "id": "ready-lines",
+      "name": "Ready Lines",
+      "nameZh": "现成系列",
+      "description": "Fast catalogue items for distributors that need clear SKUs and quick quotation.",
+      "descriptionZh": "适合需要清晰 SKU 和快速报价的经销商目录产品。",
+      "heroImage": "/电子烟/disposable_vape_max.png",
+      "children": [
+        {
+          "id": "disposable-vapes",
+          "name": "Disposable Vapes",
+          "nameZh": "一次性电子烟",
+          "shortName": "Disposables",
+          "shortNameZh": "一次性",
+          "description": "Ready-to-ship disposable lines with modern finishes, multiple capacity tiers, and market-ready packaging.",
+          "descriptionZh": "具备现代外观、多容量档位和市场化包装的一次性产品线。",
+          "heroImage": "/电子烟/disposable_vape_max.png"
+        },
+        {
+          "id": "sample-packs",
+          "name": "Sample Packs",
+          "nameZh": "样品套包",
+          "shortName": "Samples",
+          "shortNameZh": "样品",
+          "description": "Mixed samples for buyer evaluation, trade-show preparation, and distributor sales teams.",
+          "descriptionZh": "用于买家评估、展会准备和经销商销售团队的混合样品包。",
+          "heroImage": "/电子烟/微信图片_20250805234550_1212.jpg"
+        }
+      ]
+    },
+    {
+      "id": "parts-accessories",
+      "name": "Parts & Accessories",
+      "nameZh": "配件与耗材",
+      "description": "Replacement parts and add-on items for repeat orders, service packs, and channel replenishment.",
+      "descriptionZh": "用于复购订单、售后套包和渠道补货的替换件与附加产品。",
+      "heroImage": "/电子烟/微信图片_20250805234550_1222.jpg",
+      "children": [
+        {
+          "id": "replacement-pods",
+          "name": "Replacement Pods",
+          "nameZh": "替换烟弹",
+          "shortName": "Pods",
+          "shortNameZh": "烟弹",
+          "description": "Replacement cartridges and pod packs for repeat-purchase programs and distributor replenishment.",
+          "descriptionZh": "面向复购项目和经销商补货的替换烟弹与烟弹套包。",
+          "heroImage": "/电子烟/微信图片_20250805234550_1213.jpg"
+        },
+        {
+          "id": "coils-accessories",
+          "name": "Coils & Accessories",
+          "nameZh": "雾化芯与配件",
+          "shortName": "Coils",
+          "shortNameZh": "雾化芯",
+          "description": "Mesh coils, cables, lanyards, and small accessories that support catalogue follow-up orders.",
+          "descriptionZh": "Mesh 雾化芯、线材、挂绳和小配件，适合目录后续补充订单。",
+          "heroImage": "/电子烟/微信图片_20250805234550_1220.jpg"
+        }
+      ]
+    },
+    {
+      "id": "brand-support",
+      "name": "Brand Support",
+      "nameZh": "品牌支持",
+      "description": "Packaging and OEM services that turn selected models into market-ready business orders.",
+      "descriptionZh": "把选定型号转化为可上市商业订单的包装与 OEM 服务。",
+      "heroImage": "/电子烟/starter_kit_box.png",
+      "children": [
+        {
+          "id": "packaging-oem",
+          "name": "Packaging & OEM",
+          "nameZh": "包装与 OEM",
+          "shortName": "OEM",
+          "shortNameZh": "OEM",
+          "description": "Retail boxes, sleeves, manuals, logo placement, and sample-ready presentation support.",
+          "descriptionZh": "支持零售盒、套筒、说明书、Logo 位置和样品展示包装。",
+          "heroImage": "/电子烟/packaging.jpg"
+        },
+        {
+          "id": "retail-displays",
+          "name": "Retail Displays",
+          "nameZh": "陈列物料",
+          "shortName": "Displays",
+          "shortNameZh": "陈列",
+          "description": "Counter displays, sample boards, and sales tools for distributors and retail channel teams.",
+          "descriptionZh": "面向经销商和零售渠道团队的柜台陈列、样品板和销售工具。",
+          "heroImage": "/电子烟/counter_display_stand.png"
+        }
+      ]
+    }
+  ]
+}

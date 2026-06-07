@@ -1,0 +1,60 @@
+{
+  "id": 13,
+  "name": "Counter Display Stand",
+  "image": "/电子烟/counter_display_stand.png",
+  "category": "retail-displays",
+  "description": "A retail display support item for counter presentation, sample organization, and distributor sales visits.",
+  "descriptionZh": "零售陈列支持物料，适合柜台展示、样品整理和经销商销售拜访。",
+  "highlights": [
+    "Counter display concept",
+    "Sample and shelf support",
+    "Useful for channel teams"
+  ],
+  "highlightsZh": [
+    "柜台陈列概念",
+    "支持样品与货架展示",
+    "适合渠道团队使用"
+  ],
+  "specs": [
+    {
+      "label": "Display Type",
+      "value": "Counter stand / sample board"
+    },
+    {
+      "label": "Material",
+      "value": "Paperboard / acrylic option"
+    },
+    {
+      "label": "Branding",
+      "value": "Logo and color support"
+    },
+    {
+      "label": "MOQ",
+      "value": "By project"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "陈列类型",
+      "value": "柜台架 / 样品板"
+    },
+    {
+      "label": "材质",
+      "value": "纸板 / 亚克力可选"
+    },
+    {
+      "label": "品牌定制",
+      "value": "支持 Logo 与颜色"
+    },
+    {
+      "label": "起订量",
+      "value": "按项目确认"
+    }
+  ],
+  "moq": "By project",
+  "moqZh": "按项目确认",
+  "leadTime": "15-25 days",
+  "leadTimeZh": "15-25 天",
+  "badge": "Sales Display",
+  "badgeZh": "销售陈列"
+}

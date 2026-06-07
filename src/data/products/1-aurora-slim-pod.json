@@ -1,0 +1,60 @@
+{
+  "id": 1,
+  "name": "Aurora Slim Pod",
+  "image": "/电子烟/微信图片_20250805234550_1239.jpg",
+  "category": "pod-systems",
+  "description": "A slim aluminum pod device for channel-ready nicotine salt programs. The clean shell, stable draw activation, and lightweight format make it easy to position for everyday retail.",
+  "descriptionZh": "轻薄铝合金换弹设备，适合渠道型尼古丁盐项目。外壳干净、吸阻稳定、机身轻巧，方便放入日常零售目录。",
+  "highlights": [
+    "Refillable 2 ml pod",
+    "Draw-activated output",
+    "Logo and shell color options"
+  ],
+  "highlightsZh": [
+    "2 ml 可注油烟弹",
+    "吸气启动输出",
+    "支持 Logo 和外壳颜色定制"
+  ],
+  "specs": [
+    {
+      "label": "Battery",
+      "value": "450 mAh"
+    },
+    {
+      "label": "Pod Capacity",
+      "value": "2 ml"
+    },
+    {
+      "label": "Material",
+      "value": "Aluminum alloy body"
+    },
+    {
+      "label": "MOQ",
+      "value": "500 pcs per color"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "电池",
+      "value": "450 mAh"
+    },
+    {
+      "label": "烟弹容量",
+      "value": "2 ml"
+    },
+    {
+      "label": "材质",
+      "value": "铝合金机身"
+    },
+    {
+      "label": "起订量",
+      "value": "每色 500 件"
+    }
+  ],
+  "moq": "500 pcs",
+  "moqZh": "500 件",
+  "leadTime": "7-15 days",
+  "leadTimeZh": "7-15 天",
+  "badge": "OEM Ready",
+  "badgeZh": "支持 OEM"
+}

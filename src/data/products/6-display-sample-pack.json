@@ -1,0 +1,60 @@
+{
+  "id": 6,
+  "name": "Display Sample Pack",
+  "image": "/电子烟/微信图片_20250805234550_1212.jpg",
+  "category": "sample-packs",
+  "description": "A curated sample pack for buyers comparing finishes, flavors, and device families before confirming a wholesale order.",
+  "descriptionZh": "组合样品包，方便买家在确认批发订单前比较表面工艺、口味和设备系列。",
+  "highlights": [
+    "Mixed models in one pack",
+    "Finish and color comparison",
+    "Useful for sales teams"
+  ],
+  "highlightsZh": [
+    "多型号组合样品",
+    "便于比较工艺和颜色",
+    "适合销售团队展示"
+  ],
+  "specs": [
+    {
+      "label": "Pack Type",
+      "value": "Mixed SKU sample set"
+    },
+    {
+      "label": "Use Case",
+      "value": "Buyer evaluation"
+    },
+    {
+      "label": "Branding",
+      "value": "Neutral or branded"
+    },
+    {
+      "label": "MOQ",
+      "value": "By inquiry"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "套包类型",
+      "value": "混合 SKU 样品组"
+    },
+    {
+      "label": "使用场景",
+      "value": "买家评估"
+    },
+    {
+      "label": "品牌方式",
+      "value": "中性或品牌化"
+    },
+    {
+      "label": "起订量",
+      "value": "询盘确认"
+    }
+  ],
+  "moq": "By inquiry",
+  "moqZh": "询盘确认",
+  "leadTime": "3-7 days",
+  "leadTimeZh": "3-7 天",
+  "badge": "Sample Friendly",
+  "badgeZh": "样品友好"
+}

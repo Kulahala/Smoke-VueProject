@@ -1,0 +1,60 @@
+{
+  "id": 7,
+  "name": "Metro Open Pod Kit",
+  "image": "/电子烟/微信图片_20250805234550_1236.jpg",
+  "category": "starter-kits",
+  "description": "A starter kit configuration for first-order brand launches, built around a compact device, clear inserts, and retail-ready documentation.",
+  "descriptionZh": "首批品牌发布用套装配置，围绕紧凑设备、清晰内托和零售化说明资料搭建。",
+  "highlights": [
+    "Starter device bundle",
+    "Manual and cable included",
+    "Ready for branded sleeve"
+  ],
+  "highlightsZh": [
+    "入门设备套装",
+    "包含说明书和线材",
+    "可配品牌套筒"
+  ],
+  "specs": [
+    {
+      "label": "Kit Type",
+      "value": "Device + pod + cable"
+    },
+    {
+      "label": "Packaging",
+      "value": "Window box / sleeve"
+    },
+    {
+      "label": "Branding",
+      "value": "Color and logo options"
+    },
+    {
+      "label": "MOQ",
+      "value": "600 sets"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "套装类型",
+      "value": "设备 + 烟弹 + 线材"
+    },
+    {
+      "label": "包装",
+      "value": "开窗盒 / 套筒"
+    },
+    {
+      "label": "品牌定制",
+      "value": "颜色和 Logo 可选"
+    },
+    {
+      "label": "起订量",
+      "value": "600 套"
+    }
+  ],
+  "moq": "600 sets",
+  "moqZh": "600 套",
+  "leadTime": "14-22 days",
+  "leadTimeZh": "14-22 天",
+  "badge": "Kit Program",
+  "badgeZh": "套装项目"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 12,
+  "name": "Mesh Coil Service Pack",
+  "image": "/电子烟/微信图片_20250805234550_1220.jpg",
+  "category": "coils-accessories",
+  "description": "A small accessory and coil service pack for distributors who need add-on replenishment items with clear SKU control.",
+  "descriptionZh": "雾化芯与小配件服务包，适合需要清晰 SKU 管理的经销商补充订单。",
+  "highlights": [
+    "Mesh coil pack concept",
+    "Accessory bundle friendly",
+    "Simple SKU and carton planning"
+  ],
+  "highlightsZh": [
+    "Mesh 雾化芯套包概念",
+    "适合配件组合销售",
+    "便于 SKU 和外箱规划"
+  ],
+  "specs": [
+    {
+      "label": "Pack Type",
+      "value": "Coils / cable / lanyard options"
+    },
+    {
+      "label": "Use Case",
+      "value": "Service and replenishment"
+    },
+    {
+      "label": "Branding",
+      "value": "Label and carton support"
+    },
+    {
+      "label": "MOQ",
+      "value": "By inquiry"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "套包类型",
+      "value": "雾化芯 / 线材 / 挂绳可选"
+    },
+    {
+      "label": "使用场景",
+      "value": "售后与补货"
+    },
+    {
+      "label": "品牌定制",
+      "value": "标签与外箱支持"
+    },
+    {
+      "label": "起订量",
+      "value": "询盘确认"
+    }
+  ],
+  "moq": "By inquiry",
+  "moqZh": "询盘确认",
+  "leadTime": "7-15 days",
+  "leadTimeZh": "7-15 天",
+  "badge": "Accessory",
+  "badgeZh": "配件产品"
+}

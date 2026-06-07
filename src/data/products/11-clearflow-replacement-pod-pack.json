@@ -1,0 +1,60 @@
+{
+  "id": 11,
+  "name": "ClearFlow Replacement Pod Pack",
+  "image": "/电子烟/微信图片_20250805234550_1213.jpg",
+  "category": "replacement-pods",
+  "description": "A replacement pod pack for repeat-purchase programs, after-sales bundles, and distributor replenishment orders.",
+  "descriptionZh": "替换烟弹套包，适合复购项目、售后组合和经销商补货订单。",
+  "highlights": [
+    "Multi-pack cartridge format",
+    "Compatible program planning",
+    "Neutral or branded pack options"
+  ],
+  "highlightsZh": [
+    "多支装烟弹形式",
+    "支持兼容性项目规划",
+    "中性或品牌包装可选"
+  ],
+  "specs": [
+    {
+      "label": "Pack Type",
+      "value": "2 pcs / 3 pcs pod pack"
+    },
+    {
+      "label": "Capacity",
+      "value": "2 ml option"
+    },
+    {
+      "label": "Resistance",
+      "value": "1.0 ohm / 1.2 ohm"
+    },
+    {
+      "label": "MOQ",
+      "value": "1000 packs"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "套包类型",
+      "value": "2 支 / 3 支装烟弹包"
+    },
+    {
+      "label": "容量",
+      "value": "2 ml 可选"
+    },
+    {
+      "label": "阻值",
+      "value": "1.0 ohm / 1.2 ohm"
+    },
+    {
+      "label": "起订量",
+      "value": "1000 包"
+    }
+  ],
+  "moq": "1000 packs",
+  "moqZh": "1000 包",
+  "leadTime": "10-18 days",
+  "leadTimeZh": "10-18 天",
+  "badge": "Repeat Order",
+  "badgeZh": "复购补货"
+}

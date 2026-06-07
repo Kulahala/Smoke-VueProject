@@ -1,0 +1,60 @@
+{
+  "id": 3,
+  "name": "Pulse Max Disposable",
+  "image": "/电子烟/disposable_vape_max.png",
+  "category": "disposable-vapes",
+  "description": "A high-capacity disposable vape line for distributors who need strong shelf presence, consistent vapor output, and fast SKU rollout.",
+  "descriptionZh": "高容量一次性电子烟系列，适合需要货架识别度、稳定出雾和快速 SKU 上新的经销商。",
+  "highlights": [
+    "Large e-liquid capacity tier",
+    "Mesh coil configuration",
+    "Flavor and packaging customization"
+  ],
+  "highlightsZh": [
+    "大容量油仓档位",
+    "Mesh 网芯配置",
+    "支持口味与包装定制"
+  ],
+  "specs": [
+    {
+      "label": "Puffs",
+      "value": "Up to 8000"
+    },
+    {
+      "label": "Coil",
+      "value": "Mesh coil"
+    },
+    {
+      "label": "Battery",
+      "value": "Rechargeable option"
+    },
+    {
+      "label": "MOQ",
+      "value": "1000 pcs per flavor"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "口数",
+      "value": "最高 8000 口"
+    },
+    {
+      "label": "雾化芯",
+      "value": "Mesh 网芯"
+    },
+    {
+      "label": "电池",
+      "value": "可选可充电方案"
+    },
+    {
+      "label": "起订量",
+      "value": "每口味 1000 件"
+    }
+  ],
+  "moq": "1000 pcs",
+  "moqZh": "1000 件",
+  "leadTime": "12-20 days",
+  "leadTimeZh": "12-20 天",
+  "badge": "Distributor Pick",
+  "badgeZh": "经销商优选"
+}

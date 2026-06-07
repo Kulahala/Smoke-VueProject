@@ -1,0 +1,60 @@
+{
+  "id": 9,
+  "name": "OEM Packaging Suite",
+  "image": "/电子烟/packaging.jpg",
+  "category": "packaging-oem",
+  "description": "Packaging coordination for selected catalogue items, including box structure, sleeve design, barcode area, and sales sample presentation.",
+  "descriptionZh": "为目录产品提供包装协同，包括盒型结构、套筒设计、条码区域和销售样品展示。",
+  "highlights": [
+    "Retail box layout support",
+    "Manual and insert options",
+    "Sample-ready presentation"
+  ],
+  "highlightsZh": [
+    "支持零售盒版式",
+    "说明书与内托可选",
+    "样品展示就绪"
+  ],
+  "specs": [
+    {
+      "label": "Box Type",
+      "value": "Rigid box / folding carton"
+    },
+    {
+      "label": "Artwork",
+      "value": "Logo and color matching"
+    },
+    {
+      "label": "Insert",
+      "value": "Paper tray / EVA option"
+    },
+    {
+      "label": "MOQ",
+      "value": "By project"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "盒型",
+      "value": "硬盒 / 折叠彩盒"
+    },
+    {
+      "label": "设计稿",
+      "value": "Logo 与颜色匹配"
+    },
+    {
+      "label": "内托",
+      "value": "纸托 / EVA 可选"
+    },
+    {
+      "label": "起订量",
+      "value": "按项目确认"
+    }
+  ],
+  "moq": "By project",
+  "moqZh": "按项目确认",
+  "leadTime": "15-25 days",
+  "leadTimeZh": "15-25 天",
+  "badge": "OEM Support",
+  "badgeZh": "OEM 支持"
+}

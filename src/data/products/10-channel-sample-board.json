@@ -1,0 +1,60 @@
+{
+  "id": 10,
+  "name": "Channel Sample Board",
+  "image": "/电子烟/微信图片_20250805234550_1210.jpg",
+  "category": "sample-packs",
+  "description": "A compact sample board for distributor teams to compare finishes, model sizes, and target shelf positioning before confirming orders.",
+  "descriptionZh": "紧凑样品板，帮助经销商团队在确认订单前比较表面工艺、型号尺寸和货架定位。",
+  "highlights": [
+    "Mixed model presentation",
+    "Finish comparison",
+    "Useful for sales visits"
+  ],
+  "highlightsZh": [
+    "混合型号展示",
+    "表面工艺比较",
+    "适合客户拜访"
+  ],
+  "specs": [
+    {
+      "label": "Pack Type",
+      "value": "Model and finish sample"
+    },
+    {
+      "label": "Use Case",
+      "value": "Distributor meetings"
+    },
+    {
+      "label": "Branding",
+      "value": "Neutral or branded"
+    },
+    {
+      "label": "MOQ",
+      "value": "By inquiry"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "套包类型",
+      "value": "型号与工艺样品"
+    },
+    {
+      "label": "使用场景",
+      "value": "经销商会议"
+    },
+    {
+      "label": "品牌方式",
+      "value": "中性或品牌化"
+    },
+    {
+      "label": "起订量",
+      "value": "询盘确认"
+    }
+  ],
+  "moq": "By inquiry",
+  "moqZh": "询盘确认",
+  "leadTime": "5-9 days",
+  "leadTimeZh": "5-9 天",
+  "badge": "Sales Tool",
+  "badgeZh": "销售工具"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 4,
+  "name": "Edge Mini Disposable",
+  "image": "/电子烟/微信图片_20250805234550_1230.jpg",
+  "category": "disposable-vapes",
+  "description": "A compact disposable product for sample packs, convenience channels, and markets that prefer a smaller device footprint.",
+  "descriptionZh": "小尺寸一次性产品，适合样品包、便利渠道，以及偏好小机身的市场。",
+  "highlights": [
+    "Pocket-size shell",
+    "Smooth matte finish",
+    "Retail box support"
+  ],
+  "highlightsZh": [
+    "口袋尺寸外壳",
+    "顺滑磨砂表面",
+    "支持零售包装盒"
+  ],
+  "specs": [
+    {
+      "label": "Puffs",
+      "value": "Up to 3000"
+    },
+    {
+      "label": "Activation",
+      "value": "Auto draw"
+    },
+    {
+      "label": "Finish",
+      "value": "Matte / gradient"
+    },
+    {
+      "label": "MOQ",
+      "value": "1000 pcs"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "口数",
+      "value": "最高 3000 口"
+    },
+    {
+      "label": "启动方式",
+      "value": "自动吸气启动"
+    },
+    {
+      "label": "表面工艺",
+      "value": "磨砂 / 渐变"
+    },
+    {
+      "label": "起订量",
+      "value": "1000 件"
+    }
+  ],
+  "moq": "1000 pcs",
+  "moqZh": "1000 件",
+  "leadTime": "10-16 days",
+  "leadTimeZh": "10-16 天",
+  "badge": "Fast Turnaround",
+  "badgeZh": "快速交付"
+}

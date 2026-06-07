@@ -1,0 +1,60 @@
+{
+  "id": 2,
+  "name": "Nova Ceramic Pod",
+  "image": "/电子烟/微信图片_20250805234550_1240.jpg",
+  "category": "pod-systems",
+  "description": "A refillable ceramic-core pod solution focused on smoother flavor delivery and repeat-purchase cartridge programs for wholesale buyers.",
+  "descriptionZh": "可注油陶瓷芯换弹方案，面向批发买家的顺滑口感和复购烟弹项目。",
+  "highlights": [
+    "Ceramic coil option",
+    "Magnetic pod connection",
+    "Leak-resistant structure"
+  ],
+  "highlightsZh": [
+    "可选陶瓷芯",
+    "磁吸烟弹连接",
+    "防漏结构"
+  ],
+  "specs": [
+    {
+      "label": "Battery",
+      "value": "520 mAh"
+    },
+    {
+      "label": "Resistance",
+      "value": "1.0 ohm / 1.2 ohm"
+    },
+    {
+      "label": "Charging",
+      "value": "USB-C"
+    },
+    {
+      "label": "MOQ",
+      "value": "800 pcs"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "电池",
+      "value": "520 mAh"
+    },
+    {
+      "label": "阻值",
+      "value": "1.0 ohm / 1.2 ohm"
+    },
+    {
+      "label": "充电",
+      "value": "USB-C"
+    },
+    {
+      "label": "起订量",
+      "value": "800 件"
+    }
+  ],
+  "moq": "800 pcs",
+  "moqZh": "800 件",
+  "leadTime": "10-18 days",
+  "leadTimeZh": "10-18 天",
+  "badge": "Stable Supply",
+  "badgeZh": "稳定供货"
+}

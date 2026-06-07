@@ -1,0 +1,60 @@
+{
+  "id": 5,
+  "name": "Launch Kit Box Set",
+  "image": "/电子烟/starter_kit_box.png",
+  "category": "starter-kits",
+  "description": "A complete starter kit package for brands preparing trade-show samples, distributor onboarding, or first retail placement.",
+  "descriptionZh": "完整套装包装方案，适合品牌准备展会样品、经销商首批上架或首次零售铺货。",
+  "highlights": [
+    "Device, pod, cable, and manual bundle",
+    "Custom insert and sleeve",
+    "Barcode and compliance label area"
+  ],
+  "highlightsZh": [
+    "设备、烟弹、线材和说明书组合",
+    "支持定制内托与套筒",
+    "预留条码和合规标签区域"
+  ],
+  "specs": [
+    {
+      "label": "Packaging",
+      "value": "Rigid box / sleeve"
+    },
+    {
+      "label": "Insert",
+      "value": "Paper tray or EVA option"
+    },
+    {
+      "label": "Branding",
+      "value": "Logo, color, manual"
+    },
+    {
+      "label": "MOQ",
+      "value": "500 sets"
+    }
+  ],
+  "specsZh": [
+    {
+      "label": "包装",
+      "value": "硬盒 / 套筒"
+    },
+    {
+      "label": "内托",
+      "value": "纸托或 EVA 可选"
+    },
+    {
+      "label": "品牌定制",
+      "value": "Logo、颜色、说明书"
+    },
+    {
+      "label": "起订量",
+      "value": "500 套"
+    }
+  ],
+  "moq": "500 sets",
+  "moqZh": "500 套",
+  "leadTime": "15-25 days",
+  "leadTimeZh": "15-25 天",
+  "badge": "Private Label",
+  "badgeZh": "贴牌方案"
+}

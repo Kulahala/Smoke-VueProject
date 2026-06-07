@@ -1,0 +1,32 @@
+{
+  "inquiryEmail": "benson.lee@bestlinksz.com",
+  "heroSlides": [
+    {
+      "image": "/电子烟/微信图片_20250805234550_1239.jpg",
+      "title": "Wholesale vape catalogue",
+      "titleZh": "批发电子烟产品目录"
+    },
+    {
+      "image": "/电子烟/disposable_vape_max.png",
+      "title": "Device and pod systems",
+      "titleZh": "设备与烟弹系统"
+    },
+    {
+      "image": "/电子烟/packaging.jpg",
+      "title": "Packaging and OEM support",
+      "titleZh": "包装与 OEM 支持"
+    }
+  ],
+  "servicePoints": [
+    "OEM and private-label support",
+    "Wholesale catalogue supply",
+    "Packaging and sample coordination",
+    "Email-based quotation and order follow-up"
+  ],
+  "servicePointsZh": [
+    "OEM 与贴牌支持",
+    "批发目录供货",
+    "包装与样品协调",
+    "邮箱报价与订单跟进"
+  ]
+}
