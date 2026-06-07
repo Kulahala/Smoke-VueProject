@@ -719,6 +719,7 @@ watchEffect(() => {
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
+  left: auto;
   width: min(320px, calc(100vw - 32px));
   display: grid;
   gap: 14px;
@@ -729,6 +730,14 @@ watchEffect(() => {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   padding: 14px;
+  z-index: 100;
+}
+
+@media (min-width: 1200px) {
+  .utility-panel {
+    right: auto;
+    left: 0;
+  }
 }
 
 .utility-section {
