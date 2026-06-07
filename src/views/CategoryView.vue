@@ -475,7 +475,7 @@ onMounted(() => {
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.3s ease;
-  animation: vapeSteam 12s ease-in-out infinite;
+  animation: vapeSteam 10s ease-in-out infinite;
 }
 
 /* Vape 左下角小霓虹发光球 */
