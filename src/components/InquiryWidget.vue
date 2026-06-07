@@ -12,7 +12,7 @@ const errorMessage = ref('');
 const toggleWidget = () => {
   // 如果后台未配置 Web3Forms Key，执行智能降级：复制邮箱并唤起邮件客户端
   if (!store.web3formsKey) {
-    store.showToast(store.language === 'zh' ? '已复制询盘邮箱，正在为您拉起邮件客户端...' : 'Email copied! Opening mail client...');
+    store.showToast(store.language === 'zh' ? '在线询盘服务尚未激活，已为您复制邮箱并拉起邮件客户端...' : 'Inquiry form not activated yet, copied email and opening mail client...');
     try {
       navigator.clipboard.writeText(inquiryEmail);
     } catch (err) {
