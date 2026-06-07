@@ -5,6 +5,7 @@
 ## 历史记录
 
 - **2026-06-07**:
+  - 优化本地开发配置（[vite.config.js](file:///c:/Users/Administrator/Desktop/Code/vue-project/vite.config.js)），在 `server` 属性中开启了 `open: true`。现在运行 `npm run dev` 启动开发服务器后，会自动在默认浏览器中打开本地测试链接。
   - 优化公司能力页（[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)）大配图修改为 `object-fit: cover` 铺满容器，去除白边框，使意境配图大卡片在页面整体排版中更加舒展大气。
   - 优化首页及全站底部询盘区（[HomeView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/HomeView.vue)、[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)、[CategoryView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/CategoryView.vue)）的视觉设计。抛弃生硬的全宽单色横条，统一重塑为带圆角和悬浮阴影的高级卡片布局，使用 CSS 实现了科技点阵背景网格与漂浮在背景右上角的薄荷/黑金霓虹发光烟雾球（Vape Steam Glow Aura），契合电子烟主题。
   - 修复后台管理系统在聚焦 `HERO SLIDES` (首页轮播大图) 和 `CARD BADGE` (卡片角标) 等表单项时，左侧蓝图/截图无对应红框或错配 the Bug（优化了 ID 字符识别正则，增加了 `prod-badge` 坐标定位并在 CSS 蓝图中增加了模拟角标元素）。
