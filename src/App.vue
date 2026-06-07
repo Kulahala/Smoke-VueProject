@@ -660,7 +660,7 @@ watchEffect(() => {
   gap: 6px;
   border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 68%, transparent);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   backdrop-filter: blur(18px) saturate(1.2);
   box-shadow: 0 22px 54px var(--color-shadow-hover);
@@ -770,7 +770,7 @@ watchEffect(() => {
   gap: 14px;
   border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 68%, transparent);
   box-shadow: 0 24px 70px var(--color-shadow-hover);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   backdrop-filter: blur(18px) saturate(1.2);
@@ -1013,7 +1013,7 @@ html.dark .inquiry-link:hover {
     overflow: auto;
     border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
     border-radius: 8px;
-    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 68%, transparent);
     -webkit-backdrop-filter: blur(18px) saturate(1.2);
     backdrop-filter: blur(18px) saturate(1.2);
     box-shadow: 0 22px 60px var(--color-shadow-hover);
