@@ -19,7 +19,7 @@
         border-radius: 16px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
         z-index: 9999;
-        display: flex;
+        display: none; /* 默认隐藏，登录后由 JS 动态显示 */
         flex-direction: column;
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -63,6 +63,29 @@
         color: #0d2b24;
       }
 
+      /* 滑动视图容器 */
+      .guide-views-container {
+        display: flex;
+        width: 200%;
+        height: 100%;
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        flex: 1;
+        overflow: hidden;
+      }
+
+      /* 激活二级视图时滑动 */
+      .guide-views-container.show-detail {
+        transform: translateX(-50%);
+      }
+
+      .guide-view {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
       .guide-content {
         padding: 20px;
         overflow-y: auto;
@@ -86,6 +109,121 @@
         gap: 6px;
         border-bottom: 1px solid rgba(0, 135, 121, 0.1);
         padding-bottom: 4px;
+      }
+
+      /* 菜单列表项 */
+      .guide-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 12px 14px;
+        background: #fafcfc;
+        border: 1px solid rgba(0, 135, 121, 0.08);
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s ease;
+      }
+
+      .menu-item:hover {
+        background: #f0f7f5;
+        border-color: #008779;
+        transform: translateY(-1px);
+      }
+
+      .menu-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #0d2b24;
+      }
+
+      .menu-arrow {
+        font-size: 14px;
+        color: #008779;
+        font-weight: bold;
+        transition: transform 0.2s ease;
+      }
+
+      .menu-item:hover .menu-arrow {
+        transform: translateX(3px);
+      }
+
+      /* 二级细节视图头部 */
+      .detail-header {
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fafcfc;
+      }
+
+      .guide-back-btn {
+        background: none;
+        border: none;
+        color: #008779;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background 0.2s;
+      }
+
+      .guide-back-btn:hover {
+        background: rgba(0, 135, 121, 0.08);
+      }
+
+      .detail-header h4 {
+        margin: 0;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #0d2b24;
+      }
+
+      .detail-content {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #2c3e3a;
+      }
+
+      .step-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .step-list li {
+        margin-bottom: 12px;
+      }
+
+      .step-list code {
+        background: #f0f4f3;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-size: 11.5px;
+        color: #008779;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+      }
+
+      .warning-text {
+        color: #c29543;
+        font-weight: bold;
+      }
+
+      .danger-text {
+        color: #d32f2f;
+        font-weight: bold;
       }
 
       .guide-section ul {
@@ -152,42 +290,69 @@
         <h3>📖 B2B Catalogue 操作指南</h3>
         <button id="guide-close-btn" class="guide-close-btn">&times;</button>
       </div>
-      <div class="guide-content">
-        <div class="guide-section">
-          <h4>📌 核心注意事项</h4>
-          <div class="guide-alert">
-            <strong>🚨 新增商品 ID 限制</strong><br>
-            每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 23，新商品 ID 必须填写 <b>24</b>，否则会导致数据覆盖或保存失败。
+      
+      <!-- 滑动视图容器 -->
+      <div id="guide-views-container" class="guide-views-container">
+        <!-- 主界面 -->
+        <div class="guide-view">
+          <div class="guide-content">
+            <div class="guide-section">
+              <h4>📌 核心注意事项</h4>
+              <div class="guide-alert">
+                <strong>🚨 新增商品 ID 限制</strong><br>
+                每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 23，新商品 ID 必须填写 <b>24</b>，否则会导致数据覆盖或保存失败。
+              </div>
+              <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;">
+                <strong>⚠️ 分类 ID 禁止修改</strong><br>
+                编辑分类时，<b>Group ID</b> 和 <b>Category ID</b> 已经被锁定/隐藏，千万不要尝试更改或随意替换其定义，否则前台网页将无法正确过滤显示商品。
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <h4>⚙️ 栏目如何管理 (点击看步骤)</h4>
+              <div class="guide-menu">
+                <button class="menu-item" data-target="settings">
+                  <span class="menu-title">⚙️ Settings (全局设置)</span>
+                  <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-target="categories">
+                  <span class="menu-title">📁 Categories (分类管理)</span>
+                  <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-target="products">
+                  <span class="menu-title">📦 Products (商品库)</span>
+                  <span class="menu-arrow">→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <h4>🎨 内容与图片规范</h4>
+              <ul>
+                <li><strong>商品图片</strong>：必须上传<b>纯白色背景</b>的渲染图或实拍图。前台系统会对白底图片自动渲染为高端的“照片展示盒”物理效果。</li>
+                <li><strong>系列背景图 (Hero Image)</strong>：必须是<b>无文字、无规格图表</b>的纯净、高清大特写图，防止在 object-fit cover 或暗色遮罩时文字被裁剪、显示杂乱。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section">
+              <h4>🚀 如何发布上线</h4>
+              <ul>
+                <li>所有的修改和新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
+                <li>点击发布后，Netlify 会在后台自动完成打包部署，<b>通常 1-2 分钟内</b>前台网站即可更新。</li>
+              </ul>
+            </div>
           </div>
-          <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;">
-            <strong>⚠️ 分类 ID 禁止修改</strong><br>
-            编辑分类时，<b>Group ID</b> 和 <b>Category ID</b> 已经被锁定/隐藏，千万不要尝试更改或随意替换其定义，否则前台网页将无法正确过滤显示商品。
+        </div>
+
+        <!-- 二级细节界面 -->
+        <div class="guide-view">
+          <div class="detail-header">
+            <button id="guide-back-btn" class="guide-back-btn">← 返回</button>
+            <h4 id="detail-title">详细步骤</h4>
           </div>
-        </div>
-
-        <div class="guide-section">
-          <h4>⚙️ 栏目如何管理</h4>
-          <ul>
-            <li><strong>Settings (全局设置)</strong>：配置询盘接单邮箱、首页轮播图图片/标题、以及中英文的服务亮点。</li>
-            <li><strong>Categories (分类管理)</strong>：配置商品系列的名字、描述以及大背景图。</li>
-            <li><strong>Products (商品库)</strong>：管理单款商品。点击右上角 "New Products" 来添加新商品。</li>
-          </ul>
-        </div>
-
-        <div class="guide-section">
-          <h4>🎨 内容与图片规范</h4>
-          <ul>
-            <li><strong>商品图片</strong>：必须上传<b>纯白色背景</b>的渲染图或实拍图。前台系统会对白底图片自动渲染为高端的“照片展示盒”物理效果。</li>
-            <li><strong>系列背景图 (Hero Image)</strong>：必须是<b>无文字、无规格图表</b>的纯净、高清大特写图，防止在 object-fit cover 或暗色遮罩时文字被裁剪、显示杂乱。</li>
-          </ul>
-        </div>
-
-        <div class="guide-section">
-          <h4>🚀 如何发布上线</h4>
-          <ul>
-            <li>所有的修改和新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
-            <li>点击发布后，Netlify 会在后台自动完成打包部署，<b>通常 1-2 分钟内</b>前台网站即可更新。</li>
-          </ul>
+          <div id="detail-content" class="detail-content">
+            <!-- 动态填充 -->
+          </div>
         </div>
       </div>
     </div>
@@ -198,20 +363,108 @@
     </button>
 
     <script>
+      // 存储二级菜单的详细内容
+      const detailContents = {
+        settings: `
+          <ol class="step-list">
+            <li><strong>进入路径</strong>：点击左侧的 <code>Settings (全局设置)</code>，然后再点击右侧列表中的 <code>General Settings</code>。</li>
+            <li><strong>修改接单邮箱</strong>：在 <code>Inquiry Email</code> 输入框中直接修改邮箱。前台“邮箱询盘”复制及写信链接会自动发送到该邮箱。</li>
+            <li><strong>修改首页轮播图</strong>：
+              <ul>
+                <li>在 <code>Hero Slides</code> 列表中，可以点击 <code>Add</code> 增加新的幻灯大图，或拖动左侧控制点进行排序。</li>
+                <li>每张幻灯片必须上传大图（通过 Upload 或 Choose existing），并分别填写<strong>中英文标题</strong>。</li>
+              </ul>
+            </li>
+            <li><strong>修改服务亮点</strong>：在 <code>Service Points</code> (中/英文版) 中可直接编辑首页底部的优势卖点文字（例如 MOQ、OEM 承诺等）。</li>
+          </ol>
+        `,
+        categories: `
+          <ol class="step-list">
+            <li><strong>进入路径</strong>：点击左侧的 <code>Categories (分类名称编辑)</code>，点击列表中的 <code>Category Management</code>。</li>
+            <li><strong>修改中英文名称</strong>：在对应的 <code>Group Name</code> (大分类名) 或 <code>Sub Categories</code> 的 <code>Category Name</code> (二级子分类名) 字段中修改文本。</li>
+            <li><strong>更换分类背景大图</strong>：
+              <ul>
+                <li>上传的 <code>Hero Cover Image</code> 将作为前台该系列列表顶部的全宽大背景配图。</li>
+                <li><span class="warning-text">⚠️ 视觉要求</span>：配图必须是纯净、高清大特写图，<b>禁止使用包含大段文字或规格参数对比的实拍照</b>，防止裁剪后文字杂乱。</li>
+              </ul>
+            </li>
+            <li><strong>安全警告</strong>：<b>Group ID 和 Category ID 禁止修改</b>（已锁/隐藏）。修改会导致前台商品过滤失效！</li>
+          </ol>
+        `,
+        products: `
+          <ol class="step-list">
+            <li><strong>进入路径与新建</strong>：点击左侧的 <code>Products (商品库)</code>。点击右上角的 <code>Quick Add</code> 或 <code>New Products</code>。</li>
+            <li><strong>填写 Product ID（核心）</strong>：
+              <ul>
+                <li><b>必须是递增的唯一数字</b>。例如：当前最大的商品 ID 是 13，那么新增商品必须填 <b>14</b>。</li>
+                <li><span class="danger-text">🚨 注意</span>：ID 重复会导致数据覆盖或保存失败！</li>
+              </ul>
+            </li>
+            <li><strong>图片上传规范</strong>：
+              <ul>
+                <li>必须上传<b>纯白色背景</b>的单款实拍或渲染图。</li>
+                <li>前台已针对白底图做物理照片展示盒效果，若带杂乱背景会破坏整体高端质感。</li>
+              </ul>
+            </li>
+            <li><strong>选择分类与卖点</strong>：
+              <ul>
+                <li>在 <code>Category</code> 下拉菜单中选择正确的二级分类（如换弹设备、一次性等）。</li>
+                <li>在中英文 <code>Key Highlights</code> 中，点击 Add 新增中英文的卡片卖点（建议 2-3 条短句）。</li>
+              </ul>
+            </li>
+            <li><strong>规格参数与下架</strong>：
+              <ul>
+                <li>在 <code>Specifications</code> 中配置具体的技术参数（如 <code>Puffs: 6000</code> / <code>口数: 6000</code>）。</li>
+                <li>如需暂时下架某款商品，在右上角将状态从 <strong>Published</strong> 改为 <strong>Draft (草稿)</strong> 后发布即可。</li>
+              </ul>
+            </li>
+          </ol>
+        `
+      };
+
+      const titleMap = {
+        settings: '⚙️ Settings (全局设置) 详细指南',
+        categories: '📁 Categories (分类管理) 详细指南',
+        products: '📦 Products (商品库) 详细指南'
+      };
+
       document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('guide-sidebar');
         const openBtn = document.getElementById('guide-open-btn');
         const closeBtn = document.getElementById('guide-close-btn');
+        const viewsContainer = document.getElementById('guide-views-container');
+        const backBtn = document.getElementById('guide-back-btn');
+        const detailTitle = document.getElementById('detail-title');
+        const detailContent = document.getElementById('detail-content');
 
-        // 读取本地存储的状态
-        const isCollapsed = localStorage.getItem('admin-guide-collapsed') === 'true';
-        if (isCollapsed) {
-          sidebar.classList.add('collapsed');
-          openBtn.style.display = 'flex';
-        } else {
-          sidebar.classList.remove('collapsed');
-          openBtn.style.display = 'none';
-        }
+        // 默认隐藏
+        sidebar.style.display = 'none';
+        openBtn.style.display = 'none';
+
+        // 检查登录状态的函数
+        const checkLoginStatus = () => {
+          const hasSidebar = document.querySelector('[class*="sidebar"]') || document.querySelector('[class*="Sidebar"]');
+          const hasCollections = document.body.innerText.includes('Collections') || document.body.innerText.includes('分类名称编辑');
+
+          if (hasSidebar || hasCollections) {
+            const isCollapsed = localStorage.getItem('admin-guide-collapsed') === 'true';
+            sidebar.style.display = 'flex';
+            if (isCollapsed) {
+              sidebar.classList.add('collapsed');
+              openBtn.style.display = 'flex';
+            } else {
+              sidebar.classList.remove('collapsed');
+              openBtn.style.display = 'none';
+            }
+          } else {
+            // 未登录状态，彻底隐藏
+            sidebar.style.display = 'none';
+            openBtn.style.display = 'none';
+          }
+        };
+
+        // 轮询检查登录状态（因为 React 渲染是异步的）
+        setInterval(checkLoginStatus, 500);
 
         // 关闭事件
         closeBtn.addEventListener('click', () => {
@@ -225,6 +478,23 @@
           sidebar.classList.remove('collapsed');
           openBtn.style.display = 'none';
           localStorage.setItem('admin-guide-collapsed', 'false');
+        });
+
+        // 菜单项点击事件（进入二级菜单）
+        document.querySelectorAll('.menu-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const target = item.getAttribute('data-target');
+            if (detailContents[target]) {
+              detailTitle.textContent = titleMap[target];
+              detailContent.innerHTML = detailContents[target];
+              viewsContainer.classList.add('show-detail');
+            }
+          });
+        });
+
+        // 返回主菜单事件
+        backBtn.addEventListener('click', () => {
+          viewsContainer.classList.remove('show-detail');
         });
       });
     </script>
