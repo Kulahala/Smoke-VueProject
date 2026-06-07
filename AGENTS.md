@@ -45,19 +45,25 @@ npm run preview
 
 ## 图片路径规则
 
+- 所有在 `public/电子烟/` 目录下的图片资产统一使用 **`.webp`** 格式（除了 `placeholders/` 下的 `.svg` 文件）。
 - 图片放入 `public/电子烟/` 或 `public/电子烟/placeholders/`。
 - 代码里写路径时不要带 `public`。
 - 正确：
 
 ```js
 image: '/电子烟/placeholders/pod-slim.svg'
+image: '/电子烟/disposable_vape_max.webp'
 ```
 
 - 错误：
 
 ```js
 image: 'public/电子烟/placeholders/pod-slim.svg'
+image: '/电子烟/disposable_vape_max.png'
 ```
+
+- **图片自动化转换说明**：后台 CMS 上传或本地直接提交的 `.png` / `.jpg` / `.jpeg` 原图，在 push 到 `main` 分支后，GitHub Actions 会在云端自动执行 `scripts/compress-uploaded-images.js` 进行处理：将原图移至 `original_images_backup/` 文件夹中备份，同时将 `public/电子烟/` 目录下的原图转换为 WebP 并自动替换全站代码引用后缀。
+
 
 ## 图片展示与比例规范
 
