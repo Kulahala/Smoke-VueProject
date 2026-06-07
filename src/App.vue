@@ -547,11 +547,19 @@ watchEffect(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
   background: color-mix(in srgb, var(--color-surface) 68%, transparent);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   backdrop-filter: blur(18px) saturate(1.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  pointer-events: none;
 }
 
 .header-inner {
@@ -1118,8 +1126,10 @@ html.dark .inquiry-link:hover {
     display: none;
   }
 
-  .site-header {
+  .site-header::before {
     background: var(--color-background);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
