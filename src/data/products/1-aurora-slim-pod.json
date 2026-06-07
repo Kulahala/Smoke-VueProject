@@ -1,60 +1,77 @@
 {
   "id": 1,
-  "name": "Aurora Slim Pod",
+  "name": "Aurora Metro Pod System",
+  "nameZh": "Aurora Metro 换弹式系统",
   "image": "/电子烟/微信图片_20250805234550_1239.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1239.jpg",
+    "/电子烟/微信图片_20250805234550_1236.jpg",
+    "/电子烟/微信图片_20250805234550_1237.jpg",
+    "/电子烟/微信图片_20250805234550_1238.jpg",
+    "/电子烟/微信图片_20250805234550_1240.jpg",
+    "/电子烟/微信图片_20250805234550_1241.jpg"
+  ],
   "category": "pod-systems",
-  "description": "A slim aluminum pod device for channel-ready nicotine salt programs. The clean shell, stable draw activation, and lightweight format make it easy to position for everyday retail.",
-  "descriptionZh": "轻薄铝合金换弹设备，适合渠道型尼古丁盐项目。外壳干净、吸阻稳定、机身轻巧，方便放入日常零售目录。",
+  "description": "A comprehensive rechargeable pod system line combining slim aluminum design, ceramic heating options, and complete starter kit sets. Ideal for distributor private labels.",
+  "descriptionZh": "全方位换弹式电子烟系统，融合了轻薄铝合金机身、可选陶瓷雾化芯以及完整的入门礼盒套装。是分销商私有品牌的理想之选。",
   "highlights": [
-    "Refillable 2 ml pod",
-    "Draw-activated output",
-    "Logo and shell color options"
+    "Refillable cotton or ceramic coil pods",
+    "Draw-activated magnetic connection",
+    "Starter kit gift box options available"
   ],
   "highlightsZh": [
-    "2 ml 可注油烟弹",
-    "吸气启动输出",
-    "支持 Logo 和外壳颜色定制"
+    "可选棉芯或陶瓷芯注油烟弹",
+    "吸气启动与磁吸连接",
+    "支持单机及入门套装礼盒包装"
   ],
   "specs": [
     {
       "label": "Battery",
-      "value": "450 mAh"
+      "value": "450 mAh - 520 mAh"
+    },
+    {
+      "label": "Coil Options",
+      "value": "Cotton coil / Ceramic coil"
     },
     {
       "label": "Pod Capacity",
-      "value": "2 ml"
+      "value": "2.0 ml"
     },
     {
-      "label": "Material",
-      "value": "Aluminum alloy body"
+      "label": "Package Options",
+      "value": "Single device / Starter Kit Gift Box"
     },
     {
       "label": "MOQ",
-      "value": "500 pcs per color"
+      "value": "500 sets"
     }
   ],
   "specsZh": [
     {
       "label": "电池",
-      "value": "450 mAh"
+      "value": "450 mAh - 520 mAh"
+    },
+    {
+      "label": "可选雾化芯",
+      "value": "棉芯 / 陶瓷芯"
     },
     {
       "label": "烟弹容量",
-      "value": "2 ml"
+      "value": "2.0 ml"
     },
     {
-      "label": "材质",
-      "value": "铝合金机身"
+      "label": "包装选项",
+      "value": "单机简装 / 入门礼盒套装"
     },
     {
       "label": "起订量",
-      "value": "每色 500 件"
+      "value": "500 套"
     }
   ],
-  "moq": "500 pcs",
-  "moqZh": "500 件",
+  "moq": "500 sets",
+  "moqZh": "500 套",
   "leadTime": "7-15 days",
   "leadTimeZh": "7-15 天",
-  "badge": "OEM Ready",
-  "badgeZh": "支持 OEM"
+  "badge": "Flagship Program",
+  "badgeZh": "旗舰项目"
 }

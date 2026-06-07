@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { inquiryEmail, store } from '../store';
 
@@ -31,6 +31,27 @@ const mailtoLink = computed(() => {
   return `mailto:${inquiryEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 
+const activeImage = ref('');
+const productImages = computed(() => {
+  if (product.value) {
+    if (Array.isArray(product.value.images) && product.value.images.length > 0) {
+      return product.value.images;
+    }
+    return [product.value.image];
+  }
+  return [];
+});
+
+watch(
+  () => product.value,
+  (newProd) => {
+    if (newProd) {
+      activeImage.value = newProd.images?.[0] || newProd.image || '';
+    }
+  },
+  { immediate: true }
+);
+
 onMounted(() => {
   requestAnimationFrame(() => {
     isReady.value = true;
@@ -43,8 +64,22 @@ onMounted(() => {
     <main v-if="product" class="container product-layout">
       <section class="product-gallery">
         <div class="image-frame">
-          <img :src="product.image" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+          <img :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
         </div>
+
+        <!-- 多图切换缩略图栏 -->
+        <div v-if="productImages.length > 1" class="gallery-thumbs" aria-label="Product gallery">
+          <button
+            v-for="(img, idx) in productImages"
+            :key="idx"
+            type="button"
+            :class="['thumb-btn', { active: activeImage === img }]"
+            @click="activeImage = img"
+          >
+            <img :src="img" :alt="`${product.name} detail ${idx + 1}`" loading="lazy" />
+          </button>
+        </div>
+
         <div class="thumb-strip" aria-label="Product image notes">
           <span>{{ store.text(product, 'badge') }}</span>
           <span>{{ store.text(categoryGroup, 'name') }}</span>
@@ -205,6 +240,71 @@ onMounted(() => {
 
 .image-frame:hover img {
   transform: scale(1.045);
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--color-accent-rgb), 0.25) rgba(255, 255, 255, 0.03);
+}
+
+.gallery-thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 99px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-accent-rgb), 0.25);
+  border-radius: 99px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+.thumb-btn {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.thumb-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--color-accent-rgb), 0.5);
+}
+
+.thumb-btn.active {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.15), 0 4px 12px var(--color-shadow);
+}
+
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.22s ease;
+}
+
+.thumb-btn:hover img {
+  transform: scale(1.05);
 }
 
 .thumb-strip {

@@ -1,24 +1,35 @@
 {
   "id": 4,
-  "name": "Edge Mini Disposable",
+  "name": "Edge Mini & Cloud Pro Series",
+  "nameZh": "Edge Mini & Cloud Pro 一次性系列",
   "image": "/电子烟/微信图片_20250805234550_1230.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1230.jpg",
+    "/电子烟/微信图片_20250805234550_1227.jpg",
+    "/电子烟/微信图片_20250805234550_1228.jpg",
+    "/电子烟/微信图片_20250805234550_1229.jpg",
+    "/电子烟/微信图片_20250805234550_1231.jpg",
+    "/电子烟/微信图片_20250805234550_1233.jpg",
+    "/电子烟/微信图片_20250805234550_1234.jpg",
+    "/电子烟/微信图片_20250805234550_1235.jpg"
+  ],
   "category": "disposable-vapes",
-  "description": "A compact disposable product for sample packs, convenience channels, and markets that prefer a smaller device footprint.",
-  "descriptionZh": "小尺寸一次性产品，适合样品包、便利渠道，以及偏好小机身的市场。",
+  "description": "A versatile disposable vape series ranging from 3000 to 6000 puffs, designed for strong shelf visibility, premium matte finishes, and diverse flavor rollouts.",
+  "descriptionZh": "多功能一次性电子烟系列，口数覆盖 3000 到 6000 口，专为提升货架表现、顺滑磨砂质感和多口味铺货而设计。",
   "highlights": [
-    "Pocket-size shell",
-    "Smooth matte finish",
-    "Retail box support"
+    "3000 to 6000 puffs options",
+    "Smooth matte & gradient finishes",
+    "Robust retail box packaging"
   ],
   "highlightsZh": [
-    "口袋尺寸外壳",
-    "顺滑磨砂表面",
-    "支持零售包装盒"
+    "可选 3000 至 6000 口规格",
+    "顺滑磨砂与渐变色表面工艺",
+    "高品质零售包装盒"
   ],
   "specs": [
     {
       "label": "Puffs",
-      "value": "Up to 3000"
+      "value": "3000 - 6000 Puffs"
     },
     {
       "label": "Activation",
@@ -30,13 +41,13 @@
     },
     {
       "label": "MOQ",
-      "value": "1000 pcs"
+      "value": "1000 pcs per flavor"
     }
   ],
   "specsZh": [
     {
       "label": "口数",
-      "value": "最高 3000 口"
+      "value": "3000 - 6000 口"
     },
     {
       "label": "启动方式",
@@ -48,13 +59,13 @@
     },
     {
       "label": "起订量",
-      "value": "1000 件"
+      "value": "每口味 1000 件"
     }
   ],
   "moq": "1000 pcs",
   "moqZh": "1000 件",
   "leadTime": "10-16 days",
   "leadTimeZh": "10-16 天",
-  "badge": "Fast Turnaround",
-  "badgeZh": "快速交付"
+  "badge": "Popular Choice",
+  "badgeZh": "人气推荐"
 }
