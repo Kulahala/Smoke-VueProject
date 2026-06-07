@@ -92,18 +92,39 @@ const activeSchemeLabel = computed(() => {
 
 const activeLanguageLabel = computed(() => (store.language === 'zh' ? store.t('lang.zh') : store.t('lang.en')));
 
+const handleMailtoClick = (event) => {
+  const anchor = event.target.closest('a');
+  if (anchor && anchor.getAttribute('href')?.startsWith('mailto:')) {
+    navigator.clipboard.writeText(inquiryEmail).then(() => {
+      store.showToast(
+        store.language === 'zh'
+          ? `已复制询盘邮箱: ${inquiryEmail}，若写信软件未打开，请手动粘贴发送。`
+          : `Copied email: ${inquiryEmail}. Please paste manually if mail client did not open.`
+      );
+    }).catch(() => {
+      store.showToast(
+        store.language === 'zh'
+          ? `询盘邮箱: ${inquiryEmail}，请手动复制发送。`
+          : `Inquiry email: ${inquiryEmail}. Please copy and send manually.`
+      );
+    });
+  }
+};
+
 onMounted(() => {
   mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   updateSystemTheme();
   mediaQuery.addEventListener?.('change', updateSystemTheme);
   document.addEventListener('click', handleDocumentClick);
   window.addEventListener('scroll', handleScroll);
+  window.addEventListener('click', handleMailtoClick);
 });
 
 onBeforeUnmount(() => {
   mediaQuery?.removeEventListener?.('change', updateSystemTheme);
   document.removeEventListener('click', handleDocumentClick);
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('click', handleMailtoClick);
 });
 
 const setMeta = (selector, attribute, value) => {
@@ -281,6 +302,20 @@ watchEffect(() => {
 
 <template>
   <div id="app-container">
+    <!-- 全局 Toast 提示 -->
+    <Transition name="toast-fade">
+      <div v-if="store.toastMessage" class="global-toast" role="alert">
+        <div class="toast-content">
+          <svg class="toast-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <span>{{ store.toastMessage }}</span>
+        </div>
+        <button class="toast-close" type="button" @click="store.toastMessage = ''" aria-label="Close">✕</button>
+      </div>
+    </Transition>
+
     <header class="site-header">
       <div class="container header-inner">
         <router-link class="brand" to="/" @click="handleBrandClick">
@@ -1074,5 +1109,77 @@ html.dark .inquiry-link:hover {
     width: 42px;
     height: 42px;
   }
+}
+
+/* 全局 Toast 提示样式 */
+.global-toast {
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 320px;
+  max-width: min(520px, calc(100vw - 32px));
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-surface-elevated) 85%, transparent);
+  backdrop-filter: blur(16px);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    0 0 24px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  padding: 12px 18px;
+  color: var(--color-heading);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.toast-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.toast-close {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.toast-close:hover {
+  color: var(--color-heading);
+}
+
+/* Toast 渐变动画 */
+.toast-fade-enter-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-fade-leave-active {
+  transition: all 0.25s ease;
+}
+
+.toast-fade-enter-from {
+  opacity: 0;
+  transform: translate(-50%, 14px);
+}
+.toast-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -8px);
 }
 </style>

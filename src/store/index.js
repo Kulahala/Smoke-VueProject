@@ -28,6 +28,17 @@ export const store = reactive({
   language: localStorage.getItem('language') || 'en',
   theme: localStorage.getItem('theme') || 'system',
   colorScheme: localStorage.getItem('colorScheme') || 'default',
+  toastMessage: '',
+  toastTimer: null,
+
+  showToast(msg) {
+    this.toastMessage = msg;
+    if (this.toastTimer) clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => {
+      this.toastMessage = '';
+      this.toastTimer = null;
+    }, 4500);
+  },
 
   setLanguage(newLanguage) {
     this.language = newLanguage === 'zh' ? 'zh' : 'en';
