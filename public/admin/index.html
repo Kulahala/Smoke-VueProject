@@ -6,9 +6,227 @@
     <title>BestLinksz B2B Catalogue Admin</title>
     <!-- Include Netlify Identity widget to support Netlify-backed authentication -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+      /* 操作手册悬浮窗样式 */
+      #guide-sidebar {
+        position: fixed;
+        top: 80px;
+        right: 30px;
+        width: 360px;
+        bottom: 40px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(9, 14, 16, 0.08);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      #guide-sidebar.collapsed {
+        transform: translateX(420px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .guide-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #f5f9f8 0%, #eaf5f2 100%);
+      }
+
+      .guide-header h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #0d2b24;
+      }
+
+      .guide-close-btn {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #8c9e99;
+        transition: color 0.2s;
+        padding: 0 4px;
+        line-height: 1;
+      }
+
+      .guide-close-btn:hover {
+        color: #0d2b24;
+      }
+
+      .guide-content {
+        padding: 20px;
+        overflow-y: auto;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #2c3e3a;
+        flex: 1;
+      }
+
+      .guide-section {
+        margin-bottom: 22px;
+      }
+
+      .guide-section h4 {
+        margin: 0 0 10px 0;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #008779;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border-bottom: 1px solid rgba(0, 135, 121, 0.1);
+        padding-bottom: 4px;
+      }
+
+      .guide-section ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .guide-section li {
+        margin-bottom: 8px;
+      }
+
+      .guide-section li strong {
+        color: #0d2b24;
+      }
+
+      .guide-alert {
+        background: rgba(194, 149, 67, 0.06);
+        border-left: 3px solid #dfb260;
+        padding: 10px 12px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        color: #6e4e10;
+        line-height: 1.5;
+      }
+
+      .guide-alert strong {
+        color: #533a0b;
+      }
+
+      #guide-open-btn {
+        position: fixed;
+        right: 30px;
+        bottom: 40px;
+        padding: 12px 20px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #0d2b24 0%, #008779 100%);
+        color: #ffffff;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 135, 121, 0.25);
+        cursor: pointer;
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+      }
+
+      #guide-open-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 135, 121, 0.35);
+      }
+    </style>
   </head>
   <body>
     <!-- Include the Decap CMS script -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <!-- 操作手册浮窗 -->
+    <div id="guide-sidebar">
+      <div class="guide-header">
+        <h3>📖 B2B Catalogue 操作指南</h3>
+        <button id="guide-close-btn" class="guide-close-btn">&times;</button>
+      </div>
+      <div class="guide-content">
+        <div class="guide-section">
+          <h4>📌 核心注意事项</h4>
+          <div class="guide-alert">
+            <strong>🚨 新增商品 ID 限制</strong><br>
+            每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 23，新商品 ID 必须填写 <b>24</b>，否则会导致数据覆盖或保存失败。
+          </div>
+          <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;">
+            <strong>⚠️ 分类 ID 禁止修改</strong><br>
+            编辑分类时，<b>Group ID</b> 和 <b>Category ID</b> 已经被锁定/隐藏，千万不要尝试更改或随意替换其定义，否则前台网页将无法正确过滤显示商品。
+          </div>
+        </div>
+
+        <div class="guide-section">
+          <h4>⚙️ 栏目如何管理</h4>
+          <ul>
+            <li><strong>Settings (全局设置)</strong>：配置询盘接单邮箱、首页轮播图图片/标题、以及中英文的服务亮点。</li>
+            <li><strong>Categories (分类管理)</strong>：配置商品系列的名字、描述以及大背景图。</li>
+            <li><strong>Products (商品库)</strong>：管理单款商品。点击右上角 "New Products" 来添加新商品。</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>🎨 内容与图片规范</h4>
+          <ul>
+            <li><strong>商品图片</strong>：必须上传<b>纯白色背景</b>的渲染图或实拍图。前台系统会对白底图片自动渲染为高端的“照片展示盒”物理效果。</li>
+            <li><strong>系列背景图 (Hero Image)</strong>：必须是<b>无文字、无规格图表</b>的纯净、高清大特写图，防止在 object-fit cover 或暗色遮罩时文字被裁剪、显示杂乱。</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>🚀 如何发布上线</h4>
+          <ul>
+            <li>所有的修改和新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
+            <li>点击发布后，Netlify 会在后台自动完成打包部署，<b>通常 1-2 分钟内</b>前台网站即可更新。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 唤起操作手册按钮 -->
+    <button id="guide-open-btn" style="display: none;">
+      <span>📖 打开操作指南</span>
+    </button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('guide-sidebar');
+        const openBtn = document.getElementById('guide-open-btn');
+        const closeBtn = document.getElementById('guide-close-btn');
+
+        // 读取本地存储的状态
+        const isCollapsed = localStorage.getItem('admin-guide-collapsed') === 'true';
+        if (isCollapsed) {
+          sidebar.classList.add('collapsed');
+          openBtn.style.display = 'flex';
+        } else {
+          sidebar.classList.remove('collapsed');
+          openBtn.style.display = 'none';
+        }
+
+        // 关闭事件
+        closeBtn.addEventListener('click', () => {
+          sidebar.classList.add('collapsed');
+          openBtn.style.display = 'flex';
+          localStorage.setItem('admin-guide-collapsed', 'true');
+        });
+
+        // 打开事件
+        openBtn.addEventListener('click', () => {
+          sidebar.classList.remove('collapsed');
+          openBtn.style.display = 'none';
+          localStorage.setItem('admin-guide-collapsed', 'false');
+        });
+      });
+    </script>
   </body>
 </html>
