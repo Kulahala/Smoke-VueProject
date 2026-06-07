@@ -1,8 +1,12 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { inquiryEmail, store } from '../store';
 
+const route = useRoute();
 const isReady = ref(false);
+const activeGroupId = ref('');
+let isScrolling = false;
 
 const groups = computed(() =>
   store.categoryGroups.map((group) => ({
@@ -27,10 +31,75 @@ const mailtoLink = computed(
     )}`,
 );
 
+const onScroll = () => {
+  if (isScrolling) return;
+
+  const scrollTop = window.scrollY;
+  const scrollHeight = document.documentElement.scrollHeight;
+  const clientHeight = document.documentElement.clientHeight;
+
+  // 滚动到底部时，直接激活最后一个分类
+  if (scrollTop + clientHeight >= scrollHeight - 30) {
+    if (groups.value.length > 0) {
+      activeGroupId.value = groups.value[groups.value.length - 1].id;
+      return;
+    }
+  }
+
+  // 计算当前滚动线（设在导航栏下方，约 160px）落在哪一个 section
+  const scrollPosition = scrollTop + 160;
+  let currentActiveId = '';
+
+  for (const group of groups.value) {
+    const el = document.getElementById(group.id);
+    if (el) {
+      if (el.offsetTop <= scrollPosition) {
+        currentActiveId = group.id;
+      }
+    }
+  }
+
+  // 默认高亮第一个
+  if (!currentActiveId && groups.value.length > 0) {
+    currentActiveId = groups.value[0].id;
+  }
+
+  activeGroupId.value = currentActiveId;
+};
+
+const scrollToGroup = (event, id) => {
+  if (event) event.preventDefault();
+  const el = document.getElementById(id);
+  if (el) {
+    isScrolling = true;
+    activeGroupId.value = id;
+    el.scrollIntoView({ behavior: 'smooth' });
+    history.pushState(null, null, `#${id}`);
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 800);
+  }
+};
+
 onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   requestAnimationFrame(() => {
     isReady.value = true;
+    if (route.hash) {
+      const hashId = route.hash.replace('#', '');
+      setTimeout(() => {
+        scrollToGroup(null, hashId);
+      }, 150);
+    } else {
+      onScroll();
+    }
   });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll);
 });
 </script>
 
@@ -50,7 +119,13 @@ onMounted(() => {
 
     <nav class="category-strip" :aria-label="store.t('catalog.jumpToCategory')">
       <div class="container strip-inner">
-        <a v-for="group in groups" :key="group.id" :href="`#${group.id}`">
+        <a
+          v-for="group in groups"
+          :key="group.id"
+          :href="`#${group.id}`"
+          :class="{ active: activeGroupId === group.id }"
+          @click="scrollToGroup($event, group.id)"
+        >
           {{ store.text(group, 'name') }}
         </a>
       </div>
@@ -242,6 +317,12 @@ onMounted(() => {
 
 .strip-inner a:hover {
   border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  background: var(--color-accent-soft);
+  color: var(--color-link);
+}
+
+.strip-inner a.active {
+  border-color: var(--color-accent);
   background: var(--color-accent-soft);
   color: var(--color-link);
 }

@@ -123,3 +123,9 @@ image: 'public/电子烟/placeholders/pod-slim.svg'
 - 适合：只读查文件、符号定位、文档核对、简单清单、窄范围机械文档编辑。
 - 不适合：架构决策、代码 review、行为敏感逻辑、模糊 bug、跨文件重构。
 - 主 agent 继续负责关键判断；mini 是副手，不是主刀。
+
+## 维护与更新记录
+
+- **2026-06-07**:
+  - 修复移动端导航菜单关闭时子元素 `.nav-menu` 点击热区穿透并遮挡页面按钮的 Bug（[App.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/App.vue)）。
+  - 在产品目录页中实现了 Scrollspy 滚动高亮分类条功能，并优化了点击平滑滚动及初次 hash 载入跳转逻辑（[ProductCatalogView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/ProductCatalogView.vue)）。

@@ -968,7 +968,6 @@ html.dark .inquiry-link:hover {
     margin-top: 6px;
     box-shadow: none;
     opacity: 1;
-    visibility: visible;
     transform: none;
   }
 
