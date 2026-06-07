@@ -778,10 +778,17 @@ onBeforeUnmount(() => {
   right: -10%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.22) 0%, transparent 68%);
-  filter: blur(40px);
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.28) 0%, rgba(var(--color-accent-rgb), 0.05) 50%, transparent 70%);
+  filter: blur(35px);
   pointer-events: none;
   z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* 在暗色模式（即当前浅色卡片底）下，增强发光球的对比度和色彩饱和度，使其烟雾质感明显显现 */
+html.dark .contact-band::after {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.5) 0%, rgba(var(--color-accent-rgb), 0.12) 45%, transparent 70%);
+  filter: blur(30px);
 }
 
 .contact-band .eyebrow,
