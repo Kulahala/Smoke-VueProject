@@ -41,12 +41,55 @@ const closeMenu = () => {
 };
 
 const showBackToTop = ref(false);
+const isScrollingToTop = ref(false);
+
+const cancelScrollToTop = () => {
+  if (!isScrollingToTop.value) return;
+  isScrollingToTop.value = false;
+  window.scrollTo({
+    top: window.scrollY,
+    behavior: 'auto',
+  });
+  removeInterruptionListeners();
+};
+
+const handleInterruption = () => {
+  cancelScrollToTop();
+};
+
+const handleKeyDownInterruption = (e) => {
+  const scrollKeys = ['ArrowUp', 'ArrowDown', 'Space', 'PageUp', 'PageDown', 'Home', 'End'];
+  if (scrollKeys.includes(e.code) || scrollKeys.includes(e.key)) {
+    cancelScrollToTop();
+  }
+};
+
+const addInterruptionListeners = () => {
+  window.addEventListener('wheel', handleInterruption, { passive: true });
+  window.addEventListener('touchmove', handleInterruption, { passive: true });
+  window.addEventListener('keydown', handleKeyDownInterruption, { passive: true });
+  window.addEventListener('mousedown', handleInterruption, { passive: true });
+};
+
+const removeInterruptionListeners = () => {
+  window.removeEventListener('wheel', handleInterruption);
+  window.removeEventListener('touchmove', handleInterruption);
+  window.removeEventListener('keydown', handleKeyDownInterruption);
+  window.removeEventListener('mousedown', handleInterruption);
+};
 
 const handleScroll = () => {
   showBackToTop.value = window.scrollY > 300;
+  if (isScrollingToTop.value && window.scrollY === 0) {
+    isScrollingToTop.value = false;
+    removeInterruptionListeners();
+  }
 };
 
 const scrollToTop = () => {
+  if (window.scrollY === 0) return;
+  isScrollingToTop.value = true;
+  addInterruptionListeners();
   window.scrollTo({
     top: 0,
     behavior: 'smooth',
@@ -126,6 +169,7 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', handleDocumentClick);
   window.removeEventListener('scroll', handleScroll);
   window.removeEventListener('click', handleMailtoClick);
+  removeInterruptionListeners();
 });
 
 const setMeta = (selector, attribute, value) => {
