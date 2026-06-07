@@ -1,0 +1,49 @@
+name: Auto Convert CMS Uploaded Images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/电子烟/**'
+
+permissions:
+  contents: write
+
+jobs:
+  convert-images:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Sharp
+        run: |
+          npm install sharp
+
+      - name: Run Compression Script
+        run: |
+          node scripts/compress-uploaded-images.js
+
+      - name: Commit & Push Converted Images
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "style(images): auto convert CMS uploaded images to webp and backup originals [skip ci]"
+            git push origin main
+          else
+            echo "No changes detected. Skipping commit."
+          fi
