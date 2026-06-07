@@ -121,32 +121,42 @@ image: '/电子烟/real-product-01.jpg'
 
 ## 新增商品
 
-打开 `src/store/index.js`，在 `products` 数组里复制一个商品，然后改内容：
+目前商品数据已经进行了模块化解耦，每个产品均在以下目录以独立的 `.json` 文件保存：
 
-```js
+```txt
+src/data/products/
+```
+
+如果需要新增商品，请**不要**修改 `src/store/index.js`。你只需在上述目录下**复制并重命名一个现有的 `.json` 文件**（例如新建 `14-my-new-vape.json`），然后直接修改其中的属性：
+
+```json
 {
-  id: 11,
-  name: 'New Product Name',
-  image: '/电子烟/new-product.jpg',
-  category: 'pod-systems',
-  description: 'Short product description for business buyers.',
-  descriptionZh: '给中文模式看的产品说明。',
-  highlights: ['Highlight 1', 'Highlight 2', 'Highlight 3'],
-  highlightsZh: ['中文卖点 1', '中文卖点 2', '中文卖点 3'],
-  specs: [
-    { label: 'Battery', value: '500 mAh' },
-    { label: 'MOQ', value: '1000 pcs' },
+  "id": 14,
+  "name": "New Product Name",
+  "nameZh": "新产品中文名称",
+  "image": "/电子烟/new-product.jpg",
+  "images": [
+    "/电子烟/new-product.jpg"
   ],
-  specsZh: [
-    { label: '电池', value: '500 mAh' },
-    { label: '起订量', value: '1000 件' },
+  "category": "pod-systems",
+  "description": "Short product description for business buyers.",
+  "descriptionZh": "给中文模式看的产品说明。",
+  "highlights": ["Highlight 1", "Highlight 2"],
+  "highlightsZh": ["中文卖点 1", "中文卖点 2"],
+  "specs": [
+    { "label": "Battery", "value": "500 mAh" },
+    { "label": "MOQ", "value": "1000 pcs" }
   ],
-  moq: '1000 pcs',
-  moqZh: '1000 件',
-  leadTime: '10-18 days',
-  leadTimeZh: '10-18 天',
-  badge: 'OEM Ready',
-  badgeZh: '支持 OEM',
+  "specsZh": [
+    { "label": "电池", "value": "500 mAh" },
+    { "label": "起订量", "value": "1000 件" }
+  ],
+  "moq": "1000 pcs",
+  "moqZh": "1000 件",
+  "leadTime": "10-18 days",
+  "leadTimeZh": "10-18 天",
+  "badge": "OEM Ready",
+  "badgeZh": "支持 OEM"
 }
 ```
 
