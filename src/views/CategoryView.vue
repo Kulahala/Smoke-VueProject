@@ -374,8 +374,12 @@ onMounted(() => {
   left: 14px;
   top: 14px;
   border-radius: 999px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent-ink);
+  background: rgba(var(--color-accent-rgb), 0.15);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  color: var(--color-link);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.05);
   padding: 5px 10px;
   font-size: 0.78rem;
   font-weight: 900;
@@ -470,6 +474,7 @@ onMounted(() => {
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.3s ease;
+  animation: vapeSteam 10s ease-in-out infinite;
 }
 
 html.dark .contact-band::after {

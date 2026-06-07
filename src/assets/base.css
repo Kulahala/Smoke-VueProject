@@ -107,6 +107,7 @@ img {
 /* 1. 黑蓝/科技蓝 (Cyber Blue) */
 html.scheme-blue {
   --color-accent: #0066ff;
+  --color-accent-rgb: 0, 102, 255;
   --color-accent-soft: rgba(0, 102, 255, 0.12);
   --color-link: #0055d4;
 }
@@ -118,6 +119,7 @@ html.dark.scheme-blue {
   --color-surface: #0f172a;
   --color-surface-elevated: #1e293b;
   --color-accent: #00d2ff;
+  --color-accent-rgb: 0, 210, 255;
   --color-accent-soft: rgba(0, 210, 255, 0.12);
   --color-link: #00d2ff;
   --shadow-glow: 0 0 24px rgba(0, 210, 255, 0.2);
@@ -126,6 +128,7 @@ html.dark.scheme-blue {
 /* 2. 黑金/奢华金 (Luxury Gold) */
 html.scheme-gold {
   --color-accent: #c29543;
+  --color-accent-rgb: 194, 149, 67;
   --color-accent-soft: rgba(194, 149, 67, 0.12);
   --color-link: #9a732a;
 }
@@ -137,7 +140,32 @@ html.dark.scheme-gold {
   --color-surface: #18181b;
   --color-surface-elevated: #27272a;
   --color-accent: #dfb260;
+  --color-accent-rgb: 223, 178, 96;
   --color-accent-soft: rgba(223, 178, 96, 0.12);
   --color-link: #dfb260;
   --shadow-glow: 0 0 24px rgba(223, 178, 96, 0.2);
+}
+
+/* ==========================================================================
+   动画特效 (Keyframes)
+   ========================================================================== */
+
+/* Vape 霓虹发光烟雾球漂浮循环动效 */
+@keyframes vapeSteam {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  33% {
+    transform: translate(-40px, 20px) scale(1.15);
+    opacity: 1;
+  }
+  66% {
+    transform: translate(20px, -30px) scale(0.9);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
 }

@@ -381,6 +381,7 @@ html.dark .primary-action:hover,
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.3s ease;
+  animation: vapeSteam 10s ease-in-out infinite;
 }
 
 html.dark .contact-band::after {

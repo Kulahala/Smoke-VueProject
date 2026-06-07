@@ -217,11 +217,14 @@ onMounted(() => {
 .thumb-strip span {
   border: 1px solid var(--color-border);
   border-radius: 999px;
-  background: var(--color-surface);
+  background: color-mix(in srgb, var(--color-surface) 68%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   color: var(--color-text-muted);
-  padding: 6px 10px;
+  padding: 6px 14px;
   font-size: 0.82rem;
   font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 .breadcrumb {
@@ -367,7 +370,22 @@ onMounted(() => {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 22px;
   align-items: center;
-  background: var(--color-heading);
+  background: linear-gradient(135deg, var(--color-heading) 0%, color-mix(in srgb, var(--color-heading) 85%, var(--color-accent)) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.inquiry-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(10px);
 }
 
 .inquiry-card h2,
@@ -393,11 +411,14 @@ onMounted(() => {
   font-weight: 900;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 0.18s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .inquiry-card a:hover {
   transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(var(--color-accent-rgb), 0.4),
+    0 0 12px rgba(var(--color-accent-rgb), 0.2);
 }
 
 .related-section {

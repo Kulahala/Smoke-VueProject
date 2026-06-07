@@ -494,8 +494,12 @@ onBeforeUnmount(() => {
   top: 14px;
   left: 14px;
   border-radius: 6px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent-ink);
+  background: rgba(var(--color-accent-rgb), 0.15);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  color: var(--color-link);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.05);
   padding: 5px 10px;
   font-size: 0.76rem;
   font-weight: 900;

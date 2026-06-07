@@ -503,12 +503,11 @@ watchEffect(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-border-strong) 40%, transparent);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-background) 92%, transparent), color-mix(in srgb, var(--color-background) 82%, transparent)),
-    color-mix(in srgb, var(--color-background) 90%, transparent);
-  backdrop-filter: blur(26px) saturate(1.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 68%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
 }
 
 .header-inner {
@@ -723,13 +722,12 @@ watchEffect(() => {
   width: min(320px, calc(100vw - 32px));
   display: grid;
   gap: 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 90%, transparent), transparent),
-    color-mix(in srgb, var(--color-surface) 94%, transparent);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   box-shadow: 0 24px 70px var(--color-shadow-hover);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   padding: 14px;
 }
 

@@ -533,11 +533,13 @@ onBeforeUnmount(() => {
 
 .category-card span {
   width: fit-content;
-  border: 1px solid rgba(255, 255, 255, 0.36);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
-  background: rgba(6, 12, 14, 0.34);
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   padding: 4px 10px;
-  color: rgba(255, 255, 255, 0.78);
+  color: #ffffff;
   font-size: 0.8rem;
   font-weight: 800;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -652,8 +654,12 @@ onBeforeUnmount(() => {
   left: 14px;
   top: 14px;
   border-radius: 6px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent-ink);
+  background: rgba(var(--color-accent-rgb), 0.15);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  color: var(--color-link);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.05);
   padding: 5px 10px;
   font-size: 0.78rem;
   font-weight: 900;
@@ -783,6 +789,7 @@ onBeforeUnmount(() => {
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.3s ease;
+  animation: vapeSteam 10s ease-in-out infinite;
 }
 
 /* 在暗色模式（即当前浅色卡片底）下，增强发光球的对比度和色彩饱和度，使其烟雾质感明显显现 */

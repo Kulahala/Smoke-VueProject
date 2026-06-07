@@ -162,8 +162,9 @@ const handleSend = async () => {
   padding: 0 18px;
   border-radius: 23px;
   border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-surface-elevated) 82%, transparent);
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--color-surface-elevated) 68%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   color: var(--color-heading);
   cursor: pointer;
   box-shadow: 0 8px 24px var(--color-shadow);
@@ -172,12 +173,12 @@ const handleSend = async () => {
 
 .inquiry-trigger-btn:hover {
   transform: translateY(-2px);
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+  border-color: rgba(var(--color-accent-rgb), 0.8);
+  background: rgba(var(--color-accent-rgb), 0.25);
+  color: var(--color-link);
   box-shadow: 
     0 12px 30px var(--color-shadow-hover),
-    0 0 16px color-mix(in srgb, var(--color-accent) 40%, transparent);
+    0 0 16px rgba(var(--color-accent-rgb), 0.3);
 }
 
 .inquiry-trigger-btn .icon {
@@ -196,14 +197,14 @@ const handleSend = async () => {
   bottom: 58px;
   right: 0;
   width: 350px;
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
-  backdrop-filter: blur(20px);
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--color-border-strong);
   border-radius: 16px;
   box-shadow: 
-    0 20px 48px rgba(0, 0, 0, 0.12),
-    0 0 24px rgba(var(--color-accent-rgb), 0.04);
+    0 20px 48px rgba(0, 0, 0, 0.15),
+    0 0 24px rgba(var(--color-accent-rgb), 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
