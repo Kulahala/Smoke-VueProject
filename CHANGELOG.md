@@ -5,6 +5,14 @@
 ## 历史记录
 
 - **2026-06-07**:
+  - **图片资产重组与新产品上线**：
+    - 新建了 [Product 7 (Metro Open Pod Kit)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/7-metro-open-pod.json)（分类为 `"pod-systems"` 开放式换弹系统），以微信实拍 `1216` 为主图，`1214` - `1219` 系列作为多图轮播。
+    - 为 [Product 11 (ClearFlow Replacement Pod Pack)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/11-clearflow-replacement-pod-pack.json) 引入了 `1213` 主图及 `1211`、`1208`、`1209` 作为副图。
+    - 为 [Product 6 (Display Sample Pack)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/6-display-sample-pack.json) 引入了 `1212` 主图及 `1210`、`1211` 作为副图。
+    - 为 [Product 10 (Channel Sample Board)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/10-channel-sample-board.json) 引入了 `1210` 主图及 `1211`、`1212` 作为副图。
+    - 为 [Product 12 (Mesh Coil Service Pack)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/12-mesh-coil-service-pack.json) 关联了 `1220` 主图及 `1221` - `1226` 全套配件、挂绳微信实拍作为轮播。
+    - 在 [Product 4 (Edge Mini & Cloud Pro Series)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/4-edge-mini-disposable.json) 的多图轮播中增加了 `1232` 实拍图。
+    - 同步更新本地媒体资源库 [MediaLibrary.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/MediaLibrary.vue) 清除已删除的产品，并将 Product 7 指向新的主图。
   - **详情页询盘卡片视觉对齐**：重构了产品详情页侧边询盘卡片（`.inquiry-card`），引入与主页底部横幅一致的科技点阵背景网格，并在左下角追加了按比例缩小的第二个霓虹发光球（`.vape-glow-2`），同样绑定 `8s`（小球）与 `10s`（大球）的异步无序漂移特效，保持全站询盘区块的设计语言高度统一。
   - **底部询盘区悬停交互修复**：去除了外层大卡片（`.contact-band`）在鼠标悬停时的上浮及阴影加深特效，仅保留里面邮箱按钮本身的 Hover 悬浮动画，以纠正“整张大卡片都可以点击”的错误交互暗示。
   - **底部询盘区双球无序动效**：在全站底部询盘卡片（`.contact-band`）左下角追加了偏小的第二个霓虹发光球（`.vape-glow-2`），并设计了独立的 `@keyframes vapeSteamAlt` 漂移轨迹，通过 `8s` 与 `10s` 的差异化周期及不同飘动振幅，营造出完全无序、有纵深呼吸感的科技微烟雾动效。

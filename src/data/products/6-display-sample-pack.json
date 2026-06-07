@@ -2,6 +2,11 @@
   "id": 6,
   "name": "Display Sample Pack",
   "image": "/电子烟/微信图片_20250805234550_1212.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1212.jpg",
+    "/电子烟/微信图片_20250805234550_1210.jpg",
+    "/电子烟/微信图片_20250805234550_1211.jpg"
+  ],
   "category": "sample-packs",
   "description": "A curated sample pack for buyers comparing finishes, flavors, and device families before confirming a wholesale order.",
   "descriptionZh": "组合样品包，方便买家在确认批发订单前比较表面工艺、口味和设备系列。",

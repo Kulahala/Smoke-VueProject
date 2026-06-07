@@ -2,6 +2,11 @@
   "id": 10,
   "name": "Channel Sample Board",
   "image": "/电子烟/微信图片_20250805234550_1210.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1210.jpg",
+    "/电子烟/微信图片_20250805234550_1211.jpg",
+    "/电子烟/微信图片_20250805234550_1212.jpg"
+  ],
   "category": "sample-packs",
   "description": "A compact sample board for distributor teams to compare finishes, model sizes, and target shelf positioning before confirming orders.",
   "descriptionZh": "紧凑样品板，帮助经销商团队在确认订单前比较表面工艺、型号尺寸和货架定位。",

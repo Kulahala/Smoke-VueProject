@@ -9,11 +9,9 @@ const images = Object.keys(imageModules)
 
 const coreProducts = ref([
   { id: 1, name: "Product 1 (Aurora Slim Pod)", mainImage: "/电子烟/微信图片_20250805234550_1239.jpg" },
-  { id: 2, name: "Product 2 (Nova Ceramic Pod)", mainImage: "/电子烟/微信图片_20250805234550_1240.jpg" },
   { id: 3, name: "Product 3 (Pulse Max Disposable)", mainImage: "/电子烟/disposable_vape_max.png" },
   { id: 4, name: "Product 4 (Edge Mini Disposable)", mainImage: "/电子烟/微信图片_20250805234550_1230.jpg" },
-  { id: 7, name: "Product 7 (Metro Open Pod Kit)", mainImage: "/电子烟/微信图片_20250805234550_1236.jpg" },
-  { id: 8, name: "Product 8 (Cloud Bar Pro)", mainImage: "/电子烟/微信图片_20250805234550_1229.jpg" }
+  { id: 7, name: "Product 7 (Metro Open Pod Kit)", mainImage: "/电子烟/微信图片_20250805234550_1216.jpg" }
 ]);
 </script>
 

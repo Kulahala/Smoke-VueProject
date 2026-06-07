@@ -2,6 +2,15 @@
   "id": 12,
   "name": "Mesh Coil Service Pack",
   "image": "/电子烟/微信图片_20250805234550_1220.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1220.jpg",
+    "/电子烟/微信图片_20250805234550_1221.jpg",
+    "/电子烟/微信图片_20250805234550_1222.jpg",
+    "/电子烟/微信图片_20250805234550_1223.jpg",
+    "/电子烟/微信图片_20250805234550_1224.jpg",
+    "/电子烟/微信图片_20250805234550_1225.jpg",
+    "/电子烟/微信图片_20250805234550_1226.jpg"
+  ],
   "category": "coils-accessories",
   "description": "A small accessory and coil service pack for distributors who need add-on replenishment items with clear SKU control.",
   "descriptionZh": "雾化芯与小配件服务包，适合需要清晰 SKU 管理的经销商补充订单。",

@@ -2,6 +2,12 @@
   "id": 11,
   "name": "ClearFlow Replacement Pod Pack",
   "image": "/电子烟/微信图片_20250805234550_1213.jpg",
+  "images": [
+    "/电子烟/微信图片_20250805234550_1213.jpg",
+    "/电子烟/微信图片_20250805234550_1211.jpg",
+    "/电子烟/微信图片_20250805234550_1208.jpg",
+    "/电子烟/微信图片_20250805234550_1209.jpg"
+  ],
   "category": "replacement-pods",
   "description": "A replacement pod pack for repeat-purchase programs, after-sales bundles, and distributor replenishment orders.",
   "descriptionZh": "替换烟弹套包，适合复购项目、售后组合和经销商补货订单。",
