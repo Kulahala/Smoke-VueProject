@@ -5,6 +5,7 @@
 ## 历史记录
 
 - **2026-06-07**:
+  - **商品详情页灯箱优化**：优化了商品详情页大图点击放大效果，移除白底收纳容器与放大镜图标，使放大的图片以原生比例直接悬浮展示在深色磨砂玻璃背景上，并配有柔和阴影。
   - **产品画册合并与真实实拍图集配置**：
     - 对商品数据库进行了合并瘦身：删除了重复雷同的 Product 2 (Nova)、Product 7 (Metro Kit)、Product 8 (Cloud Bar Pro)。
     - 将换弹式设备合并至 [Product 1 (Aurora Metro Pod System)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/1-aurora-slim-pod.json)，导入组 8 的 6 张 100% 真实微信实拍图，涵盖单机/礼盒套装、棉芯/陶瓷芯规格。

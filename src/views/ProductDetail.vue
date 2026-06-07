@@ -31,6 +31,7 @@ const mailtoLink = computed(() => {
   return `mailto:${inquiryEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 
+const isLightboxOpen = ref(false);
 const activeImage = ref('');
 const productImages = computed(() => {
   if (product.value) {
@@ -63,7 +64,7 @@ onMounted(() => {
   <div class="product-page" :class="{ ready: isReady }">
     <main v-if="product" class="container product-layout">
       <section class="product-gallery">
-        <div class="image-frame">
+        <div class="image-frame" @click="isLightboxOpen = true" style="cursor: zoom-in;" title="Click to view large image">
           <img :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
         </div>
 
@@ -164,6 +165,16 @@ onMounted(() => {
       <p>{{ store.t('product.notFoundText') }}</p>
       <router-link to="/">{{ store.t('common.backHome') }}</router-link>
     </main>
+
+    <!-- 全屏大图灯箱 (Lightbox) -->
+    <transition name="lightbox-fade">
+      <div v-if="isLightboxOpen" class="lightbox-overlay" @click="isLightboxOpen = false">
+        <button class="lightbox-close" @click="isLightboxOpen = false" aria-label="Close image">&times;</button>
+        <div class="lightbox-content" @click.stop>
+          <img :src="activeImage" :alt="product.name" />
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -653,6 +664,87 @@ onMounted(() => {
 
   .spec-table div {
     gap: 4px;
+  }
+}
+
+/* 全屏大图灯箱 (Lightbox) */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.88);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 2010;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.lightbox-content {
+  max-width: min(1200px, 90vw);
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(255, 255, 255, 0.05);
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+
+/* 渐变动画 */
+.lightbox-fade-enter-active,
+.lightbox-fade-leave-active {
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-fade-enter-from,
+.lightbox-fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 </style>
