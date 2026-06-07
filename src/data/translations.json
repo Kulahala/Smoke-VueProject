@@ -133,7 +133,20 @@
     "notFound.title": "Page not found",
     "notFound.text": "The catalogue page you opened does not exist or the product id has changed.",
     "seo.homeTitle": "BestLinksz B2B Vape Catalogue",
-    "seo.homeDescription": "BestLinksz B2B vape product catalogue for wholesale inquiries, OEM packaging, samples, MOQ, lead time, and email-based orders."
+    "seo.homeDescription": "BestLinksz B2B vape product catalogue for wholesale inquiries, OEM packaging, samples, MOQ, lead time, and email-based orders.",
+    "inquiry.button": "Inquiry",
+    "inquiry.title": "Send B2B Inquiry",
+    "inquiry.name": "Your Name",
+    "inquiry.email": "Business Email",
+    "inquiry.message": "Message",
+    "inquiry.placeholderName": "Enter your name",
+    "inquiry.placeholderEmail": "Enter your business email",
+    "inquiry.placeholderMessage": "Please list the product codes, quantities, or OEM requirements...",
+    "inquiry.send": "Send Message",
+    "inquiry.sending": "Sending...",
+    "inquiry.success": "Message Sent! We will contact you shortly.",
+    "inquiry.error": "Failed to send. Please email us directly.",
+    "inquiry.close": "Close"
   },
   "zh": {
     "brand.subtitle": "B2B 电子烟目录",
@@ -269,6 +282,19 @@
     "notFound.title": "页面不存在",
     "notFound.text": "你打开的目录页面不存在，或产品 ID 已经变更。",
     "seo.homeTitle": "BestLinksz B2B 电子烟产品目录",
-    "seo.homeDescription": "BestLinksz B2B 电子烟产品目录，支持批发询盘、OEM 包装、样品、起订量、交期和邮箱订单。"
+    "seo.homeDescription": "BestLinksz B2B 电子烟产品目录，支持批发询盘、OEM 包装、样品、起订量、交期和邮箱订单。",
+    "inquiry.button": "在线询盘",
+    "inquiry.title": "发送询盘留言",
+    "inquiry.name": "您的姓名",
+    "inquiry.email": "业务电子邮箱",
+    "inquiry.message": "留言内容",
+    "inquiry.placeholderName": "请输入您的称呼",
+    "inquiry.placeholderEmail": "请输入您的电子邮箱",
+    "inquiry.placeholderMessage": "请列出您感兴趣的产品型号、采购数量或贴牌需求...",
+    "inquiry.send": "提交发送",
+    "inquiry.sending": "正在发送...",
+    "inquiry.success": "发送成功！我们将尽快与您取得联系。",
+    "inquiry.error": "发送失败，请直接复制底部邮箱向我们发信。",
+    "inquiry.close": "关闭"
   }
 }

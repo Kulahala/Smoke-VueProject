@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { inquiryEmail, store } from './store';
+import InquiryWidget from './components/InquiryWidget.vue';
 
 const isMenuOpen = ref(false);
 const isUtilityOpen = ref(false);
@@ -459,6 +460,9 @@ watchEffect(() => {
         <polyline points="18 15 12 9 6 15"></polyline>
       </svg>
     </button>
+
+    <!-- 在线询盘留言悬浮窗口 -->
+    <InquiryWidget />
   </div>
 </template>
 

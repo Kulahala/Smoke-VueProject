@@ -22,6 +22,11 @@ collections:
           - label: "Inquiry Email (询盘接单邮箱)"
             name: "inquiryEmail"
             widget: "string"
+          - label: "Web3Forms Access Key (在线询盘邮件转发Key)"
+            name: "web3formsKey"
+            widget: "string"
+            required: false
+            hint: "前往 web3forms.com 输入接收邮箱可免费获取该 Key，填入后即可在线接收右下角表单的询盘留言。"
           - label: "Hero Slides (首页轮播大图)"
             name: "heroSlides"
             widget: "list"

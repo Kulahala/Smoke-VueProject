@@ -14,6 +14,7 @@ export const store = reactive({
   language: localStorage.getItem('language') || 'en',
   theme: localStorage.getItem('theme') || 'system',
   colorScheme: localStorage.getItem('colorScheme') || 'default',
+  web3formsKey: settings.web3formsKey || '',
   toastMessage: '',
   toastTimer: null,
 
@@ -24,6 +25,30 @@ export const store = reactive({
       this.toastMessage = '';
       this.toastTimer = null;
     }, 4500);
+  },
+
+  async submitInquiry(formData) {
+    if (!this.web3formsKey) {
+      console.warn("Web3Forms Access Key is not configured.");
+      return { success: false, error: 'Key not configured' };
+    }
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: this.web3formsKey,
+          ...formData
+        })
+      });
+      const result = await response.json();
+      return { success: result.success, error: result.message };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
   },
 
   setLanguage(newLanguage) {

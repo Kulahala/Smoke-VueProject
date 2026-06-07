@@ -5,6 +5,8 @@
 ## 历史记录
 
 - **2026-06-07**:
+  - 新增全局**在线询盘留言小浮窗**（[InquiryWidget.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/components/InquiryWidget.vue)）：页面右下角追加了常驻的“在线询盘 / Inquiry”悬浮按钮，点击拉起磨砂玻璃半透明小表单，支持表单校验、多语言自适应及发送状态转换，基于 Web3Forms 服务实现零后端成本直接发送邮件到接单邮箱。
+  - 在 [public/admin/config.yml](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/config.yml) 全局设置中增加了 `web3formsKey` 选项，支持非技术商家直接在后台管理邮箱留言接收密钥。
   - 优化本地开发配置（[vite.config.js](file:///c:/Users/Administrator/Desktop/Code/vue-project/vite.config.js)），在 `server` 属性中开启了 `open: true`。现在运行 `npm run dev` 启动开发服务器后，会自动在默认浏览器中打开本地测试链接。
   - 优化公司能力页（[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)）大配图修改为 `object-fit: cover` 铺满容器，去除白边框，使意境配图大卡片在页面整体排版中更加舒展大气。
   - 优化首页及全站底部询盘区（[HomeView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/HomeView.vue)、[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)、[CategoryView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/CategoryView.vue)）的视觉设计。抛弃生硬的全宽单色横条，统一重塑为带圆角和悬浮阴影的高级卡片布局，使用 CSS 实现了科技点阵背景网格与漂浮在背景右上角的薄荷/黑金霓虹发光烟雾球（Vape Steam Glow Aura），契合电子烟主题。
