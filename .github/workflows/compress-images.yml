@@ -33,7 +33,7 @@ jobs:
 
       - name: Run Compression Script
         run: |
-          node scripts/compress-uploaded-images.js
+          node scripts/compress-uploaded-images.cjs
 
       - name: Commit & Push Converted Images
         run: |
