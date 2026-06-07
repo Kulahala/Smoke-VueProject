@@ -209,7 +209,7 @@ onBeforeUnmount(() => {
       </section>
 
       <section class="contact-band">
-        <div class="container contact-band-inner">
+        <div class="contact-band-inner">
           <div>
             <p class="eyebrow">{{ store.t('home.wholesaleInquiry') }}</p>
             <h2>{{ store.t('home.contactTitle') }}</h2>
@@ -736,11 +736,52 @@ onBeforeUnmount(() => {
 }
 
 .contact-band {
-  padding: 70px 0;
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 76px),
-    var(--color-heading);
+  position: relative;
+  background: var(--color-heading);
   color: var(--color-background);
+  overflow: hidden;
+  border-radius: 24px;
+  margin: 60px auto;
+  width: min(1180px, calc(100% - 40px));
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0px rgba(255, 255, 255, 0.1);
+  /* 平滑缩放过渡 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 悬浮轻微放大，提升互动质感 */
+.contact-band:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0px rgba(255, 255, 255, 0.15);
+}
+
+/* 科技点阵背景网格 */
+.contact-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-background) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vape 薄荷霓虹发光烟雾球 */
+.contact-band::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.22) 0%, transparent 68%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .contact-band .eyebrow,
@@ -749,16 +790,20 @@ onBeforeUnmount(() => {
 }
 
 .contact-band-inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 32px;
+  padding: 60px clamp(24px, 6vw, 64px);
 }
 
 .contact-band .primary-action {
   flex: 0 0 auto;
   background: var(--color-accent);
   color: #071018;
+  z-index: 2;
 }
 
 .hero-fade-enter-active,
@@ -825,6 +870,11 @@ onBeforeUnmount(() => {
   .contact-band-inner {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .contact-band-inner {
+    padding: 40px 24px;
+    gap: 24px;
   }
 
   .primary-action,
