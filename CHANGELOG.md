@@ -10,6 +10,12 @@
     - 将用户压缩好的 54 张 `.webp` 新图片从临时目录 `dist/compressed/` 移动至标准资源目录 `public/电子烟/` 下。
     - 对整个 codebase 进行了自动引用路径重排：修改了所有产品 JSON 定义文件、`src/App.vue`、`index.html` 以及 `src/views/MediaLibrary.vue` 中所有对应图片的后缀为 `.webp`。
     - 针对 Favicon 资源进行了优化：在 `index.html` 中将 Favicon 链接属性升级为 `type="image/webp" href="/电子烟/smoke.webp"`，保证了加载性能。
+  - **后台上传图片云端自动转换与备份 (GitHub Actions)**：
+    - 新增了 `.github/workflows/compress-images.yml` 自动化工作流配置，当后台（Decap CMS）或任何 Git push 操作往 `public/电子烟/` 目录上传了新的 JPG/PNG/JPEG 原图时，GitHub 云端会自动触发工作流。
+    - 编写了自动化转换脚本 `scripts/compress-uploaded-images.js`，该脚本在云端会自动利用 `sharp` 库将新原图转换为 WebP 格式并覆盖回目录，同时自动重构全站代码引用的图片后缀。
+    - 调整了 `.gitignore`，从忽略列表中移除了 `original_images_backup/`，使得自动处理后的原图能安全保存在 GitHub 仓库中供未来下载和备份。
+    - 为自动处理提交的消息配置了 `[skip ci]` 标识，防止 GitHub Actions 自循环触发。
+
 
 - **2026-06-07**:
   - **图片资产重组与新产品上线**：
