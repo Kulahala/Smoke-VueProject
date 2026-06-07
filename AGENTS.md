@@ -130,7 +130,7 @@ image: 'public/电子烟/placeholders/pod-slim.svg'
   - 修复移动端导航菜单关闭时子元素 `.nav-menu` 点击热区穿透并遮挡页面按钮的 Bug（[App.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/App.vue)）。
   - 在产品目录页中实现了 Scrollspy 滚动高亮分类条功能，并优化了点击平滑滚动及初次 hash 载入跳转逻辑（[ProductCatalogView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/ProductCatalogView.vue)）。
   - 全局拦截 `mailto:` 写信链接，点击时自动复制询盘邮箱至剪贴板，并配合毛玻璃卡片 Toast 提示，解决无本地写信客户端 white page 的体验问题。
-  - 公司能力页（[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)）大配图修改为 `object-fit: contain`、强制纯白背景和内边距，统一视觉标准防止图片被裁剪。
+  - 公司能力页（[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)）大配图修改为 `object-fit: cover` 铺满容器，去除白边框，使意境配图大卡片在页面整体排版中更加舒展大气。
   - 优化产品目录页移动端体验，实现分类导航滑条在滚动切换时自动滚动居中（[ProductCatalogView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/ProductCatalogView.vue)）。
   - 修复 Netlify Identity 线上邀请邮件激活链接被首页吞掉的 Bug（在根目录 [index.html](file:///c:/Users/Administrator/Desktop/Code/vue-project/index.html) 中引入 Widget 脚本并添加 init/login 自动重定向逻辑）。
   - 在后台管理系统 [public/admin/index.html](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/index.html) 中定制了具有磨砂玻璃质感的**右侧操作手册悬浮窗**。支持二级菜单滑动切换，并新增定时器监听，确保只有登录成功进入管理主界面后才显示该浮窗，以防在登录页遮挡界面。

@@ -227,18 +227,15 @@ html.dark .primary-action:hover,
   aspect-ratio: 1.1 / 1;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 24px 62px var(--color-shadow);
   overflow: hidden;
-  padding: 24px;
-  display: grid;
-  place-items: center;
 }
 
 .hero-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.34s ease;
 }
 
