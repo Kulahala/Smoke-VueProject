@@ -26,9 +26,9 @@ const routes = [
     component: ProductDetail
   },
   {
-    path: '/debug-images',
-    name: 'DebugImages',
-    component: () => import('../views/DebugImages.vue')
+    path: '/media-library',
+    name: 'MediaLibrary',
+    component: () => import('../views/MediaLibrary.vue')
   },
   {
     path: '/about',

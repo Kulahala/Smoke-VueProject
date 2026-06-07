@@ -18,10 +18,10 @@ const coreProducts = ref([
 </script>
 
 <template>
-  <div class="debug-page">
+  <div class="media-library-page">
     <div class="container">
-      <h1>原始素材图片浏览器 (Debug Images View)</h1>
-      <p class="subtitle">请对照各产品主图，在下方所有微信图片中寻找与其属于同款、同颜色、同系列的多角度原图。</p>
+      <h1>本地媒体资源库 (Media Library)</h1>
+      <p class="subtitle">用于快速对照、预览和管理项目 public/电子烟/ 目录下的所有本地实拍图片资产。</p>
 
       <section class="core-comparison">
         <h2>核心产品主图参考</h2>
@@ -55,7 +55,7 @@ const coreProducts = ref([
 </template>
 
 <style scoped>
-.debug-page {
+.media-library-page {
   padding: 40px 0;
   background: #111;
   color: #eee;
