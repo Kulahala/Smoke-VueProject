@@ -55,7 +55,7 @@ onMounted(() => {
         </div>
         <div class="resource-visual">
           <img
-            src="/电子烟/微信图片_20250805234550_1210.jpg"
+            src="/电子烟/微信图片_20250805234550_1210.webp"
             alt="Vape catalogue resource preview"
             loading="eager"
             decoding="async"

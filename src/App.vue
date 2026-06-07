@@ -216,7 +216,7 @@ const pageSeo = computed(() => {
     const description = category
       ? `${store.text(category, 'description')} ${store.t('home.contactTitle')}`
       : store.t('seo.homeDescription');
-    return { title, description, url: routeUrl, image: category?.heroImage || '/电子烟/雾化器主页1.jpg' };
+    return { title, description, url: routeUrl, image: category?.heroImage || '/电子烟/雾化器主页1.webp' };
   }
 
   if (route.name === 'Product') {
@@ -225,7 +225,7 @@ const pageSeo = computed(() => {
       ? `${store.text(product, 'name')} | ${store.language === 'zh' ? '批发询盘' : 'Wholesale Inquiry'}`
       : store.t('product.notFound');
     const description = product ? store.text(product, 'description') : store.t('product.notFoundText');
-    return { title, description, url: routeUrl, image: product?.image || '/电子烟/雾化器主页1.jpg' };
+    return { title, description, url: routeUrl, image: product?.image || '/电子烟/雾化器主页1.webp' };
   }
 
   if (route.name === 'Products') {
@@ -233,7 +233,7 @@ const pageSeo = computed(() => {
       title: `${store.t('catalog.title')} | BestLinksz`,
       description: store.t('catalog.intro'),
       url: routeUrl,
-      image: '/电子烟/disposable_vape_max.png',
+      image: '/电子烟/disposable_vape_max.webp',
     };
   }
 
@@ -245,7 +245,7 @@ const pageSeo = computed(() => {
           ? 'BestLinksz 面向海外商业买家提供电子烟批发目录、OEM 包装、样品和邮箱询盘支持。'
           : 'BestLinksz provides a B2B vape catalogue, OEM packaging, sample coordination, and email inquiry support for overseas business buyers.',
       url: routeUrl,
-      image: '/电子烟/packaging.jpg',
+      image: '/电子烟/packaging.webp',
     };
   }
 
@@ -257,7 +257,7 @@ const pageSeo = computed(() => {
           ? '电子烟批发询盘、样品、OEM 包装和目录维护说明。'
           : 'Buyer notes for wholesale vape inquiries, samples, OEM packaging, and catalogue maintenance.',
       url: routeUrl,
-      image: '/电子烟/微信图片_20250805234550_1210.jpg',
+      image: '/电子烟/微信图片_20250805234550_1210.webp',
     };
   }
 
@@ -265,7 +265,7 @@ const pageSeo = computed(() => {
     title: store.t('seo.homeTitle'),
     description: store.t('seo.homeDescription'),
     url: routeUrl,
-    image: '/电子烟/微信图片_20250805234550_1239.jpg',
+    image: '/电子烟/微信图片_20250805234550_1239.webp',
   };
 });
 
@@ -280,7 +280,7 @@ watchEffect(() => {
   // 动态切换最顶部标签页 Favicon 图标以适配系统/浏览器本身的明暗主题（不受网站内部配色切换影响）
   const favEl = document.head.querySelector('link[rel="icon"]');
   if (favEl) {
-    favEl.setAttribute('href', systemPrefersDark.value ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png');
+    favEl.setAttribute('href', systemPrefersDark.value ? '/电子烟/smoke-light.webp' : '/电子烟/smoke.webp');
   }
 
   const seo = pageSeo.value;
@@ -365,7 +365,7 @@ watchEffect(() => {
       <div class="container header-inner">
         <router-link class="brand" to="/" @click="handleBrandClick">
           <div class="brand-mark-wrapper">
-            <img class="brand-logo" :src="isDark ? '/电子烟/smoke-light.png' : '/电子烟/smoke.png'" alt="BestLinksz Logo" />
+            <img class="brand-logo" :src="isDark ? '/电子烟/smoke-light.webp' : '/电子烟/smoke.webp'" alt="BestLinksz Logo" />
           </div>
           <span>
             <strong>BestLinksz</strong>

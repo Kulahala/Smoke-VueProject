@@ -4,6 +4,13 @@
 
 ## 历史记录
 
+- **2026-06-08**:
+  - **WebP 图片格式迁移与路径重构**：
+    - 将 `public/电子烟/` 目录下的所有原始 uncompressed 格式（`.png`、`.jpg`）图片移动至项目根目录的备份文件夹 `original_images_backup/`，并已将其配置进 `.gitignore` 避免仓库膨胀。
+    - 将用户压缩好的 54 张 `.webp` 新图片从临时目录 `dist/compressed/` 移动至标准资源目录 `public/电子烟/` 下。
+    - 对整个 codebase 进行了自动引用路径重排：修改了所有产品 JSON 定义文件、`src/App.vue`、`index.html` 以及 `src/views/MediaLibrary.vue` 中所有对应图片的后缀为 `.webp`。
+    - 针对 Favicon 资源进行了优化：在 `index.html` 中将 Favicon 链接属性升级为 `type="image/webp" href="/电子烟/smoke.webp"`，保证了加载性能。
+
 - **2026-06-07**:
   - **图片资产重组与新产品上线**：
     - 新建了 [Product 7 (Metro Open Pod Kit)](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/data/products/7-metro-open-pod.json)（分类为 `"pod-systems"` 开放式换弹系统），以微信实拍 `1216` 为主图，`1214` - `1219` 系列作为多图轮播。

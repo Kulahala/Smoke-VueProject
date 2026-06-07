@@ -1,10 +1,10 @@
 {
   "id": 5,
   "name": "Launch Kit Box Set",
-  "image": "/电子烟/starter_kit_box.png",
+  "image": "/电子烟/starter_kit_box.webp",
   "images": [
-    "/电子烟/starter_kit_box.png",
-    "/电子烟/launch_kit_detail.png"
+    "/电子烟/starter_kit_box.webp",
+    "/电子烟/launch_kit_detail.webp"
   ],
   "category": "starter-kits",
   "description": "A complete starter kit package for brands preparing trade-show samples, distributor onboarding, or first retail placement.",

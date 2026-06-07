@@ -1,11 +1,11 @@
 {
   "id": 6,
   "name": "Display Sample Pack",
-  "image": "/电子烟/微信图片_20250805234550_1212.jpg",
+  "image": "/电子烟/微信图片_20250805234550_1212.webp",
   "images": [
-    "/电子烟/微信图片_20250805234550_1212.jpg",
-    "/电子烟/微信图片_20250805234550_1210.jpg",
-    "/电子烟/微信图片_20250805234550_1211.jpg"
+    "/电子烟/微信图片_20250805234550_1212.webp",
+    "/电子烟/微信图片_20250805234550_1210.webp",
+    "/电子烟/微信图片_20250805234550_1211.webp"
   ],
   "category": "sample-packs",
   "description": "A curated sample pack for buyers comparing finishes, flavors, and device families before confirming a wholesale order.",

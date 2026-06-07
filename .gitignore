@@ -32,6 +32,10 @@ coverage
 # Custom ignores
 控制台.txt
 
-#Ignore vscode AI rules
+# Ignore vscode AI rules
 .github/
+
+# Backup original images folder
+original_images_backup/
+
 
