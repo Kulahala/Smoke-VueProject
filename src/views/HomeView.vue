@@ -209,6 +209,7 @@ onBeforeUnmount(() => {
       </section>
 
       <section class="contact-band">
+        <div class="vape-glow-2"></div>
         <div class="contact-band-inner">
           <div>
             <p class="eyebrow">{{ store.t('home.wholesaleInquiry') }}</p>
@@ -792,10 +793,30 @@ onBeforeUnmount(() => {
   animation: vapeSteam 10s ease-in-out infinite;
 }
 
+/* Vape 左下角小霓虹发光球 */
+.vape-glow-2 {
+  position: absolute;
+  bottom: -50%;
+  left: -10%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.22) 0%, rgba(var(--color-accent-rgb), 0.04) 50%, transparent 70%);
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  animation: vapeSteamAlt 14s ease-in-out infinite;
+}
+
 /* 在暗色模式（即当前浅色卡片底）下，增强发光球的对比度和色彩饱和度，使其烟雾质感明显显现 */
 html.dark .contact-band::after {
   background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.5) 0%, rgba(var(--color-accent-rgb), 0.12) 45%, transparent 70%);
   filter: blur(30px);
+}
+
+html.dark .vape-glow-2 {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.4) 0%, rgba(var(--color-accent-rgb), 0.1) 45%, transparent 70%);
+  filter: blur(28px);
 }
 
 .contact-band .eyebrow,
