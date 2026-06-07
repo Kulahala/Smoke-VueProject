@@ -108,7 +108,7 @@ onMounted(() => {
     </main>
 
     <section class="contact-band">
-      <div class="container contact-band-inner">
+      <div class="contact-band-inner">
         <div>
           <p class="eyebrow">{{ store.t('common.wholesaleInquiry') }}</p>
           <h2>{{ store.t('category.priceSheet') }}</h2>
@@ -427,8 +427,54 @@ onMounted(() => {
 }
 
 .contact-band {
-  padding: 64px 0;
+  position: relative;
   background: var(--color-heading);
+  color: var(--color-background);
+  overflow: hidden;
+  border-radius: 24px;
+  margin: 60px auto;
+  width: min(1180px, calc(100% - 40px));
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-band:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0px rgba(255, 255, 255, 0.15);
+}
+
+.contact-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-background) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-band::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.28) 0%, rgba(var(--color-accent-rgb), 0.05) 50%, transparent 70%);
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+html.dark .contact-band::after {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.5) 0%, rgba(var(--color-accent-rgb), 0.12) 45%, transparent 70%);
+  filter: blur(30px);
 }
 
 .contact-band .eyebrow,
@@ -437,10 +483,13 @@ onMounted(() => {
 }
 
 .contact-band-inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 32px;
+  padding: 60px clamp(24px, 6vw, 64px);
   opacity: 0;
   transform: translateY(18px);
 }
@@ -476,6 +525,11 @@ onMounted(() => {
   .contact-band-inner {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .contact-band-inner {
+    padding: 40px 24px;
+    gap: 24px;
   }
 
   .primary-action,

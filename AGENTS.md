@@ -139,6 +139,6 @@ image: 'public/电子烟/placeholders/pod-slim.svg'
   - 优化后台管理系统 [public/admin/index.html](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/index.html) 的布局与体验，实现了表单输入聚焦与右侧指南小卡片的高亮及自动平滑滚动联动。去除了左侧的网页实时预览 iframe 侧边栏，CMS 表单主体容器恢复为 100% 宽度的舒适大格局。
   - 在后台管理系统 [public/admin/index.html](file:///c:/Users/Administrator/Desktop/Code/vue-project/public/admin/index.html) 中引入了全新的左侧**交互式网页蓝图与截图对照侧边栏**（支持自适应折叠与自适应宽屏布局）。默认渲染用 HTML/CSS 绘制的网页模块结构蓝图，当检测到 `/admin/img/` 下存在真实页面截图时，自动无缝升级为真实截图，并在表单输入聚焦时通过 CSS 动态计算百分比坐标在对应区域渲染呼吸发光红框，极大降低非技术人员的认知门槛。
   - 修复后台管理系统在聚焦 `HERO SLIDES` (首页轮播大图) 和 `CARD BADGE` (卡片角标) 等表单项时，左侧蓝图/截图无对应红框或错配的 Bug（优化了 ID 字符识别正则，增加了 `prod-badge` 坐标定位并在 CSS 蓝图中增加了模拟角标元素）。
-  - 优化首页底部询盘区（[HomeView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/HomeView.vue)）的视觉设计。抛弃生硬的全宽单色横条，重塑为带圆角和悬浮阴影的高级卡片布局，使用 CSS 实现了科技点阵背景网格与漂浮在背景右上角的薄荷霓虹发光烟雾球（Vape Steam Glow Aura），契合电子烟主题。
+  - 优化首页及全站底部询盘区（[HomeView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/HomeView.vue)、[AboutView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/AboutView.vue)、[CategoryView.vue](file:///c:/Users/Administrator/Desktop/Code/vue-project/src/views/CategoryView.vue)）的视觉设计。抛弃生硬的全宽单色横条，统一重塑为带圆角和悬浮阴影的高级卡片布局，使用 CSS 实现了科技点阵背景网格与漂浮在背景右上角的薄荷/黑金霓虹发光烟雾球（Vape Steam Glow Aura），契合电子烟主题。
 
 
