@@ -53,6 +53,48 @@ watch(
   { immediate: true }
 );
 
+const prevImage = () => {
+  const idx = productImages.value.indexOf(activeImage.value);
+  if (idx > 0) {
+    activeImage.value = productImages.value[idx - 1];
+  } else {
+    activeImage.value = productImages.value[productImages.value.length - 1];
+  }
+};
+
+const nextImage = () => {
+  const idx = productImages.value.indexOf(activeImage.value);
+  if (idx < productImages.value.length - 1) {
+    activeImage.value = productImages.value[idx + 1];
+  } else {
+    activeImage.value = productImages.value[0];
+  }
+};
+
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+
+const handleTouchStart = (e) => {
+  touchStartX.value = e.changedTouches[0].screenX;
+};
+
+const handleTouchEnd = (e) => {
+  touchEndX.value = e.changedTouches[0].screenX;
+  handleSwipe();
+};
+
+const handleSwipe = () => {
+  const swipeThreshold = 50;
+  const diff = touchEndX.value - touchStartX.value;
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      prevImage();
+    } else {
+      nextImage();
+    }
+  }
+};
+
 onMounted(() => {
   requestAnimationFrame(() => {
     isReady.value = true;
@@ -64,8 +106,29 @@ onMounted(() => {
   <div class="product-page" :class="{ ready: isReady }">
     <main v-if="product" class="container product-layout">
       <section class="product-gallery">
-        <div class="image-frame" @click="isLightboxOpen = true" style="cursor: zoom-in;" title="Click to view large image">
-          <img :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+        <div class="image-frame-container">
+          <div 
+            class="image-frame" 
+            @click="isLightboxOpen = true" 
+            style="cursor: zoom-in;" 
+            title="Click to view large image"
+            @touchstart="handleTouchStart"
+            @touchend="handleTouchEnd"
+          >
+            <img :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+          </div>
+
+          <!-- 导航切换按钮 -->
+          <button v-if="productImages.length > 1" class="gallery-nav-btn prev-btn" @click.stop="prevImage" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button v-if="productImages.length > 1" class="gallery-nav-btn next-btn" @click.stop="nextImage" aria-label="Next image">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
 
         <!-- 多图切换缩略图栏 -->
@@ -790,6 +853,61 @@ html.dark .vape-glow-2 {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+.image-frame-container {
+  position: relative;
+}
+
+.gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #111;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.gallery-nav-btn:hover {
+  background: #ffffff;
+  color: var(--color-accent, #10b981);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.gallery-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.prev-btn {
+  left: 16px;
+}
+
+.next-btn {
+  right: 16px;
+}
+
+@media (max-width: 768px) {
+  .gallery-nav-btn {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.6);
+    left: 8px;
+  }
+  .next-btn {
+    right: 8px;
+    left: auto;
   }
 }
 </style>
