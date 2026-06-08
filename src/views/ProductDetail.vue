@@ -43,6 +43,10 @@ const productImages = computed(() => {
   return [];
 });
 
+const activeIndex = computed(() => {
+  return productImages.value.indexOf(activeImage.value);
+});
+
 watch(
   () => product.value,
   (newProd) => {
@@ -55,13 +59,28 @@ watch(
 
 watch(activeImage, () => {
   nextTick(() => {
+    const idx = productImages.value.indexOf(activeImage.value);
+    const container = document.querySelector('.gallery-thumbs');
     const activeEl = document.querySelector('.thumb-btn.active');
-    if (activeEl) {
-      activeEl.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      });
+    
+    if (container && activeEl) {
+      if (idx === 0) {
+        container.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else if (idx === productImages.value.length - 1) {
+        container.scrollTo({
+          left: container.scrollWidth,
+          behavior: 'smooth'
+        });
+      } else {
+        activeEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'nearest'
+        });
+      }
     }
   });
 });
@@ -128,9 +147,11 @@ onMounted(() => {
             @touchstart="handleTouchStart"
             @touchend="handleTouchEnd"
           >
-            <Transition name="fade-slide" mode="out-in">
-              <img :key="activeImage" :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
-            </Transition>
+            <div class="image-track" :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
+              <div v-for="(img, idx) in productImages" :key="idx" class="image-slide">
+                <img :src="img" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+              </div>
+            </div>
           </div>
 
           <!-- 导航切换按钮 -->
@@ -309,18 +330,33 @@ onMounted(() => {
 }
 
 .image-frame {
-  display: grid;
-  place-items: center;
+  position: relative;
   aspect-ratio: 1 / 1.08;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: #ffffff;
   box-shadow: 0 24px 62px var(--color-shadow);
   overflow: hidden;
-  padding: 24px;
 }
 
-.image-frame img {
+.image-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.image-slide img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -328,16 +364,16 @@ onMounted(() => {
   transition: transform 0.32s ease;
 }
 
-.image-frame:hover img {
+.image-frame:hover .image-slide img {
   transform: scale(1.045);
 }
 
 .gallery-thumbs {
   display: flex;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 6px;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding: 8px 8px 12px;
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--color-accent-rgb), 0.25) rgba(255, 255, 255, 0.03);
 }
@@ -372,33 +408,26 @@ onMounted(() => {
   overflow: hidden;
   display: grid;
   place-items: center;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 12px var(--color-shadow);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .thumb-btn:hover {
-  transform: translateY(-2px);
   border-color: rgba(var(--color-accent-rgb), 0.5);
 }
 
 .thumb-btn.active {
-  border: 2px solid transparent;
-  background: 
-    linear-gradient(#ffffff, #ffffff) padding-box,
-    linear-gradient(135deg, var(--color-accent), rgba(var(--color-accent-rgb), 0.4)) border-box;
-  box-shadow: 0 0 0 4px rgba(var(--color-accent-rgb), 0.15), 0 4px 12px var(--color-shadow);
-  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 0 0 2px var(--color-background),
+    0 0 0 4px var(--color-accent),
+    0 6px 14px var(--color-shadow);
 }
 
 .thumb-btn img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.22s ease;
-}
-
-.thumb-btn:hover img {
-  transform: scale(1.05);
 }
 
 .thumb-strip {
@@ -875,21 +904,7 @@ html.dark .vape-glow-2 {
   }
 }
 
-/* 商品主图切换过渡动画 */
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: scale(0.97) translateY(4px);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: scale(1.03) translateY(-4px);
-}
 
 .image-frame-container {
   position: relative;
