@@ -5,6 +5,13 @@
 ## 历史记录
 
 - **2026-06-08**:
+  - **代码架构清扫与 SEO 逻辑重构**：
+    - 将 App.vue 中约 170 行 SEO 逻辑（`setMeta`、`setCanonical`、`setStructuredData`、`pageSeo` computed 及对应 watchEffect）抽取为独立的 `src/composables/useSeo.js` composable，App.vue 净减约 165 行。
+    - 删除 8 个 Vue 脚手架遗留死文件（HelloWorld.vue、TheWelcome.vue、WelcomeItem.vue、5 个 Icon*.vue、logo.svg）。
+    - 删除 App.vue 中未使用的 `themeOptions` 数组死代码和 `.nav-menu small` 死 CSS 规则。
+    - 清理 base.css 中 4 组全站未引用的 CSS 变量（`--color-warning`、`--shadow-glow`、`--color-secondary-soft`、`--section-gap`）。
+    - 卸载 2 个未使用的 devDependencies（`@vitejs/plugin-legacy`、`vite-plugin-vue-devtools`），将 `sharp` 从 dependencies 移至 devDependencies。
+    - 删除根目录 4 个临时 log 文件并在 `.gitignore` 中新增对应忽略规则。
   - **商品详情页缩略图与大图画廊体验升级**：
     - 将大图切换动效由“淡入淡出”重构为**无缝左右平滑滑动轮播**（基于 `transform: translateX` 驱动，并配合贝塞尔曲线实现 `0.45s` 的慢入慢出滑动特效），完美契合移动端滑动手势与 PC 端悬浮放大。
     - 优化缩略图交互，彻底移除了缩略图在 hover/active 状态下的物理平移与缩放动效（保持静止），代之以极具精细度的**大厂风格双层悬浮隔离轮廓线环（Offset Outline Ring）**，并在小图上增加了 `0.18s` 的优雅渐显过渡。

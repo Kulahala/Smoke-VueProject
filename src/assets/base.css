@@ -18,12 +18,8 @@
   --color-accent-ink: #003028;
   --color-link: #008779;
   --color-secondary: #c29543;
-  --color-secondary-soft: rgba(194, 149, 67, 0.12);
-  --color-warning: #c29543;
   --color-shadow: rgba(4, 9, 12, 0.05);
   --color-shadow-hover: rgba(4, 9, 12, 0.12);
-  --shadow-glow: 0 0 20px rgba(0, 229, 201, 0.15);
-  --section-gap: 120px;
 }
 
 html.dark {
@@ -43,11 +39,8 @@ html.dark {
   --color-accent-ink: #00332c;
   --color-link: #00f5d4;
   --color-secondary: #dfb260;
-  --color-secondary-soft: rgba(223, 178, 96, 0.12);
-  --color-warning: #dfb260;
   --color-shadow: rgba(0, 0, 0, 0.4);
   --color-shadow-hover: rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 24px rgba(0, 245, 212, 0.2);
 }
 
 *,
@@ -124,7 +117,6 @@ html.dark.scheme-blue {
   --color-accent-soft: rgba(0, 210, 255, 0.12);
   --color-accent-ink: #002b66;
   --color-link: #00d2ff;
-  --shadow-glow: 0 0 24px rgba(0, 210, 255, 0.2);
 }
 
 /* 2. 黑金/奢华金 (Luxury Gold) */
@@ -147,7 +139,6 @@ html.dark.scheme-gold {
   --color-accent-soft: rgba(223, 178, 96, 0.12);
   --color-accent-ink: #4d3816;
   --color-link: #dfb260;
-  --shadow-glow: 0 0 24px rgba(223, 178, 96, 0.2);
 }
 
 /* ==========================================================================

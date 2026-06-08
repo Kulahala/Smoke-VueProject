@@ -31,6 +31,9 @@ coverage
 
 # Custom ignores
 控制台.txt
+build-check.log
+build-debug.log
+vite-dev-*.log
 
 # Ignore vscode AI rules
 .github/*
