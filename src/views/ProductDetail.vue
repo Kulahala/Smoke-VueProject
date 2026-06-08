@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { inquiryEmail, store } from '../store';
 
@@ -52,6 +52,19 @@ watch(
   },
   { immediate: true }
 );
+
+watch(activeImage, () => {
+  nextTick(() => {
+    const activeEl = document.querySelector('.thumb-btn.active');
+    if (activeEl) {
+      activeEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  });
+});
 
 const prevImage = () => {
   const idx = productImages.value.indexOf(activeImage.value);
@@ -115,7 +128,9 @@ onMounted(() => {
             @touchstart="handleTouchStart"
             @touchend="handleTouchEnd"
           >
-            <img :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+            <Transition name="fade-slide" mode="out-in">
+              <img :key="activeImage" :src="activeImage" :alt="product.name" loading="eager" fetchpriority="high" decoding="async" />
+            </Transition>
           </div>
 
           <!-- 导航切换按钮 -->
@@ -367,8 +382,12 @@ onMounted(() => {
 }
 
 .thumb-btn.active {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.15), 0 4px 12px var(--color-shadow);
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, var(--color-accent), rgba(var(--color-accent-rgb), 0.4)) border-box;
+  box-shadow: 0 0 0 4px rgba(var(--color-accent-rgb), 0.15), 0 4px 12px var(--color-shadow);
+  transform: translateY(-2px);
 }
 
 .thumb-btn img {
@@ -854,6 +873,22 @@ html.dark .vape-glow-2 {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* 商品主图切换过渡动画 */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: scale(0.97) translateY(4px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: scale(1.03) translateY(-4px);
 }
 
 .image-frame-container {
