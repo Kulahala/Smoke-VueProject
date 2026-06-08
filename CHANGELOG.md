@@ -5,6 +5,10 @@
 ## 历史记录
 
 - **2026-06-08**:
+  - **产品目录侧边栏长词溢出 Bug 修复**：
+    - 调整 `ProductCatalogView.vue` 侧边栏标题字号从 `clamp(2.2rem, 4vw, 4rem)` 降至更合理的 `clamp(1.75rem, 3vw, 2.5rem)`。
+    - 将 `.group-grid` 侧边栏的最小宽度限制从 `240px` 拓宽至 `250px`，提高英文长单词（如 "Accessories"）的容纳空间。
+    - 增加 `line-height: 1.1` 防止多行折叠，并添加 `overflow-wrap: break-word` 进行安全折行兜底。
   - **代码架构清扫与 SEO 逻辑重构**：
     - 将 App.vue 中约 170 行 SEO 逻辑（`setMeta`、`setCanonical`、`setStructuredData`、`pageSeo` computed 及对应 watchEffect）抽取为独立的 `src/composables/useSeo.js` composable，App.vue 净减约 165 行。
     - 删除 8 个 Vue 脚手架遗留死文件（HelloWorld.vue、TheWelcome.vue、WelcomeItem.vue、5 个 Icon*.vue、logo.svg）。

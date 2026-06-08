@@ -362,7 +362,7 @@ onBeforeUnmount(() => {
 
 .group-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
+  grid-template-columns: minmax(250px, 0.34fr) minmax(0, 1fr);
   gap: 46px;
   align-items: start;
 }
@@ -378,9 +378,10 @@ onBeforeUnmount(() => {
 
 .group-heading h2 {
   color: var(--color-heading);
-  font-size: clamp(2.2rem, 4vw, 4rem);
-  line-height: 1;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
   font-weight: 900;
+  overflow-wrap: break-word;
 }
 
 .group-heading p:not(.eyebrow) {
