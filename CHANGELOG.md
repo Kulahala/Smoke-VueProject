@@ -12,6 +12,8 @@
     - 清理 base.css 中 4 组全站未引用的 CSS 变量（`--color-warning`、`--shadow-glow`、`--color-secondary-soft`、`--section-gap`）。
     - 卸载 2 个未使用的 devDependencies（`@vitejs/plugin-legacy`、`vite-plugin-vue-devtools`），将 `sharp` 从 dependencies 移至 devDependencies。
     - 删除根目录 4 个临时 log 文件并在 `.gitignore` 中新增对应忽略规则。
+  - **自适应系统语言检测优化**：
+    - 优化 `store/index.js` 中的语言初始化逻辑，新增浏览器系统语言检测（若未检测到 localStorage 历史选择，中文系统自动设为 `zh`，其他均设为 `en`）。
   - **商品详情页缩略图与大图画廊体验升级**：
     - 将大图切换动效由“淡入淡出”重构为**无缝左右平滑滑动轮播**（基于 `transform: translateX` 驱动，并配合贝塞尔曲线实现 `0.45s` 的慢入慢出滑动特效），完美契合移动端滑动手势与 PC 端悬浮放大。
     - 优化缩略图交互，彻底移除了缩略图在 hover/active 状态下的物理平移与缩放动效（保持静止），代之以极具精细度的**大厂风格双层悬浮隔离轮廓线环（Offset Outline Ring）**，并在小图上增加了 `0.18s` 的优雅渐显过渡。

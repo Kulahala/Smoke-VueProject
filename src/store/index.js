@@ -10,8 +10,20 @@ const products = Object.values(productModules).map((mod) => mod.default || mod);
 export const inquiryEmail = settings.inquiryEmail;
 export const heroSlides = settings.heroSlides;
 
+const getInitialLanguage = () => {
+  const saved = localStorage.getItem('language');
+  if (saved) return saved;
+  if (typeof navigator !== 'undefined') {
+    const navLang = navigator.language || navigator.userLanguage;
+    if (navLang && navLang.toLowerCase().startsWith('zh')) {
+      return 'zh';
+    }
+  }
+  return 'en';
+};
+
 export const store = reactive({
-  language: localStorage.getItem('language') || 'en',
+  language: getInitialLanguage(),
   theme: localStorage.getItem('theme') || 'system',
   colorScheme: localStorage.getItem('colorScheme') || 'default',
   web3formsKey: settings.web3formsKey || '',
