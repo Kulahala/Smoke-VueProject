@@ -2,6 +2,11 @@
   "id": 3,
   "name": "Pulse Max Disposable",
   "image": "/电子烟/disposable_vape_max.webp",
+  "images": [
+    "/电子烟/disposable_vape_max.webp",
+    "/电子烟/pulse_max_packaging.webp",
+    "/电子烟/pulse_max_vaping.webp"
+  ],
   "category": "disposable-vapes",
   "description": "A high-capacity disposable vape line for distributors who need strong shelf presence, consistent vapor output, and fast SKU rollout.",
   "descriptionZh": "高容量一次性电子烟系列，适合需要货架识别度、稳定出雾和快速 SKU 上新的经销商。",

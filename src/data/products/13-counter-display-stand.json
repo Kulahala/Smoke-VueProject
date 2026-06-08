@@ -2,6 +2,10 @@
   "id": 13,
   "name": "Counter Display Stand",
   "image": "/电子烟/counter_display_stand.webp",
+  "images": [
+    "/电子烟/counter_display_stand.webp",
+    "/电子烟/display_stand_shop.png"
+  ],
   "category": "retail-displays",
   "description": "A retail display support item for counter presentation, sample organization, and distributor sales visits.",
   "descriptionZh": "零售陈列支持物料，适合柜台展示、样品整理和经销商销售拜访。",
