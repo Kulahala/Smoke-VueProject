@@ -877,6 +877,13 @@ html.dark .vape-glow-2 {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.image-frame-container:hover .gallery-nav-btn {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .gallery-nav-btn:hover {
@@ -898,12 +905,14 @@ html.dark .vape-glow-2 {
   right: 16px;
 }
 
-@media (max-width: 768px) {
+@media (hover: none), (max-width: 768px) {
   .gallery-nav-btn {
     width: 38px;
     height: 38px;
     background: rgba(255, 255, 255, 0.6);
     left: 8px;
+    opacity: 0.8;
+    pointer-events: auto;
   }
   .next-btn {
     right: 8px;
