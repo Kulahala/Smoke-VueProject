@@ -233,7 +233,7 @@ const pageSeo = computed(() => {
       title: `${store.t('catalog.title')} | BestLinksz`,
       description: store.t('catalog.intro'),
       url: routeUrl,
-      image: '/电子烟/disposable_vape_max.webp',
+      image: '/电子烟/Product3_1.webp',
     };
   }
 
@@ -245,7 +245,7 @@ const pageSeo = computed(() => {
           ? 'BestLinksz 面向海外商业买家提供电子烟批发目录、OEM 包装、样品和邮箱询盘支持。'
           : 'BestLinksz provides a B2B vape catalogue, OEM packaging, sample coordination, and email inquiry support for overseas business buyers.',
       url: routeUrl,
-      image: '/电子烟/packaging.webp',
+      image: '/电子烟/Product9_1.webp',
     };
   }
 
@@ -257,7 +257,7 @@ const pageSeo = computed(() => {
           ? '电子烟批发询盘、样品、OEM 包装和目录维护说明。'
           : 'Buyer notes for wholesale vape inquiries, samples, OEM packaging, and catalogue maintenance.',
       url: routeUrl,
-      image: '/电子烟/微信图片_20250805234550_1210.webp',
+      image: '/电子烟/Product6_2.webp',
     };
   }
 
@@ -265,7 +265,7 @@ const pageSeo = computed(() => {
     title: store.t('seo.homeTitle'),
     description: store.t('seo.homeDescription'),
     url: routeUrl,
-    image: '/电子烟/微信图片_20250805234550_1239.webp',
+    image: '/电子烟/Product1_1.webp',
   };
 });
 

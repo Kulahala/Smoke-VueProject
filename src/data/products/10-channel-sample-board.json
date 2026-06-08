@@ -1,11 +1,11 @@
 {
   "id": 10,
   "name": "Channel Sample Board",
-  "image": "/电子烟/微信图片_20250805234550_1210.webp",
+  "image": "/电子烟/Product6_2.webp",
   "images": [
-    "/电子烟/微信图片_20250805234550_1210.webp",
-    "/电子烟/微信图片_20250805234550_1211.webp",
-    "/电子烟/微信图片_20250805234550_1212.webp"
+    "/电子烟/Product6_2.webp",
+    "/电子烟/Product6_3.webp",
+    "/电子烟/Product6_1.webp"
   ],
   "category": "sample-packs",
   "description": "A compact sample board for distributor teams to compare finishes, model sizes, and target shelf positioning before confirming orders.",

@@ -52,7 +52,7 @@ onMounted(() => {
           <a :href="mailtoLink" class="primary-action">{{ store.t('about.emailInquiry') }}</a>
         </div>
         <div class="hero-image">
-          <img src="/电子烟/packaging.webp" alt="BestLinksz packaging and sample support" loading="eager" decoding="async" />
+          <img src="/电子烟/Product9_1.webp" alt="BestLinksz packaging and sample support" loading="eager" decoding="async" />
         </div>
       </div>
     </section>

@@ -8,10 +8,10 @@ const images = Object.keys(imageModules)
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
 const coreProducts = ref([
-  { id: 1, name: "Product 1 (Aurora Slim Pod)", mainImage: "/电子烟/微信图片_20250805234550_1239.webp" },
-  { id: 3, name: "Product 3 (Pulse Max Disposable)", mainImage: "/电子烟/disposable_vape_max.webp" },
-  { id: 4, name: "Product 4 (Edge Mini Disposable)", mainImage: "/电子烟/微信图片_20250805234550_1230.webp" },
-  { id: 7, name: "Product 7 (Metro Open Pod Kit)", mainImage: "/电子烟/微信图片_20250805234550_1216.webp" }
+  { id: 1, name: "Product 1 (Aurora Slim Pod)", mainImage: "/电子烟/Product1_1.webp" },
+  { id: 3, name: "Product 3 (Pulse Max Disposable)", mainImage: "/电子烟/Product3_1.webp" },
+  { id: 4, name: "Product 4 (Edge Mini Disposable)", mainImage: "/电子烟/Product4_1.webp" },
+  { id: 7, name: "Product 7 (Metro Open Pod Kit)", mainImage: "/电子烟/Product7_1.webp" }
 ]);
 </script>
 

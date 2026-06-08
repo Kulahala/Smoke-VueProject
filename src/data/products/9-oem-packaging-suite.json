@@ -1,10 +1,10 @@
 {
   "id": 9,
   "name": "OEM Packaging Suite",
-  "image": "/电子烟/packaging.webp",
+  "image": "/电子烟/Product9_1.webp",
   "images": [
-    "/电子烟/packaging.webp",
-    "/电子烟/oem_packaging_scene.png"
+    "/电子烟/Product9_1.webp",
+    "/电子烟/Product9_2.png"
   ],
   "category": "packaging-oem",
   "description": "Packaging coordination for selected catalogue items, including box structure, sleeve design, barcode area, and sales sample presentation.",
