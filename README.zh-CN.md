@@ -1,8 +1,8 @@
-# BestLinksz B2B 静态商品展示站
+# BestLinksz — B2B 静态商品展示站
+
+一个面向批发买家的静态产品展示站——不做购物车、支付、库存或实时下单。基于 Vue 3 + Vite 构建，通过 Decap CMS 管理内容。
 
 [English](./README.md) | **线上地址：** [bestlinksz.com](https://www.bestlinksz.com/)
-
-这是一个 Vue 3 + Vite 的静态商品展示网站，定位是 ToB 批发目录站：客户浏览产品、分类、规格和交付信息，通过邮箱发起询盘，不做购物车、支付、库存和实时下单。
 
 ## 页面截图
 
@@ -36,7 +36,7 @@
 | 托管 | Netlify（从 `main` 分支自动部署） |
 | 图片管线 | GitHub Actions + Sharp (PNG/JPG → WebP) |
 
-## 怎么运行
+## 快速开始
 
 ```sh
 npm install
@@ -44,40 +44,6 @@ npm run dev        # http://localhost:5173
 npm run build      # 输出到 dist/
 npm run preview    # 预览生产构建
 ```
-
-## 零代码后台管理
-
-项目已集成 Decap CMS 可视化后台，非技术人员可以直接在网页上编辑产品、分类、文案和图片。
-
-- 线上地址：`https://www.bestlinksz.com/admin/`
-- 本地地址：`http://localhost:5173/admin/`
-
-后台提供四个编辑区域：
-- **Settings（全局设置）** — 询盘邮箱、Web3Forms 密钥、首页轮播大图、服务说明
-- **Categories（分类管理）** — 分类层级、分类名、背景大图
-- **Products（产品管理）** — 产品名、图片、规格、起订量、交期、排序权重
-- **Translations（界面文案）** — 约 150 条中英文界面文字（按钮、标题、流程说明等）
-
-### 本地免密调试
-
-```sh
-# 终端 1：启动本地 CMS 代理
-npx decap-server
-
-# 终端 2：启动开发服务器
-npm run dev
-```
-
-打开 `http://localhost:5173/admin/`，点击绿色 **Login** 按钮即可免密进入。
-
-### Netlify 线上激活步骤
-
-1. **启用 Identity** — 站点设置 → Identity → Enable
-2. **注册设为 Invite only** — 防止外部注册
-3. **启用 Git Gateway** — Identity → Services → Git Gateway → Enable
-4. **邀请用户** — Identity 标签 → Invite users → 输入邮箱
-
-受邀用户在 `https://你的域名/admin/` 登录即可编辑内容。
 
 ## 项目结构
 
@@ -98,19 +64,21 @@ public/
   admin/          # Decap CMS 配置和自定义管理界面
 ```
 
-## 修改内容
+## 内容编辑
 
-### 修改邮箱
+### 通过 CMS 后台（推荐非技术人员使用）
 
-打开 `src/data/settings.json`，改 `inquiryEmail` 字段即可。所有按钮、页脚和详情页询盘邮件都会自动跟着改。
+访问线上 `/admin/` 或本地 `localhost:5173/admin/`，通过 Netlify Identity 登录。
 
-### 修改界面文案
+后台提供四个编辑区域：
+- **Settings（全局设置）** — 询盘邮箱、Web3Forms 密钥、首页轮播大图、服务说明
+- **Categories（分类管理）** — 分类层级、分类名、背景大图
+- **Products（产品管理）** — 产品名、图片、规格、起订量、交期、排序权重
+- **Translations（界面文案）** — 约 150 条中英文界面文字（按钮、标题、流程说明等）
 
-所有按钮、标题、流程说明等界面文字都在 `src/data/translations.json`，key 是扁平结构（如 `"nav.home"`、`"home.title"`）。也可以通过 CMS 后台的 Translations 编辑。
+### 通过代码（开发者）
 
-### 新增商品
-
-在 `src/data/products/` 下复制并重命名一个现有的 `.json` 文件（例如新建 `14.json`），然后修改内容：
+产品数据在 `src/data/products/*.json`，每个文件是一个产品：
 
 ```json
 {
@@ -141,13 +109,9 @@ public/
 - `image` 和 `images` 使用 `public/电子烟/` 里的图片，路径不带 `public`
 - `xxxZh` 字段是中文内容，不填则回退显示英文
 
-### 修改分类
+界面文案在 `src/data/translations.json`（扁平 key 结构，如 `"nav.home"`、`"home.title"`），也可通过 CMS 后台的 Translations 编辑。
 
-分类层级在 `src/data/categories.js` 的 `categoryGroups` 中。一级菜单是 `categoryGroups` 里的每一组，二级分类写在 `children` 里。
-
-规则：
-- `id` 不要用中文和空格，推荐小写英文加 `-`（如 `disposable-vapes`）
-- 新增二级分类后，记得给商品的 `category` 填同一个 `id`
+分类层级在 `src/data/categories.js` 的 `categoryGroups` 中。`id` 不要用中文和空格，推荐小写英文加 `-`（如 `disposable-vapes`）。新增二级分类后，记得给商品的 `category` 填同一个 `id`。
 
 ## 图片规则
 
@@ -176,6 +140,18 @@ public/
 
 默认域名是 `https://www.bestlinksz.com/`，换域名时需同步改 `index.html`、`src/App.vue`、`robots.txt`、`sitemap.xml`。
 
+## CMS 本地开发
+
+```sh
+# 终端 1：启动本地 CMS 代理
+npx decap-server
+
+# 终端 2：启动开发服务器
+npm run dev
+```
+
+打开 `http://localhost:5173/admin/`，点击绿色 **Login** 按钮即可免密进入。
+
 ## 部署
 
 Netlify 从 `main` 分支自动构建部署。推送即部署：
@@ -185,6 +161,15 @@ git push origin main
 ```
 
 Netlify 已配置 SPA 路由回退（所有路径 → `index.html`）。
+
+### Netlify Identity 激活步骤（用于 CMS 登录）
+
+1. **启用 Identity** — 站点设置 → Identity → Enable
+2. **注册设为 Invite only** — 防止外部注册
+3. **启用 Git Gateway** — Identity → Services → Git Gateway → Enable
+4. **邀请用户** — Identity 标签 → Invite users → 输入邮箱
+
+受邀用户在 `https://你的域名/admin/` 登录即可编辑内容。
 
 ## 许可
 

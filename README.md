@@ -1,6 +1,6 @@
 # BestLinksz — B2B Vape Wholesale Catalogue
 
-A static product showcase site for wholesale vape buyers. Built with Vue 3 + Vite, managed via Decap CMS.
+A static product showcase site for wholesale vape buyers — no cart, payment, or inventory. Built with Vue 3 + Vite, managed via Decap CMS.
 
 [中文说明](./README.zh-CN.md) | **Live site:** [bestlinksz.com](https://www.bestlinksz.com/)
 
