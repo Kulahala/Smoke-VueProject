@@ -246,8 +246,8 @@ collections:
     label: "Translations (界面文案)"
     delete: false
     files:
-      - name: "english"
-        label: "English UI Text (英文界面文案)"
+      - name: "all"
+        label: "All Translations (全部文案)"
         file: "src/data/translations.json"
         fields:
           - label: "English Translations (英文翻译)"
@@ -415,10 +415,6 @@ collections:
               - { label: "Inquiry Error (失败)", name: "inquiry.error", widget: "string" }
               - { label: "Inquiry Close (关闭)", name: "inquiry.close", widget: "string" }
 
-      - name: "chinese"
-        label: "Chinese UI Text (中文界面文案)"
-        file: "src/data/translations.json"
-        fields:
           - label: "Chinese Translations (中文翻译)"
             name: "zh"
             widget: "object"
