@@ -1104,6 +1104,16 @@
                 mockCatalog.style.display = 'flex';
               } else if (window.location.hash.includes('/products')) {
                 mockProduct.style.display = 'flex';
+              } else if (window.location.hash.includes('/translations')) {
+                // 界面文案编辑时显示首页蓝图，但自动折叠左侧蓝图以腾出编辑空间
+                mockHome.style.display = 'flex';
+                // 自动折叠蓝图侧边栏，给编辑区域更多空间
+                if (!localStorage.getItem('admin-blueprint-collapsed')) {
+                  blueprintSidebar.classList.add('collapsed');
+                  blueprintOpenBtn.style.display = 'flex';
+                  document.body.classList.add('blueprint-collapsed');
+                  localStorage.setItem('admin-blueprint-collapsed', 'true');
+                }
               }
             } else {
               blueprintSidebar.style.display = 'none';
