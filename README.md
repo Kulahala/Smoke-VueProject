@@ -2,7 +2,7 @@
 
 A static product showcase site for wholesale vape buyers. Built with Vue 3 + Vite, managed via Decap CMS.
 
-**Live site:** [bestlinksz.com](https://www.bestlinksz.com/)
+[中文说明](./README.zh-CN.md) | **Live site:** [bestlinksz.com](https://www.bestlinksz.com/)
 
 ## Features
 
@@ -126,7 +126,3 @@ Invited users log in at `https://your-domain/admin/`.
 ## License
 
 Private — all rights reserved. Source code is made public for transparency and collaboration; it is not licensed for redistribution or commercial use without written permission.
-
----
-
-[中文说明 → README.zh-CN.md](./README.zh-CN.md)
