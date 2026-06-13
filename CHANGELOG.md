@@ -5,6 +5,13 @@
 ## 历史记录
 
 - **2026-06-14**:
+  - **CMS 界面文案编辑修复**：
+    - 修复 Translations 集合在 CMS 侧边栏显示两个 "English UI Text" 的问题：将两个 files 条目（english/chinese）合并为单一入口 "All Translations (全部文案)"，同一页面同时包含 en 和 zh 两个折叠组，避免 Decap CMS 对同文件多条目只显示第一个 label 的 bug。
+    - Translations 编辑页左侧蓝图预览映射到首页（文案最直观的体现），并自动折叠蓝图侧边栏以腾出编辑空间。
+    - en/zh 两个折叠组默认收起（`collapsed: true`），避免打开时表单过长。
+  - **产品 ID 重复检测优化**：
+    - 修复编辑已有商品时误报 ID 重复警告的问题：从 URL 提取当前编辑的商品 slug，检测时排除自身 ID。
+    - 新建商品时自动填充最小可用正整数作为 Product ID 默认值，减少手动输入和重复风险。
   - **CMS 后台易上手性大幅改进**：
     - 新增 `Translations (界面文案)` 集合到 CMS，非技术人员现在可以通过后台直接编辑所有界面文案（按钮、标题、流程说明等约 150 条中英文翻译），无需改代码。字段采用扁平 key 结构（与 translations.json 数据格式一致），用注释分组便于阅读。
     - 修复 Product slug 规则：从 `{{id}}-{{name}}` 改为纯 `{{id}}`，避免改名导致文件残留或路径混乱。产品 JSON 文件已全部重命名为纯 ID 格式（如 `1.json`、`3.json`）。
