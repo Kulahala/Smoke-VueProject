@@ -6,6 +6,28 @@
 
 **线上地址：** [bestlinksz.com](https://www.bestlinksz.com/)
 
+## 功能特性
+
+- 多级产品目录，支持分类导航
+- 中英双语（EN / 中文），自动检测系统语言
+- 深色 / 浅色 / 跟随系统 三种主题
+- 邮箱询盘流程（Web3Forms 或 mailto 降级）
+- Decap CMS 可视化后台，零代码编辑内容
+- SEO 就绪：动态 meta、Open Graph、JSON-LD、sitemap、robots.txt
+- 响应式：桌面端和移动端布局
+- GitHub Actions 自动将上传的 PNG/JPG 转为 WebP
+
+## 技术栈
+
+| 层级 | 选型 |
+|---|---|
+| 框架 | Vue 3 (Composition API) |
+| 构建 | Vite |
+| 样式 | 原生 CSS（自定义属性，无 UI 库） |
+| CMS | Decap CMS (git-gateway) |
+| 托管 | Netlify（从 `main` 分支自动部署） |
+| 图片管线 | GitHub Actions + Sharp (PNG/JPG → WebP) |
+
 ## 怎么运行
 
 ```sh

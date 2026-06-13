@@ -92,6 +92,27 @@ UI translations are in `src/data/translations.json` (flat keys like `"nav.home"`
 - Reference paths without `public/`: `'/电子烟/Product1_1.webp'`
 - Uploaded PNG/JPG images are auto-converted to WebP by GitHub Actions on push
 
+### Image Guidelines
+
+- Hero images: 1600-2200px wide, < 500KB each
+- Product images: 900-1400px wide, < 300KB each
+- Category hero images must be clean close-ups without text or spec charts
+
+## Language Switching
+
+The site defaults to English. A toggle at the top switches between EN / 中文. The choice is saved in `localStorage`.
+
+UI text strings live in `src/data/translations.json` (flat keys like `"nav.home"`, `"home.title"`). Product and category Chinese content is in each data object's `xxxZh` fields.
+
+## SEO
+
+- `index.html` — title, description, keywords, OG/Twitter meta, initial JSON-LD
+- `src/App.vue` — per-page dynamic title, description, canonical, OG, structured data
+- `public/robots.txt` — allows search engine crawling
+- `public/sitemap.xml` — lists home, category, and product pages
+
+Default domain is `https://www.bestlinksz.com/`. When changing domains, update `index.html`, `src/App.vue`, `robots.txt`, and `sitemap.xml`.
+
 ## CMS Local Development
 
 ```sh
