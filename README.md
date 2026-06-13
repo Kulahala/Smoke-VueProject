@@ -4,6 +4,16 @@ A static product showcase site for wholesale vape buyers. Built with Vue 3 + Vit
 
 [中文说明](./README.zh-CN.md) | **Live site:** [bestlinksz.com](https://www.bestlinksz.com/)
 
+## Screenshots
+
+| Home | Catalogue |
+|---|---|
+| ![Home](docs/home.png) | ![Catalogue](docs/catalog.png) |
+
+| Product Detail | Company |
+|---|---|
+| ![Product Detail](docs/detail.png) | ![Company](docs/company.png) |
+
 ## Features
 
 - Multi-level product catalogue with category navigation
