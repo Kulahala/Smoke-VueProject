@@ -88,7 +88,15 @@ export const store = reactive({
     return this.categoryGroups
       .map((group) => {
         const categoryIds = group.children.map((category) => category.id);
-        const product = this.products.find((item) => categoryIds.includes(item.category));
+        const sorted = this.products
+          .filter((item) => categoryIds.includes(item.category))
+          .sort((a, b) => {
+            const orderA = a.sortOrder ?? Infinity;
+            const orderB = b.sortOrder ?? Infinity;
+            if (orderA !== orderB) return orderA - orderB;
+            return a.id - b.id;
+          });
+        const product = sorted[0];
         return product ? { group, product } : null;
       })
       .filter(Boolean);
@@ -126,7 +134,14 @@ export const store = reactive({
   },
 
   getProductsByCategory(categoryId) {
-    return this.products.filter((product) => product.category === categoryId);
+    return this.products
+      .filter((product) => product.category === categoryId)
+      .sort((a, b) => {
+        const orderA = a.sortOrder ?? Infinity;
+        const orderB = b.sortOrder ?? Infinity;
+        if (orderA !== orderB) return orderA - orderB;
+        return a.id - b.id;
+      });
   },
 
   getCategory(categoryId) {
@@ -135,5 +150,14 @@ export const store = reactive({
 
   getCategoryGroup(categoryId) {
     return this.categoryGroups.find((group) => group.children.some((child) => child.id === categoryId));
+  },
+
+  get sortedProducts() {
+    return [...this.products].sort((a, b) => {
+      const orderA = a.sortOrder ?? Infinity;
+      const orderB = b.sortOrder ?? Infinity;
+      if (orderA !== orderB) return orderA - orderB;
+      return a.id - b.id;
+    });
   },
 });

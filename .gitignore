@@ -35,6 +35,9 @@ build-check.log
 build-debug.log
 vite-dev-*.log
 
+# Deepwork session files
+.slim/deepwork/
+
 # Ignore vscode AI rules
 .github/*
 !.github/workflows/

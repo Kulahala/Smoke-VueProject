@@ -88,6 +88,7 @@ collections:
               - label: "Hero Cover Image (系列顶部大配图)"
                 name: "heroImage"
                 widget: "image"
+                hint: "⚠️ 必须是纯净、无文字、无规格图表的高清大特写图，防止裁剪后文字杂乱。"
               - label: "Sub Categories (二级子分类)"
                 name: "children"
                 widget: "list"
@@ -116,35 +117,40 @@ collections:
                   - label: "Hero Cover Image (大配图)"
                     name: "heroImage"
                     widget: "image"
+                    hint: "⚠️ 必须是纯净、无文字、无规格图表的高清大特写图。"
 
   # 3. 产品库管理（支持完整的新增、下架、图文内容修改）
   - name: "products"
     label: "Products (商品库)"
     folder: "src/data/products"
     create: true
-    slug: "{{id}}-{{name}}"
+    slug: "{{id}}"
     extension: "json"
     format: "json"
     editor:
       preview: false
     fields:
-      - label: "Product ID (数字ID, 新增时请递增不可重复)"
+      - label: "Product ID (数字ID)"
         name: "id"
         widget: "number"
         value_type: "int"
+        hint: "🚨 新增时填入不重复的数字（查看列表中最大 ID，填 最大ID+1）。重复 ID 会覆盖已有产品！"
       - label: "Product Name (产品名称)"
         name: "name"
         widget: "string"
       - label: "Product Image (主图/封面图)"
         name: "image"
         widget: "image"
-      - label: "Product Gallery (产品相册多图, 主图需选为第一个)"
+        hint: "⚠️ 必须上传纯白色背景的渲染图或实拍图，前台会自动渲染为高端照片展示盒效果。"
+      - label: "Product Gallery (产品相册多图)"
         name: "images"
         widget: "list"
         required: false
         field:
           label: "Image"
+          name: "image"
           widget: "image"
+        hint: "💡 第一张图将作为主图/封面图显示在目录卡片上，请确保第一张与上方主图一致。可拖拽排序调整顺序。"
       - label: "Category (所属二级分类)"
         name: "category"
         widget: "select"
@@ -165,6 +171,12 @@ collections:
             value: "packaging-oem"
           - label: "陈列物料 (Retail Displays)"
             value: "retail-displays"
+      - label: "Sort Order (排序权重, 数字越小越靠前)"
+        name: "sortOrder"
+        widget: "number"
+        value_type: "int"
+        required: false
+        hint: "💡 填数字控制产品在目录页的显示顺序，数字越小排越前。留空则按 ID 排序。"
       - label: "Description - English (产品描述-英文)"
         name: "description"
         widget: "text"
@@ -225,3 +237,349 @@ collections:
         name: "badgeZh"
         widget: "string"
         required: false
+
+  # 4. 界面文案管理（按钮、标题、流程说明等中英文翻译）
+  # ⚠️ 重要：translations.json 的 key 是扁平结构（如 "brand.subtitle"），
+  # 不是嵌套对象。以下所有字段必须直接挂在 "en" / "zh" 下，不能用 object 分组，
+  # 否则 CMS 保存时会破坏数据结构导致前台显示异常。
+  - name: "translations"
+    label: "Translations (界面文案)"
+    delete: false
+    files:
+      - name: "english"
+        label: "English UI Text (英文界面文案)"
+        file: "src/data/translations.json"
+        fields:
+          - label: "English Translations (英文翻译)"
+            name: "en"
+            widget: "object"
+            fields:
+              # ── Brand & Navigation ──
+              - { label: "Brand Subtitle (品牌副标题)", name: "brand.subtitle", widget: "string" }
+              - { label: "Nav Home (导航-首页)", name: "nav.home", widget: "string" }
+              - { label: "Nav Products (导航-产品)", name: "nav.products", widget: "string" }
+              - { label: "Nav Company (导航-公司)", name: "nav.company", widget: "string" }
+              - { label: "Nav Resources (导航-资料)", name: "nav.resources", widget: "string" }
+              - { label: "Nav Email Inquiry (导航-邮箱询盘)", name: "nav.emailInquiry", widget: "string" }
+              - { label: "Nav Open (导航-打开菜单)", name: "nav.open", widget: "string" }
+              # ── Theme & Language ──
+              - { label: "Theme System (跟随系统)", name: "theme.system", widget: "string" }
+              - { label: "Theme Light (浅色)", name: "theme.light", widget: "string" }
+              - { label: "Theme Dark (深色)", name: "theme.dark", widget: "string" }
+              - { label: "Lang EN", name: "lang.en", widget: "string" }
+              - { label: "Lang ZH", name: "lang.zh", widget: "string" }
+              - { label: "Settings Label (设置标签)", name: "settings.label", widget: "string" }
+              - { label: "Settings Theme (主题)", name: "settings.theme", widget: "string" }
+              - { label: "Settings Language (语言)", name: "settings.language", widget: "string" }
+              # ── Footer ──
+              - { label: "Footer Description (页脚描述)", name: "footer.description", widget: "string" }
+              - { label: "Footer Product Lines (产品线)", name: "footer.productLines", widget: "string" }
+              - { label: "Footer Contact (联系)", name: "footer.contact", widget: "string" }
+              - { label: "Footer Contact Note (联系说明)", name: "footer.contactNote", widget: "string" }
+              - { label: "Footer Rights (版权)", name: "footer.rights", widget: "string" }
+              - { label: "Footer Legal (法律声明)", name: "footer.legal", widget: "string" }
+              # ── Home Page ──
+              - { label: "Home Eyebrow (小标题)", name: "home.eyebrow", widget: "string" }
+              - { label: "Home Title (大标题)", name: "home.title", widget: "string" }
+              - { label: "Home Hero Text (轮播说明)", name: "home.heroText", widget: "text" }
+              - { label: "Home Email Quote (邮箱询价按钮)", name: "home.emailQuote", widget: "string" }
+              - { label: "Home View Products (查看产品按钮)", name: "home.viewProducts", widget: "string" }
+              - { label: "Home Metric OEM (指标-OEM)", name: "home.metric.oem", widget: "string" }
+              - { label: "Home Metric OEM Text", name: "home.metric.oemText", widget: "string" }
+              - { label: "Home Metric MOQ (指标-起订量)", name: "home.metric.moq", widget: "string" }
+              - { label: "Home Metric MOQ Text", name: "home.metric.moqText", widget: "string" }
+              - { label: "Home Metric Lead (指标-交期)", name: "home.metric.lead", widget: "string" }
+              - { label: "Home Metric Lead Text", name: "home.metric.leadText", widget: "string" }
+              - { label: "Home Inquiry Desk (询盘台)", name: "home.inquiryDesk", widget: "string" }
+              - { label: "Home Product Lines (产品线)", name: "home.productLines", widget: "string" }
+              - { label: "Home Intro Title (介绍标题)", name: "home.introTitle", widget: "string" }
+              - { label: "Home Intro Text (介绍文字)", name: "home.introText", widget: "text" }
+              - { label: "Home Featured (精选)", name: "home.featured", widget: "string" }
+              - { label: "Home Showcase (展示)", name: "home.showcase", widget: "string" }
+              - { label: "Home Browse Category (浏览分类)", name: "home.browseCategory", widget: "string" }
+              - { label: "Home Featured Text (精选说明)", name: "home.featuredText", widget: "text" }
+              - { label: "Home How Orders (订单流程标题)", name: "home.howOrders", widget: "string" }
+              - { label: "Home Workflow Title (流程标题)", name: "home.workflowTitle", widget: "string" }
+              - { label: "Home Step 1 Title", name: "home.step1Title", widget: "string" }
+              - { label: "Home Step 1 Text", name: "home.step1Text", widget: "text" }
+              - { label: "Home Step 2 Title", name: "home.step2Title", widget: "string" }
+              - { label: "Home Step 2 Text", name: "home.step2Text", widget: "text" }
+              - { label: "Home Step 3 Title", name: "home.step3Title", widget: "string" }
+              - { label: "Home Step 3 Text", name: "home.step3Text", widget: "text" }
+              - { label: "Home Wholesale Inquiry (批发询盘)", name: "home.wholesaleInquiry", widget: "string" }
+              - { label: "Home Contact Title (联系标题)", name: "home.contactTitle", widget: "string" }
+              - { label: "Home Contact Email (联系邮箱)", name: "home.contactEmail", widget: "string" }
+              - { label: "Home Show Slide (显示轮播)", name: "home.showSlide", widget: "string" }
+              # ── Common ──
+              - { label: "Common MOQ (起订量)", name: "common.moq", widget: "string" }
+              - { label: "Common Lead Time (交期)", name: "common.leadTime", widget: "string" }
+              - { label: "Common Order Mode (订单方式)", name: "common.orderMode", widget: "string" }
+              - { label: "Common Email Inquiry (邮箱询盘)", name: "common.emailInquiry", widget: "string" }
+              - { label: "Common Contact (联系)", name: "common.contact", widget: "string" }
+              - { label: "Common Back Home (返回首页)", name: "common.backHome", widget: "string" }
+              - { label: "Common Back Catalogue (返回目录)", name: "common.backCatalogue", widget: "string" }
+              - { label: "Common View Products (查看产品)", name: "common.viewProducts", widget: "string" }
+              - { label: "Common Wholesale Inquiry (批发询盘)", name: "common.wholesaleInquiry", widget: "string" }
+              # ── Category Page ──
+              - { label: "Category Directory (目录)", name: "category.directory", widget: "string" }
+              - { label: "Category Email Pricing (邮件询价)", name: "category.emailPricing", widget: "string" }
+              - { label: "Category Catalogue Items (目录产品)", name: "category.catalogueItems", widget: "string" }
+              - { label: "Category Models Available (个型号可询盘)", name: "category.modelsAvailable", widget: "string" }
+              - { label: "Category Help Text (帮助文字)", name: "category.helpText", widget: "string" }
+              - { label: "Category Empty Title (空分类标题)", name: "category.emptyTitle", widget: "string" }
+              - { label: "Category Empty Text Prefix (空前缀)", name: "category.emptyTextPrefix", widget: "string" }
+              - { label: "Category Empty Text Suffix (空后缀)", name: "category.emptyTextSuffix", widget: "string" }
+              - { label: "Category Price Sheet (价格表)", name: "category.priceSheet", widget: "string" }
+              - { label: "Category Products Fallback (产品目录回退)", name: "category.productsFallback", widget: "string" }
+              # ── Catalog Page ──
+              - { label: "Catalog Eyebrow (小标题)", name: "catalog.eyebrow", widget: "string" }
+              - { label: "Catalog Title (大标题)", name: "catalog.title", widget: "string" }
+              - { label: "Catalog Intro (介绍)", name: "catalog.intro", widget: "text" }
+              - { label: "Catalog All Products (全部产品)", name: "catalog.allProducts", widget: "string" }
+              - { label: "Catalog Jump to Category (跳转分类)", name: "catalog.jumpToCategory", widget: "string" }
+              - { label: "Catalog Categories (个分类)", name: "catalog.categories", widget: "string" }
+              - { label: "Catalog Models (个型号)", name: "catalog.models", widget: "string" }
+              - { label: "Catalog View Detail (查看详情)", name: "catalog.viewDetail", widget: "string" }
+              - { label: "Catalog Email Pricing (邮件索取报价)", name: "catalog.emailPricing", widget: "string" }
+              # ── Product Detail ──
+              - { label: "Product Detail (详情)", name: "product.detail", widget: "string" }
+              - { label: "Product Highlights (核心卖点)", name: "product.highlights", widget: "string" }
+              - { label: "Product Specification (规格参数)", name: "product.specification", widget: "string" }
+              - { label: "Product Request Title (报价标题)", name: "product.requestTitle", widget: "string" }
+              - { label: "Product Request Text (报价文字)", name: "product.requestText", widget: "text" }
+              - { label: "Product Same Category (同分类产品)", name: "product.sameCategory", widget: "string" }
+              - { label: "Product Related (相关型号)", name: "product.related", widget: "string" }
+              - { label: "Product Not Found (未找到)", name: "product.notFound", widget: "string" }
+              - { label: "Product Not Found Text (未找到文字)", name: "product.notFoundText", widget: "string" }
+              # ── About Page ──
+              - { label: "About Eyebrow (小标题)", name: "about.eyebrow", widget: "string" }
+              - { label: "About Title (大标题)", name: "about.title", widget: "string" }
+              - { label: "About Intro (介绍)", name: "about.intro", widget: "text" }
+              - { label: "About Email Inquiry (商务询盘)", name: "about.emailInquiry", widget: "string" }
+              - { label: "About Capability 1 Title", name: "about.capability1Title", widget: "string" }
+              - { label: "About Capability 1 Text", name: "about.capability1Text", widget: "text" }
+              - { label: "About Capability 2 Title", name: "about.capability2Title", widget: "string" }
+              - { label: "About Capability 2 Text", name: "about.capability2Text", widget: "text" }
+              - { label: "About Capability 3 Title", name: "about.capability3Title", widget: "string" }
+              - { label: "About Capability 3 Text", name: "about.capability3Text", widget: "text" }
+              - { label: "About Order Handling (订单处理)", name: "about.orderHandling", widget: "string" }
+              - { label: "About Workflow Title (流程标题)", name: "about.workflowTitle", widget: "string" }
+              - { label: "About Workflow Text (流程文字)", name: "about.workflowText", widget: "text" }
+              - { label: "About Workflow 1", name: "about.workflow1", widget: "string" }
+              - { label: "About Workflow 2", name: "about.workflow2", widget: "string" }
+              - { label: "About Workflow 3", name: "about.workflow3", widget: "string" }
+              - { label: "About Workflow 4", name: "about.workflow4", widget: "string" }
+              - { label: "About Catalogue Structure (目录结构)", name: "about.catalogueStructure", widget: "string" }
+              - { label: "About Directory Title (目录标题)", name: "about.directoryTitle", widget: "string" }
+              - { label: "About Contact Title (联系标题)", name: "about.contactTitle", widget: "string" }
+              # ── Blog / Resources ──
+              - { label: "Blog Eyebrow (小标题)", name: "blog.eyebrow", widget: "string" }
+              - { label: "Blog Title (大标题)", name: "blog.title", widget: "string" }
+              - { label: "Blog Intro (介绍)", name: "blog.intro", widget: "text" }
+              - { label: "Blog Ask Files (索取文件)", name: "blog.askFiles", widget: "string" }
+              - { label: "Blog Resource 1 Title", name: "blog.resource1Title", widget: "string" }
+              - { label: "Blog Resource 1 Text", name: "blog.resource1Text", widget: "text" }
+              - { label: "Blog Resource 1 Tag", name: "blog.resource1Tag", widget: "string" }
+              - { label: "Blog Resource 2 Title", name: "blog.resource2Title", widget: "string" }
+              - { label: "Blog Resource 2 Text", name: "blog.resource2Text", widget: "text" }
+              - { label: "Blog Resource 2 Tag", name: "blog.resource2Tag", widget: "string" }
+              - { label: "Blog Resource 3 Title", name: "blog.resource3Title", widget: "string" }
+              - { label: "Blog Resource 3 Text", name: "blog.resource3Text", widget: "text" }
+              - { label: "Blog Resource 3 Tag", name: "blog.resource3Tag", widget: "string" }
+              - { label: "Blog Product Directory (产品目录)", name: "blog.productDirectory", widget: "string" }
+              - { label: "Blog Directory Title (目录标题)", name: "blog.directoryTitle", widget: "string" }
+              - { label: "Blog Directory Text (目录文字)", name: "blog.directoryText", widget: "text" }
+              - { label: "Blog Loading (加载)", name: "blog.loading", widget: "string" }
+              - { label: "Blog Loading Title (加载标题)", name: "blog.loadingTitle", widget: "string" }
+              - { label: "Blog Performance 1", name: "blog.performance1", widget: "string" }
+              - { label: "Blog Performance 2", name: "blog.performance2", widget: "string" }
+              - { label: "Blog Performance 3", name: "blog.performance3", widget: "string" }
+              # ── Not Found ──
+              - { label: "Not Found Title (404标题)", name: "notFound.title", widget: "string" }
+              - { label: "Not Found Text (404文字)", name: "notFound.text", widget: "string" }
+              # ── SEO ──
+              - { label: "SEO Home Title (首页标题)", name: "seo.homeTitle", widget: "string" }
+              - { label: "SEO Home Description (首页描述)", name: "seo.homeDescription", widget: "text" }
+              # ── Inquiry Widget ──
+              - { label: "Inquiry Button (按钮)", name: "inquiry.button", widget: "string" }
+              - { label: "Inquiry Title (标题)", name: "inquiry.title", widget: "string" }
+              - { label: "Inquiry Name (姓名)", name: "inquiry.name", widget: "string" }
+              - { label: "Inquiry Email (邮箱)", name: "inquiry.email", widget: "string" }
+              - { label: "Inquiry Message (留言)", name: "inquiry.message", widget: "string" }
+              - { label: "Inquiry Placeholder Name (姓名占位)", name: "inquiry.placeholderName", widget: "string" }
+              - { label: "Inquiry Placeholder Email (邮箱占位)", name: "inquiry.placeholderEmail", widget: "string" }
+              - { label: "Inquiry Placeholder Message (留言占位)", name: "inquiry.placeholderMessage", widget: "text" }
+              - { label: "Inquiry Send (发送)", name: "inquiry.send", widget: "string" }
+              - { label: "Inquiry Sending (发送中)", name: "inquiry.sending", widget: "string" }
+              - { label: "Inquiry Success (成功)", name: "inquiry.success", widget: "string" }
+              - { label: "Inquiry Error (失败)", name: "inquiry.error", widget: "string" }
+              - { label: "Inquiry Close (关闭)", name: "inquiry.close", widget: "string" }
+
+      - name: "chinese"
+        label: "Chinese UI Text (中文界面文案)"
+        file: "src/data/translations.json"
+        fields:
+          - label: "Chinese Translations (中文翻译)"
+            name: "zh"
+            widget: "object"
+            fields:
+              # ── 品牌与导航 ──
+              - { label: "品牌副标题", name: "brand.subtitle", widget: "string" }
+              - { label: "导航-首页", name: "nav.home", widget: "string" }
+              - { label: "导航-产品", name: "nav.products", widget: "string" }
+              - { label: "导航-公司", name: "nav.company", widget: "string" }
+              - { label: "导航-资料", name: "nav.resources", widget: "string" }
+              - { label: "导航-邮箱询盘", name: "nav.emailInquiry", widget: "string" }
+              - { label: "导航-打开菜单", name: "nav.open", widget: "string" }
+              # ── 主题与语言 ──
+              - { label: "跟随系统", name: "theme.system", widget: "string" }
+              - { label: "浅色", name: "theme.light", widget: "string" }
+              - { label: "深色", name: "theme.dark", widget: "string" }
+              - { label: "EN", name: "lang.en", widget: "string" }
+              - { label: "中文", name: "lang.zh", widget: "string" }
+              - { label: "设置标签", name: "settings.label", widget: "string" }
+              - { label: "主题", name: "settings.theme", widget: "string" }
+              - { label: "语言", name: "settings.language", widget: "string" }
+              # ── 页脚 ──
+              - { label: "页脚描述", name: "footer.description", widget: "string" }
+              - { label: "产品线", name: "footer.productLines", widget: "string" }
+              - { label: "联系", name: "footer.contact", widget: "string" }
+              - { label: "联系说明", name: "footer.contactNote", widget: "string" }
+              - { label: "版权", name: "footer.rights", widget: "string" }
+              - { label: "法律声明", name: "footer.legal", widget: "string" }
+              # ── 首页 ──
+              - { label: "首页小标题", name: "home.eyebrow", widget: "string" }
+              - { label: "首页大标题", name: "home.title", widget: "string" }
+              - { label: "首页轮播说明", name: "home.heroText", widget: "text" }
+              - { label: "邮箱询价按钮", name: "home.emailQuote", widget: "string" }
+              - { label: "查看产品按钮", name: "home.viewProducts", widget: "string" }
+              - { label: "指标-OEM", name: "home.metric.oem", widget: "string" }
+              - { label: "OEM说明", name: "home.metric.oemText", widget: "string" }
+              - { label: "指标-起订量", name: "home.metric.moq", widget: "string" }
+              - { label: "起订量说明", name: "home.metric.moqText", widget: "string" }
+              - { label: "指标-交期", name: "home.metric.lead", widget: "string" }
+              - { label: "交期说明", name: "home.metric.leadText", widget: "string" }
+              - { label: "询盘台", name: "home.inquiryDesk", widget: "string" }
+              - { label: "产品线", name: "home.productLines", widget: "string" }
+              - { label: "介绍标题", name: "home.introTitle", widget: "string" }
+              - { label: "介绍文字", name: "home.introText", widget: "text" }
+              - { label: "精选", name: "home.featured", widget: "string" }
+              - { label: "展示", name: "home.showcase", widget: "string" }
+              - { label: "浏览分类", name: "home.browseCategory", widget: "string" }
+              - { label: "精选说明", name: "home.featuredText", widget: "text" }
+              - { label: "订单流程标题", name: "home.howOrders", widget: "string" }
+              - { label: "流程标题", name: "home.workflowTitle", widget: "string" }
+              - { label: "步骤1标题", name: "home.step1Title", widget: "string" }
+              - { label: "步骤1文字", name: "home.step1Text", widget: "text" }
+              - { label: "步骤2标题", name: "home.step2Title", widget: "string" }
+              - { label: "步骤2文字", name: "home.step2Text", widget: "text" }
+              - { label: "步骤3标题", name: "home.step3Title", widget: "string" }
+              - { label: "步骤3文字", name: "home.step3Text", widget: "text" }
+              - { label: "批发询盘", name: "home.wholesaleInquiry", widget: "string" }
+              - { label: "联系标题", name: "home.contactTitle", widget: "string" }
+              - { label: "联系邮箱", name: "home.contactEmail", widget: "string" }
+              - { label: "显示轮播", name: "home.showSlide", widget: "string" }
+              # ── 通用 ──
+              - { label: "起订量", name: "common.moq", widget: "string" }
+              - { label: "交期", name: "common.leadTime", widget: "string" }
+              - { label: "订单方式", name: "common.orderMode", widget: "string" }
+              - { label: "邮箱询盘", name: "common.emailInquiry", widget: "string" }
+              - { label: "联系", name: "common.contact", widget: "string" }
+              - { label: "返回首页", name: "common.backHome", widget: "string" }
+              - { label: "返回目录", name: "common.backCatalogue", widget: "string" }
+              - { label: "查看产品", name: "common.viewProducts", widget: "string" }
+              - { label: "批发询盘", name: "common.wholesaleInquiry", widget: "string" }
+              # ── 分类页 ──
+              - { label: "目录", name: "category.directory", widget: "string" }
+              - { label: "邮件询价", name: "category.emailPricing", widget: "string" }
+              - { label: "目录产品", name: "category.catalogueItems", widget: "string" }
+              - { label: "个型号可询盘", name: "category.modelsAvailable", widget: "string" }
+              - { label: "帮助文字", name: "category.helpText", widget: "string" }
+              - { label: "空分类标题", name: "category.emptyTitle", widget: "string" }
+              - { label: "空前缀", name: "category.emptyTextPrefix", widget: "string" }
+              - { label: "空后缀", name: "category.emptyTextSuffix", widget: "string" }
+              - { label: "价格表", name: "category.priceSheet", widget: "string" }
+              - { label: "产品目录回退", name: "category.productsFallback", widget: "string" }
+              # ── 目录页 ──
+              - { label: "目录页小标题", name: "catalog.eyebrow", widget: "string" }
+              - { label: "目录页大标题", name: "catalog.title", widget: "string" }
+              - { label: "目录页介绍", name: "catalog.intro", widget: "text" }
+              - { label: "全部产品", name: "catalog.allProducts", widget: "string" }
+              - { label: "跳转分类", name: "catalog.jumpToCategory", widget: "string" }
+              - { label: "个分类", name: "catalog.categories", widget: "string" }
+              - { label: "个型号", name: "catalog.models", widget: "string" }
+              - { label: "查看详情", name: "catalog.viewDetail", widget: "string" }
+              - { label: "邮件索取报价", name: "catalog.emailPricing", widget: "string" }
+              # ── 产品详情 ──
+              - { label: "详情", name: "product.detail", widget: "string" }
+              - { label: "核心卖点", name: "product.highlights", widget: "string" }
+              - { label: "规格参数", name: "product.specification", widget: "string" }
+              - { label: "报价标题", name: "product.requestTitle", widget: "string" }
+              - { label: "报价文字", name: "product.requestText", widget: "text" }
+              - { label: "同分类产品", name: "product.sameCategory", widget: "string" }
+              - { label: "相关型号", name: "product.related", widget: "string" }
+              - { label: "未找到", name: "product.notFound", widget: "string" }
+              - { label: "未找到文字", name: "product.notFoundText", widget: "string" }
+              # ── 公司能力 ──
+              - { label: "公司能力小标题", name: "about.eyebrow", widget: "string" }
+              - { label: "公司能力大标题", name: "about.title", widget: "string" }
+              - { label: "公司能力介绍", name: "about.intro", widget: "text" }
+              - { label: "商务询盘", name: "about.emailInquiry", widget: "string" }
+              - { label: "能力1标题", name: "about.capability1Title", widget: "string" }
+              - { label: "能力1文字", name: "about.capability1Text", widget: "text" }
+              - { label: "能力2标题", name: "about.capability2Title", widget: "string" }
+              - { label: "能力2文字", name: "about.capability2Text", widget: "text" }
+              - { label: "能力3标题", name: "about.capability3Title", widget: "string" }
+              - { label: "能力3文字", name: "about.capability3Text", widget: "text" }
+              - { label: "订单处理", name: "about.orderHandling", widget: "string" }
+              - { label: "流程标题", name: "about.workflowTitle", widget: "string" }
+              - { label: "流程文字", name: "about.workflowText", widget: "text" }
+              - { label: "流程1", name: "about.workflow1", widget: "string" }
+              - { label: "流程2", name: "about.workflow2", widget: "string" }
+              - { label: "流程3", name: "about.workflow3", widget: "string" }
+              - { label: "流程4", name: "about.workflow4", widget: "string" }
+              - { label: "目录结构", name: "about.catalogueStructure", widget: "string" }
+              - { label: "目录标题", name: "about.directoryTitle", widget: "string" }
+              - { label: "联系标题", name: "about.contactTitle", widget: "string" }
+              # ── 资料说明 ──
+              - { label: "资料说明小标题", name: "blog.eyebrow", widget: "string" }
+              - { label: "资料说明大标题", name: "blog.title", widget: "string" }
+              - { label: "资料说明介绍", name: "blog.intro", widget: "text" }
+              - { label: "索取文件", name: "blog.askFiles", widget: "string" }
+              - { label: "资源1标题", name: "blog.resource1Title", widget: "string" }
+              - { label: "资源1文字", name: "blog.resource1Text", widget: "text" }
+              - { label: "资源1标签", name: "blog.resource1Tag", widget: "string" }
+              - { label: "资源2标题", name: "blog.resource2Title", widget: "string" }
+              - { label: "资源2文字", name: "blog.resource2Text", widget: "text" }
+              - { label: "资源2标签", name: "blog.resource2Tag", widget: "string" }
+              - { label: "资源3标题", name: "blog.resource3Title", widget: "string" }
+              - { label: "资源3文字", name: "blog.resource3Text", widget: "text" }
+              - { label: "资源3标签", name: "blog.resource3Tag", widget: "string" }
+              - { label: "产品目录", name: "blog.productDirectory", widget: "string" }
+              - { label: "目录标题", name: "blog.directoryTitle", widget: "string" }
+              - { label: "目录文字", name: "blog.directoryText", widget: "text" }
+              - { label: "加载", name: "blog.loading", widget: "string" }
+              - { label: "加载标题", name: "blog.loadingTitle", widget: "string" }
+              - { label: "性能1", name: "blog.performance1", widget: "string" }
+              - { label: "性能2", name: "blog.performance2", widget: "string" }
+              - { label: "性能3", name: "blog.performance3", widget: "string" }
+              # ── 404 ──
+              - { label: "404标题", name: "notFound.title", widget: "string" }
+              - { label: "404文字", name: "notFound.text", widget: "string" }
+              # ── SEO ──
+              - { label: "首页SEO标题", name: "seo.homeTitle", widget: "string" }
+              - { label: "首页SEO描述", name: "seo.homeDescription", widget: "text" }
+              # ── 询盘浮窗 ──
+              - { label: "询盘按钮", name: "inquiry.button", widget: "string" }
+              - { label: "询盘标题", name: "inquiry.title", widget: "string" }
+              - { label: "询盘姓名", name: "inquiry.name", widget: "string" }
+              - { label: "询盘邮箱", name: "inquiry.email", widget: "string" }
+              - { label: "询盘留言", name: "inquiry.message", widget: "string" }
+              - { label: "询盘姓名占位", name: "inquiry.placeholderName", widget: "string" }
+              - { label: "询盘邮箱占位", name: "inquiry.placeholderEmail", widget: "string" }
+              - { label: "询盘留言占位", name: "inquiry.placeholderMessage", widget: "text" }
+              - { label: "询盘发送", name: "inquiry.send", widget: "string" }
+              - { label: "询盘发送中", name: "inquiry.sending", widget: "string" }
+              - { label: "询盘成功", name: "inquiry.success", widget: "string" }
+              - { label: "询盘失败", name: "inquiry.error", widget: "string" }
+              - { label: "询盘关闭", name: "inquiry.close", widget: "string" }

@@ -153,6 +153,24 @@ const handleMailtoClick = (event) => {
 
 useSeo();
 
+// Product ID duplicate detection
+const duplicateIds = ref([]);
+onMounted(() => {
+  const idMap = {};
+  for (const p of store.products) {
+    if (idMap[p.id]) {
+      duplicateIds.value.push(p.id);
+    } else {
+      idMap[p.id] = true;
+    }
+  }
+  if (duplicateIds.value.length > 0) {
+    console.error(
+      `[Data Error] Duplicate product IDs detected: ${duplicateIds.value.join(', ')}. Please fix in CMS or product JSON files.`
+    );
+  }
+});
+
 onMounted(() => {
   mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   updateSystemTheme();
@@ -188,6 +206,11 @@ watchEffect(() => {
 
 <template>
   <div id="app-container">
+    <!-- Product ID duplicate warning -->
+    <div v-if="duplicateIds.length > 0" class="data-error-banner" role="alert">
+      <span>⚠️ Data Error: Duplicate product ID{{ duplicateIds.length > 1 ? 's' : '' }} detected ({{ duplicateIds.join(', ') }}). Please fix in CMS to avoid missing products.</span>
+      <button type="button" class="banner-close" @click="duplicateIds = []" aria-label="Dismiss">✕</button>
+    </div>
     <!-- 全局 Toast 提示 -->
     <Transition name="toast-fade">
       <div v-if="store.toastMessage" class="global-toast" role="alert">
@@ -1021,6 +1044,41 @@ html.dark .inquiry-link:hover {
     width: 42px;
     height: 42px;
   }
+}
+
+/* Data error banner */
+.data-error-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #d32f2f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+}
+.banner-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.banner-close:hover {
+  opacity: 1;
 }
 
 /* 全局 Toast 提示样式 */

@@ -774,7 +774,7 @@
               <h4>📌 核心注意事项</h4>
               <div class="guide-alert" id="alert-id">
                 <strong>🚨 新增商品 ID 限制</strong><br>
-                每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 23，新商品 ID 必须填写 <b>24</b>，否则会导致数据覆盖或保存失败。
+                每次新增商品时，<b>Product ID（数字 ID）必须是递增的且不可重复</b>！例如，若已有最大 ID 是 13，新商品 ID 必须填写 <b>14</b>。<span class="danger-text">如果填了已有 ID，会直接覆盖该 ID 对应的旧产品数据，导致旧产品永久丢失！</span>前台网站会检测重复 ID 并显示红色警告横幅。
               </div>
               <div class="guide-alert" style="background: rgba(0, 135, 121, 0.05); border-left: 3px solid #008779; color: #074740;" id="alert-cat-id">
                 <strong>⚠️ 分类 ID 禁止修改</strong><br>
@@ -797,6 +797,10 @@
                   <span class="menu-title">📦 Products (商品库)</span>
                   <span class="menu-arrow">→</span>
                 </button>
+                <button class="menu-item" data-target="translations">
+                  <span class="menu-title">🌐 Translations (界面文案)</span>
+                  <span class="menu-arrow">→</span>
+                </button>
               </div>
             </div>
 
@@ -811,8 +815,17 @@
             <div class="guide-section">
               <h4>🚀 如何发布上线</h4>
               <ul>
-                <li>所有的修改 and 新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
+                <li>所有的修改和新增，都需要点击右上角的 <strong>Publish (发布)</strong> 按钮。</li>
                 <li>点击发布后，Netlify 会在后台自动完成打包部署，<b>通常 1-2 分钟内</b>前台网站即可更新。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section">
+              <h4>🔄 下架、删除与回滚</h4>
+              <ul>
+                <li><strong>暂时下架商品</strong>：在商品编辑页右上角，将状态从 <b>Published</b> 改为 <b>Draft (草稿)</b> 后发布。Draft 状态的商品<b>不会</b>出现在前台目录页和详情页。</li>
+                <li><strong>永久删除商品</strong>：在商品列表页，点击商品条目右侧的 <b>🗑 删除图标</b>，确认后发布即可。删除后前台将无法访问该商品。</li>
+                <li><strong>数据回滚</strong>：所有修改都通过 Git 提交记录保存。如需回滚到之前的版本，请联系技术人员在 GitHub 上操作，或通过 Netlify 控制面板的 <b>Deploys → Rollback</b> 功能回退整个站点到之前的部署版本。</li>
               </ul>
             </div>
           </div>
@@ -964,7 +977,7 @@
             <li><strong>填写 Product ID（核心）</strong>：
               <ul>
                 <li><b>必须是递增的唯一数字</b>。例如：当前最大的商品 ID 是 13，那么新增商品必须填 <b>14</b>。</li>
-                <li><span class="danger-text">🚨 注意</span>：ID 重复会导致数据覆盖或保存失败！</li>
+                <li><span class="danger-text">🚨 严重警告</span>：如果填了<b>已有的 ID</b>，会直接覆盖该 ID 对应的旧产品数据，<b>旧产品将永久丢失</b>！请务必先查看列表中的最大 ID。</li>
               </ul>
             </li>
             <li><strong>图片上传规范</strong>：
@@ -979,12 +992,38 @@
                 <li>在中英文 <code>Key Highlights</code> 中，点击 Add 新增中英文的卡片卖点（建议 2-3 条短句）。</li>
               </ul>
             </li>
-            <li><strong>规格参数与下架</strong>：
+            <li><strong>规格参数与排序</strong>：
               <ul>
                 <li>在 <code>Specifications</code> 中配置具体的技术参数（如 <code>Puffs: 6000</code> / <code>口数: 6000</code>）。</li>
-                <li>如需暂时下架某款商品，在右上角将状态从 <strong>Published</strong> 改为 <strong>Draft (草稿)</strong> 后发布即可。</li>
+                <li><code>Sort Order</code>（排序权重）：填数字控制产品在目录页的显示顺序，<b>数字越小越靠前</b>。留空则按 ID 排序。</li>
               </ul>
             </li>
+            <li><strong>下架与删除</strong>：
+              <ul>
+                <li><b>暂时下架</b>：在右上角将状态从 <strong>Published</strong> 改为 <strong>Draft (草稿)</strong> 后发布，前台将不再显示该商品。</li>
+                <li><b>永久删除</b>：在商品列表页点击右侧的 🗑 删除图标，确认后发布即可。</li>
+              </ul>
+            </li>
+          </ol>
+        `,
+        translations: `
+          <ol class="step-list">
+            <li><strong>进入路径</strong>：点击左侧的 <code>Translations (界面文案)</code>，然后选择 <code>English UI Text</code> 或 <code>Chinese UI Text</code>。</li>
+            <li><strong>文案分组</strong>：界面文案按页面分组，包括：
+              <ul>
+                <li><b>Brand & Navigation</b>：品牌副标题、导航菜单文字</li>
+                <li><b>Theme & Language</b>：主题切换、语言切换标签</li>
+                <li><b>Footer</b>：页脚描述、版权声明</li>
+                <li><b>Home Page</b>：首页所有文案（标题、说明、按钮等）</li>
+                <li><b>Common</b>：通用文案（起订量、交期、询盘等）</li>
+                <li><b>Category / Catalog / Product</b>：分类页、目录页、详情页文案</li>
+                <li><b>About / Blog</b>：公司能力页、资料说明页文案</li>
+                <li><b>Inquiry Widget</b>：右下角询盘浮窗文案</li>
+                <li><b>SEO</b>：搜索引擎标题和描述</li>
+              </ul>
+            </li>
+            <li><strong>修改方式</strong>：直接在对应字段中修改文字，保存并发布后前台立即生效。</li>
+            <li><strong>⚠️ 注意</strong>：只修改文字内容，<b>不要删除或重命名字段的 key</b>（如 <code>home.title</code>），否则前台可能显示异常。</li>
           </ol>
         `
       };
@@ -992,7 +1031,8 @@
       const titleMap = {
         settings: '⚙️ Settings (全局设置) 详细指南',
         categories: '📁 Categories (分类管理) 详细指南',
-        products: '📦 Products (商品库) 详细指南'
+        products: '📦 Products (商品库) 详细指南',
+        translations: '🌐 Translations (界面文案) 详细指南'
       };
 
       document.addEventListener('DOMContentLoaded', () => {
@@ -1323,6 +1363,105 @@
             clearGuideHighlights();
             clearBlueprintHighlights();
           }
+        });
+
+        // ==========================================
+        // 🛡️ 产品 ID 实时重复检测：输入时即时警告
+        // ==========================================
+        let existingProductIds = [];
+        let idsLoaded = false;
+
+        // 通过 decap-server 的 local API 获取已有产品列表
+        const loadExistingProductIds = async () => {
+          try {
+            // decap-server 默认运行在 localhost:8081
+            const response = await fetch('http://localhost:8081/api/products', {
+              headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+              const data = await response.json();
+              // data 可能是数组或带 entries 的对象
+              const entries = Array.isArray(data) ? data : (data.entries || []);
+              existingProductIds = entries.map(e => e.data?.id || e.id).filter(id => !isNaN(id));
+              idsLoaded = true;
+              return;
+            }
+          } catch (e) { /* fallback */ }
+
+          // Fallback: 逐个尝试常见 ID 范围（通过 Vite dev server）
+          try {
+            const ids = [];
+            for (let i = 1; i <= 100; i++) {
+              try {
+                const r = await fetch(`/src/data/products/${i}.json`);
+                if (r.ok) {
+                  const data = await r.json();
+                  if (data.id) ids.push(data.id);
+                }
+              } catch (e) { /* continue */ }
+            }
+            if (ids.length > 0) {
+              existingProductIds = ids;
+              idsLoaded = true;
+            }
+          } catch (e) { /* silent */ }
+        };
+
+        // 页面加载时获取 ID 列表
+        loadExistingProductIds();
+
+        const checkProductIdInput = () => {
+          if (!idsLoaded) return;
+
+          const allLabels = document.querySelectorAll('[class*="ControlContainer"] label');
+          let idInput = null;
+          let idContainer = null;
+
+          allLabels.forEach(label => {
+            const text = label.innerText || '';
+            if (text.includes('Product ID') || text.includes('数字ID')) {
+              idContainer = label.closest('[class*="ControlContainer"]');
+              idInput = idContainer ? idContainer.querySelector('input') : null;
+            }
+          });
+
+          if (!idInput || !idContainer) return;
+
+          // 移除之前的警告
+          const existingWarning = idContainer.querySelector('.id-duplicate-warning');
+          if (existingWarning) existingWarning.remove();
+          idInput.style.borderColor = '';
+
+          const currentId = parseInt(idInput.value);
+          if (isNaN(currentId)) return;
+
+          if (existingProductIds.includes(currentId)) {
+            const maxId = existingProductIds.length > 0 ? Math.max(...existingProductIds) : 0;
+            idInput.style.borderColor = '#d32f2f';
+            const warning = document.createElement('div');
+            warning.className = 'id-duplicate-warning';
+            warning.style.cssText = 'background:#d32f2f;color:#fff;padding:8px 12px;border-radius:6px;margin-top:8px;font-size:13px;font-weight:600;line-height:1.4;';
+            warning.innerHTML = '🚨 <b>ID ' + currentId + ' 已存在！</b> 保存将覆盖已有产品数据，导致旧产品永久丢失。建议改为 <b>' + (maxId + 1) + '</b>';
+            idContainer.appendChild(warning);
+          }
+        };
+
+        // 监听 ID 输入框的变化（实时检测）
+        document.body.addEventListener('input', (e) => {
+          if (e.target.tagName === 'INPUT' && e.target.type === 'number') {
+            const container = e.target.closest('[class*="ControlContainer"]');
+            if (container) {
+              const label = container.querySelector('label');
+              if (label && (label.innerText.includes('Product ID') || label.innerText.includes('数字ID'))) {
+                checkProductIdInput();
+              }
+            }
+          }
+        });
+
+        // 监听 CMS 页面切换，重新检测
+        window.addEventListener('hashchange', () => {
+          setTimeout(checkProductIdInput, 1000);
         });
       });
     </script>

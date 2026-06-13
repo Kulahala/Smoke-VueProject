@@ -127,7 +127,7 @@ image: '/电子烟/real-product-01.jpg'
 src/data/products/
 ```
 
-如果需要新增商品，请**不要**修改 `src/store/index.js`。你只需在上述目录下**复制并重命名一个现有的 `.json` 文件**（例如新建 `14-my-new-vape.json`），然后直接修改其中的属性：
+如果需要新增商品，请**不要**修改 `src/store/index.js`。你只需在上述目录下**复制并重命名一个现有的 `.json` 文件**（例如新建 `14.json`），然后直接修改其中的属性：
 
 ```json
 {
@@ -237,7 +237,7 @@ https://www.bestlinksz.com/
 
 ## 零代码后台管理部署与激活步骤 (Netlify Identity)
 
-项目在 `feat-cms` 分支中集成了 Decap CMS（可视化管理后台），在本地开发环境下，你可以通过以下链接进入后台预览其界面结构：
+项目已集成 Decap CMS（可视化管理后台），在本地开发环境下，你可以通过以下链接进入后台预览其界面结构：
 ```txt
 http://localhost:5173/admin/
 ```
@@ -245,12 +245,11 @@ http://localhost:5173/admin/
 要在 Netlify 线上正式激活该后台，供不懂代码的客户登录、修改文字和上传图片，请按照以下步骤操作：
 
 ### 第一步：将代码推送并部署到 Netlify
-1. 将当前测试分支推送至 GitHub：
+1. 将当前分支推送至 GitHub：
    ```sh
-   git push origin feat-cms
+   git push origin main
    ```
-2. 登录 Netlify 后台，将该站点的构建分支（Production branch）切换或指定为 `feat-cms`（或者合并该分支到主分支触发部署）。
-3. 等待 Netlify 部署生成完毕。
+2. Netlify 会自动从 `main` 分支构建部署。
 
 ### 第二步：在 Netlify 开启身份验证 (Identity)
 1. 在 Netlify 该站点的控制面板中，点击顶部菜单的 **Site configuration**（站点设置）。
