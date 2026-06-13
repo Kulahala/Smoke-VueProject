@@ -1418,7 +1418,10 @@
         };
 
         // 页面加载时获取 ID 列表
-        loadExistingProductIds();
+        loadExistingProductIds().then(() => {
+          // ID 列表就绪后，尝试填充默认值
+          setTimeout(fillDefaultProductId, 1500);
+        });
 
         const checkProductIdInput = () => {
           if (!idsLoaded) return;
@@ -1461,6 +1464,39 @@
           }
         };
 
+        // 新建商品时自动填充最小可用 ID
+        const fillDefaultProductId = () => {
+          if (!idsLoaded) return;
+          // 仅新建页面（URL 不含 /entries/数字）
+          if (/\/entries\/\d+/.test(window.location.hash)) return;
+
+          const allLabels = document.querySelectorAll('[class*="ControlContainer"] label');
+          let idInput = null;
+
+          allLabels.forEach(label => {
+            const text = label.innerText || '';
+            if (text.includes('Product ID') || text.includes('数字ID')) {
+              const container = label.closest('[class*="ControlContainer"]');
+              idInput = container ? container.querySelector('input') : null;
+            }
+          });
+
+          if (!idInput) return;
+          // 如果已有值则不覆盖
+          if (idInput.value !== '' && idInput.value !== undefined) return;
+
+          // 找最小未使用正整数
+          const usedSet = new Set(existingProductIds);
+          let nextId = 1;
+          while (usedSet.has(nextId)) nextId++;
+
+          // 用 nativeInputValueSetter 设置值，确保 React 感知到变化
+          const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+          nativeSetter.call(idInput, String(nextId));
+          idInput.dispatchEvent(new Event('input', { bubbles: true }));
+          idInput.dispatchEvent(new Event('change', { bubbles: true }));
+        };
+
         // 监听 ID 输入框的变化（实时检测）
         document.body.addEventListener('input', (e) => {
           if (e.target.tagName === 'INPUT' && e.target.type === 'number') {
@@ -1476,7 +1512,10 @@
 
         // 监听 CMS 页面切换，重新检测
         window.addEventListener('hashchange', () => {
-          setTimeout(checkProductIdInput, 1000);
+          setTimeout(() => {
+            checkProductIdInput();
+            fillDefaultProductId();
+          }, 1000);
         });
       });
     </script>
