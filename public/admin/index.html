@@ -1445,7 +1445,12 @@
           const currentId = parseInt(idInput.value);
           if (isNaN(currentId)) return;
 
-          if (existingProductIds.includes(currentId)) {
+          // 从 URL 提取当前正在编辑的商品 slug（如 /entries/1 中的 1）
+          const editingSlug = parseInt((window.location.hash.match(/\/entries\/(\d+)/) || [])[1]);
+          // 编辑已有商品时，排除自身的 ID；新建商品时 editingSlug 为 NaN，不排除任何 ID
+          const otherIds = existingProductIds.filter(id => id !== editingSlug);
+
+          if (otherIds.includes(currentId)) {
             const maxId = existingProductIds.length > 0 ? Math.max(...existingProductIds) : 0;
             idInput.style.borderColor = '#d32f2f';
             const warning = document.createElement('div');
