@@ -1,10 +1,8 @@
 # BestLinksz B2B 静态商品展示站
 
-[English → README.md](./README.md)
+[English](./README.md) | **线上地址：** [bestlinksz.com](https://www.bestlinksz.com/)
 
 这是一个 Vue 3 + Vite 的静态商品展示网站，定位是 ToB 批发目录站：客户浏览产品、分类、规格和交付信息，通过邮箱发起询盘，不做购物车、支付、库存和实时下单。
-
-**线上地址：** [bestlinksz.com](https://www.bestlinksz.com/)
 
 ## 页面截图
 
