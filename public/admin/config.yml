@@ -253,6 +253,7 @@ collections:
           - label: "English Translations (英文翻译)"
             name: "en"
             widget: "object"
+            collapsed: true
             fields:
               # ── Brand & Navigation ──
               - { label: "Brand Subtitle (品牌副标题)", name: "brand.subtitle", widget: "string" }
@@ -418,6 +419,7 @@ collections:
           - label: "Chinese Translations (中文翻译)"
             name: "zh"
             widget: "object"
+            collapsed: true
             fields:
               # ── 品牌与导航 ──
               - { label: "品牌副标题", name: "brand.subtitle", widget: "string" }
