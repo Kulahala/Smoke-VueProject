@@ -4,6 +4,11 @@
 
 ## 历史记录
 
+- **2026-06-16**:
+  - **在线询盘悬浮按钮动效升级**：
+    - 将右下角在线询盘悬浮按钮重构为默认仅显示邮件图标，鼠标悬停时平滑向左展开为带文字的药丸样式。
+    - 利用 `max-width` 与 `padding` 过渡实现零硬编码、自适应多语言长度的平滑展开效果，并添加 `overflow-wrap` 和 `flex-shrink` 保证文本在展开/收起过程中完全居中且不折行。
+
 - **2026-06-14**:
   - **CMS 界面文案编辑修复**：
     - 修复 Translations 集合在 CMS 侧边栏显示两个 "English UI Text" 的问题：将两个 files 条目（english/chinese）合并为单一入口 "All Translations (全部文案)"，同一页面同时包含 en 和 zh 两个折叠组，避免 Decap CMS 对同文件多条目只显示第一个 label 的 bug。

@@ -157,9 +157,12 @@ const handleSend = async () => {
 .inquiry-trigger-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   height: 46px;
-  padding: 0 18px;
+  width: auto;
+  min-width: 46px;
+  max-width: 46px;
+  padding: 0;
   border-radius: 23px;
   border: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-surface-elevated) 68%, transparent);
@@ -168,11 +171,21 @@ const handleSend = async () => {
   color: var(--color-heading);
   cursor: pointer;
   box-shadow: 0 8px 24px var(--color-shadow);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: 
+    max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .inquiry-trigger-btn:hover {
   transform: translateY(-2px);
+  max-width: 200px;
+  padding: 0 18px;
   border-color: rgba(var(--color-accent-rgb), 0.8);
   background: rgba(var(--color-accent-rgb), 0.25);
   color: var(--color-link);
@@ -183,12 +196,28 @@ const handleSend = async () => {
 
 .inquiry-trigger-btn .icon {
   font-size: 1.15rem;
+  flex-shrink: 0;
 }
 
 .inquiry-trigger-btn .text {
   font-weight: 800;
   font-size: 0.92rem;
   letter-spacing: 0.2px;
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: 
+    opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    margin-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inquiry-trigger-btn:hover .text {
+  opacity: 1;
+  max-width: 100px;
+  margin-left: 8px;
 }
 
 /* 询盘浮窗面板 */
